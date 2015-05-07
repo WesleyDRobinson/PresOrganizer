@@ -32,4 +32,5 @@ var TimeLineItem = new mongoose.Schema({
 
 // });
 
-mongoose.model('Conference', schema);
+mongoose.model('Conference', Conference);
+mongoose.model('TimeLineItem', TimeLineItem);
