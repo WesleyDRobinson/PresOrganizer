@@ -36,6 +36,8 @@ router.get('/:id', function(req,res,next){
 	});
 });
 
+
+
 // delete a user
 router.delete('/:id',function(req,res,next) {
 	User.findByIdAndRemove(req.params.id, function (err, user) {
