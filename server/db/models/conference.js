@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
     name: {type: String, required: true},
-    date: {type: Date},
+    date: {type: Date, required: true},
     place: {{type: mongoose.Schema.ObjectId, ref: 'Locale'}, required: true},
     organizers: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
     timeline:  [{type: mongoose.Schema.ObjectId, ref: 'Presentation'}]
