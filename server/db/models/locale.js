@@ -6,6 +6,21 @@ var schema = new mongoose.Schema({
     organizers: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
     leader: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
     description: String
+});
+
+schema.method('addOrganizer', function(organizerId, callback){
+
+});
+
+schema.method('removeOrganizer', function(organizerId, callback){
+
+});
+
+schema.method('addLeader', function(organizerId, callback){
+
+});
+
+schema.method('removeLeader', function(organizerId, callback){
 
 });
 
