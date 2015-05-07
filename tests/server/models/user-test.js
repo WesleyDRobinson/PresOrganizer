@@ -1,3 +1,5 @@
+
+
 var dbURI = 'mongodb://localhost:27017/testingDB';
 var clearDB = require('mocha-mongoose')(dbURI);
 
@@ -10,6 +12,7 @@ require('../../../server/db/models/user');
 var User = mongoose.model('User');
 
 describe('User model', function () {
+
 
     beforeEach('Establish DB connection', function (done) {
         if (mongoose.connection.db) return done();
