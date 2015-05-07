@@ -20,16 +20,16 @@ var TimeLineItem = new mongoose.Schema({
 });
 
 
-schema.method('insertInTimeline', function(presentationId, callback){
+// schema.method('insertInTimeline', function(presentationId, callback){
 
-});
+// });
 
-schema.method('deleteFromTimeline', function(presentationId, callback){
+// schema.method('deleteFromTimeline', function(presentationId, callback){
 
-});
+// });
 
-schema.method('adjustTimeline', function(presentationId, newPosition, callback){
+// schema.method('adjustTimeline', function(presentationId, newPosition, callback){
 
-});
+// });
 
 mongoose.model('Conference', schema);

@@ -2,52 +2,44 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
-    media: { type: [
-        { type: String, //video, image, pdf , powerpoint? 
+    media: [
+        { mediaType: String, //video, image, pdf , powerpoint? 
         url: String}
-    ], required: true},
+    ],
     title: {type: String, required: true},
-    presenter: {type: mongoose.Schema.ObjectId, ref: 'User', required: true},
-    settings: {group: Number, autoPlay: {type: Boolean, default: true}, loopStart: Boolean, loopEnd:  Boolean}
-
+    presenter: {type: mongoose.Schema.ObjectId, ref: 'User', required: true}
 });
 
-schema.pre('save', function(next){
-    var mediaArr = this.media;
-    var valid = true;
-    mediaArr.forEach(function(media){
-        //check for approved media types/extensions
-
-    });
-});
+// schema.pre('save', function(next){
+//     // var mediaArr = this.media;
+//     // var invalid = [];
+//     // var approvedTypes = ['video','image'];
+//     // mediaArr.forEach(function(media){
+//     //     //check for approved media types/extensions
+//     //     if (!approvedTypes.indexOf(media.type)) {
+//     //         invalid.push(media);
+//     //         // additional to indicate which media objects are invalid
+//     //     }
+//     // });
+// });
 
 
 schema.method('addMedia', function(mediaObj, callback){
+    this.media.push(mediaObj);
+    this.save(callback);
+}); 
+
+schema.method('removeMedia', function(index, callback){
+    this.media.splice(index,1);
+    this.save(callback);
 
 });
 
-schema.method('removeMedia', function(mediaObj, callback){
-
-});
-
-schema.method('positionMedia', function(mediaObj, mediaIndex, callback){
-
-});
-
-schema.static('toggleAutoPlay', function(callback){
-
-});
-
-schema.static('setGroupNumber', function(groupNum, callback){
-
-});
-
-schema.static('setLoopStart', function(bool, callback){
-
-});
-
-schema.static('setLoopEnd', function(bool, callback){
-
-});
+// schema.method('positionMedia', function(oldIndex, newIndex, callback){
+//     var mediaObj = this.media[oldIndex];
+//     if (newIndex < oldIndex)  oldIndex++ ;
+//     this.media.splice(newIndex, 0, mediaObj);
+//     this.media.splice(oldIndex,1);
+// });
 
 mongoose.model('Presentation', schema);
