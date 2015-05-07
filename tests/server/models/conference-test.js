@@ -25,46 +25,36 @@ describe('Conference model', function () {
         mongoose.connect(dbURI, done);
     });
 
-    beforeEach('Make a User, Conference, and Presentation', function () {
+    beforeEach('Make a User, Conference, and Presentation', function (done) {
 
 
         User.create({
             name: 'Wesley'
-        }, function (user) {
+        }, function (err, user) {
             testUser = user;
 
             Presentation.create({
                 media    : [{mediaType: 'video', url: 'www.google.com'}],
                 presenter: user._id,
                 title: 'My Trip to India'
-            }, function (presentation) {
+            }, function (err, presentation) {
                 testPresentation = presentation;
 
-                TimeLineItem.create({
-                    title: 'presentation',
-                    presentation: presentation._id
-                }, function (item) {
-                    testTimeLineItem = item;
+                Conference.create({
+                    name: "BrooklynJune15",
+                    date: new Date("June 23, 2015"),
+                    venue: "Brooklyn Bowl",
+                    presenters: [ user._id ],
+                    timeline: null,
+                    //locale: 1234
+                }, function (err, conf) {
+                    if (err) console.log("Conference err: ", err);
+                    testConference = conf;
 
-                    Conference.create({
-                        name: "BrooklynJune15",
-                        date: new Date("June 23, 2015"),
-                        venue: "Brooklyn Bowl",
-                        presenters: [ user._id ],
-                        timeline: [item._id],
-                        locale: 1234
-                    }, function (conf) {
-                        testConference = conf;
-                    })
+                    done();
                 });
-
             });
         });
-
-
-
-
-
     });
 
     afterEach('Clear test database', function (done) {
@@ -75,8 +65,38 @@ describe('Conference model', function () {
         expect(Conference).to.be.a('function');
     });
 
-    it('saves a timeline', function () {
+    it('saves a timeline on its own', function (done) {
+        TimeLineItem.create({
+            title: 'presentation',
+            presentation: testPresentation._id
+        }, function(err, item) {
+            testTimeLineItem = TimeLineItem;
 
-
+            expect(item.presentation).to.equal(testPresentation._id);
+            done();
+        }); 
     });
+
+    it('adds a timeline to a conference', function(done) {
+        console.log("Test conf: ", testConference);
+
+        Conference.findOne({ id: testConference._id}, function(err, conference) {
+            console.log("Err: ", err, "Conf: ", conference);
+
+            expect(conference.timeline).to.equal(testTimeLineItem._id);
+            done();
+        });
+    });
+
+    // it('updates a timeline in a conference', function() {
+    //     Conference.findOneAndUpdate({ id: testConference._id}, { timeline: ["Added timeline"]}, function(err, conference) {
+    //         // console.log("TTTTTTTTTT");
+    //         // console.log(conference);
+    //         conference.timeline.push("Updated");
+
+    //         Conference.findOneAndUpdate({ id: testConference._id }, { timeline: conference.timeline}, function(conference) {
+    //             expect(conference.timeline.length).to.equal(2);
+    //         });
+    //     });
+    // });
 });
