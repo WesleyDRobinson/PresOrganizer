@@ -23,6 +23,18 @@ var schema = new mongoose.Schema({
     },
     google: {
         id: String
+    },
+    type: {
+        type: String
+    },
+    name: {
+        type: String
+    },
+    username: {
+        type: String
+    },
+    registrationDate: {
+        type: Date
     }
 });
 
@@ -48,6 +60,14 @@ schema.pre('save', function (next) {
 
     next();
 
+});
+
+schema.pre('save', function (next) {
+    if (!this.registrationDate) {
+        this.registrationDate = Date.now();
+    }
+
+    next();
 });
 
 schema.statics.generateSalt = generateSalt;

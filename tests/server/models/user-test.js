@@ -139,6 +139,13 @@ describe('User model', function () {
                 });
             });
 
+            it('should set user.registrationDate upon creation', function () {
+                createUser().then(function (user) {
+                    expect(user.registrationDate).to.be.a('number');
+                    done();
+                });
+            });
+
         });
 
     });
