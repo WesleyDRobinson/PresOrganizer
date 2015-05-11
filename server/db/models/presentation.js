@@ -42,4 +42,5 @@ schema.method('removeMedia', function(index, callback){
 //     this.media.splice(oldIndex,1);
 // });
 
+
 mongoose.model('Presentation', schema);
