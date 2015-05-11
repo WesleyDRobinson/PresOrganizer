@@ -11,9 +11,7 @@ router.post('/',function(req,res,next){
 	.then(function(presentation){
 		res.send(presentation);
 	})
-	.catch(function(err){
-		return next(err);
-	});
+	.then(null, next);
 });
 
 //get all Presentations
@@ -36,10 +34,8 @@ router.get('/:id', function(req,res,next){
 	});
 });
 
-
-
 //update Media
-router.put('/:id/Media',function(req,res,next){
+router.put('/:id',function(req,res,next) {
 	var id = req.params.id;
 	var mediaArr = req.body.media;
 	var title = req.body.title;
