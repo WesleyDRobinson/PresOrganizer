@@ -14,10 +14,11 @@ var app = require("../../../server/app");
 var request = require("supertest");
 
 
-require('../../../server/db/models/user');
+require('../../../server/db/models/conference');
+require('../../../server/db/models/locale');
 
-
-var User = Promise.promisifyAll(mongoose.model('User'));
+var Conference = Promise.promisifyAll(mongoose.model('Conference'));
+var Locale = Promise.promisifyAll(mongoose.model('Locale'));
 
 
 describe('User GET, POST, PUT, DELETE routes', function () {
@@ -29,104 +30,126 @@ describe('User GET, POST, PUT, DELETE routes', function () {
     var altProduct;
     var altListItem;
     var altUser;
-    var userId;
+    var conferenceId, localeId;
 
     beforeEach('Establish DB connection', function (done) {
         if (mongoose.connection.db) return done();
         mongoose.connect(dbURI, done);
     });
 
-    beforeEach('Make a User', function (done) {
+    beforeEach('Make a locale and a bunch of Conferences', function (done) {
 
-        User.create([
-        {
-            name: 'Ash',
-            email: 'ash@beats.com'},
-        {
-            name: 'Wesley'
-        },
-        {
-            name: 'Sam'
-        }, 
-        {
-            name: 'Evan'
-        }])
-        .then(function(user){
-            userId = user._id;
-            done();
-        })
-        .then(null,done);
+    	Locale.create([
+    	{
+    		name: 'Kyoto'
+    	},
+    	{
+    		name: 'New York'
+    	}
+    	]).then(function (stuff) {
+    		console.log(stuff);
+    		done();
+    	}
+    	)
+    	.then(null, done);
+        // Conference.create([
+        // {
+        //     name: 'Kyoto Vol.13',
+        //     date: '',
+        //     venue: 'Urban Guild'
+        //     locale: localId
+        // },
+        // {
+        //     name: 'Kyoto Vol.13 1/2',
+        //     date: '',
+        //     venue: 'Urban Guild'
+        //     locale: localId
+        // },
+        // {
+        //     name: 'New York Vol.7',
+        //     date: '',
+        //     vanue: 'Fullstack Academy'
+        // }
+        // ])
+        // .then(function(conference){
+
+        //     conferenceId = conference._id;
+        //     done();
+        // })
+        // .then(null,done);
+
     });
-    
+
     after('Clear test database', function (done) {
         clearDB(done);
     });
-
-    describe ("GET", function (){
+   
+  //  describe ("GET", function (){
 
 // TODO make available to admin only
-        it('should return collection of all users', function (done) {
-            request(app)
-                .get("/api/user")
-                .end( function (err, data) {
-                    if (err) done(err);
-                    expect(data.body[1].name).to.equal('Wesley');
-                    expect(data.body[2].name).to.equal('Sam');
-                    expect(data.body[3].name).to.equal('Evan');
-                    done();
-                });
-        });
-
-        // Visually confirmed working, test not working;
-        // TODO -- optional -- make test work
-        it('should return a user based on search by Id', function (done) {
-            request(app)
-                .get("/api/user/" + userId)
-                //receive array of items with category === category we submitted
-                .end( function (err, data){
-                    expect(data.body.name).to.equal('Ash');
-                    done();
-                });
-        });
-    });
-
-    describe ("DELETE", function (){
-        it("should delete a user by id", function (done){
-            request(app).del("/api/user/" + userId)
-                .end(function (err, response){
-                    if (err) return done(err);
-                    expect(response.status).to.equal(200);
-
-                    request(app).get("/api/user" + userId).end (function (err, response){
-                        if(err) return done(err);
-                        expect(response.status).to.equal(404);
-                        done();
-                    });
-                });
-        });
-    });
-
-    describe ("PUT", function (){
-
-        it("should be able to update a user's email", function (done){
-
-            var info = { email: 'ash@ryan.com' };
-
-            request(app).put("/api/user/" + userId + "/changeEmail").send(info)
-                .end(function (err, response){
-                    if (err) return done(err);
-                    expect(response.status).to.equal(200);
-
-                    request(app).get("/api/user/" + userId).end (function (err, response){
-                        if(err) return done(err);
-                        response.res.body.should.have.property("email", info.email);
-                        done();
-                    });
-
-                });
-        });
-    });
+        // it('should return collection of all conferences', function (done) {
+        //     request(app)
+        //         .get("/api/conferences")
+        //         .end( function (err, data) {
+        //             if (err) done(err);
+        //             expect(data.body[1].name).to.equal('Wesley');
+        //             expect(data.body[2].name).to.equal('Sam');
+        //             expect(data.body[3].name).to.equal('Evan');
+        //             done();
+        //         });
+        // });
 });
+
+
+//         // Visually confirmed working, test not working;
+//         // TODO -- optional -- make test work
+//         it('should return a user based on search by Id', function (done) {
+//             request(app)
+//                 .get("/api/user/" + userId)
+//                 //receive array of items with category === category we submitted
+//                 .end( function (err, data){
+//                     expect(data.body.name).to.equal('Ash');
+//                     done();
+//                 });
+//         });
+
+//     describe ("DELETE", function (){
+//         it("should delete a user by id", function (done){
+//             request(app).del("/api/user/" + userId)
+//                 .end(function (err, response){
+//                     if (err) return done(err);
+//                     expect(response.status).to.equal(200);
+
+//                     request(app).get("/api/user" + userId).end (function (err, response){
+//                         if(err) return done(err);
+//                         expect(response.status).to.equal(404);
+//                         done();
+//                     });
+//                 });
+//         });
+//     });
+
+//     describe ("PUT", function (){
+
+//         it("should be able to update a user's email", function (done){
+
+//             var info = { email: 'ash@ryan.com' };
+
+//             request(app).put("/api/user/" + userId + "/changeEmail").send(info)
+//                 .end(function (err, response){
+//                     if (err) return done(err);
+//                     expect(response.status).to.equal(200);
+
+//                     request(app).get("/api/user/" + userId).end (function (err, response){
+//                         if(err) return done(err);
+//                         response.res.body.should.have.property("email", info.email);
+//                         done();
+//                     });
+
+//                 });
+//         });
+//     });
+
 // // TODO make available to admin and superuser only
 //         it('should return collection of listitems created by a user AND only items created by that user ', function (done) {
 //             request(app)
@@ -157,7 +180,6 @@ describe('User GET, POST, PUT, DELETE routes', function () {
 //                     done();
 //                 });
 //         });
-
 
 // //TODO make POST, PUT, DEL available to admin and superuser only
 //     describe ("POST", function (){
