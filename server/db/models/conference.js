@@ -1,12 +1,22 @@
 'use strict';
 var mongoose = require('mongoose');
 
-var schema = new mongoose.Schema({
-    name: {type: String, required: true},
-    date: {type: Date, required: true},
-    place: {type: mongoose.Schema.ObjectId, ref: 'Locale', required: true},
-    organizers: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
-    timeline:  [{type: mongoose.Schema.ObjectId, ref: 'Presentation'}]
+var Conference = new mongoose.Schema({
+
+    name: {
+        type: String,
+        required: true
+    },
+    date: Date,
+    venue: String,
+    presenters: [ {type: mongoose.Schema.ObjectId, ref: 'User'} ],
+    timeline:  [ {type: mongoose.Schema.ObjectId, ref: 'TimeLineItem'} ],
+    locale: { type: mongoose.Schema.ObjectId, ref: 'Locale'}
+});
+
+var TimeLineItem = new mongoose.Schema({
+    title: String, // presentation, pause, loopStart, loopEnd
+    presentation: {type: mongoose.Schema.ObjectId, ref: 'Presentation'}
 });
 
 
@@ -22,15 +32,5 @@ var schema = new mongoose.Schema({
 
 // });
 
-// schema.method('addOrganizer', function(organizerId, callback){
-
-// });
-
-// schema.method('removeOrganizer', function(organizerId, callback){
-
-// });
-
-
-
-
-mongoose.model('Conference', schema);
+mongoose.model('Conference', Conference);
+mongoose.model('TimeLineItem', TimeLineItem);
