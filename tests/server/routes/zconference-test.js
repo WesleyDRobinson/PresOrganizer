@@ -22,7 +22,7 @@ var Conference = Promise.promisifyAll(mongoose.model('Conference'));
 var Locale = Promise.promisifyAll(mongoose.model('Locale'));
 var User = Promise.promisifyAll(mongoose.model('User'));
 
-describe('User GET, POST, PUT, DELETE routes', function () {
+describe('Conference GET, POST, PUT, DELETE routes', function () {
     var testCategory;
     var testProduct;
     var testListItem;
@@ -31,7 +31,7 @@ describe('User GET, POST, PUT, DELETE routes', function () {
     var altProduct;
     var altListItem;
     var altUser;
-    var conferenceId, KyotoId, presenterId;
+    var conferenceId, KyotoId, presenterId, kyotoDate;
 
     beforeEach('Establish DB connection', function (done) {
         if (mongoose.connection.db) return done();
@@ -39,27 +39,37 @@ describe('User GET, POST, PUT, DELETE routes', function () {
     });
 
     beforeEach('Make locales and a bunch of Conferences', function (done) {
+        var person = new User({
+            name: "Evan"
+        });
 
-    	Locale
-        .create({ name: 'Kyoto' })
-        .then(function (locale) {
-            KyotoId = locale._id;
-            Conference.create([
-            {
-                name: 'Kyoto Vol.13',
-                date: '',
-                venue: 'Urban Guild',
-                locale: locale._id
-            },
-            {
-                name: 'Kyoto Vol.13 1/2',
-                date: '',
-                venue: 'Urban Guild',
-                locale: locale._id
-            }])
-            .then(function (conferences) {
-                console.log('created these conferences: ', conferences);
-            })
+        User.create({ name: "Evan"})
+        .then( function (user) {
+            presenterId = user._id;
+
+        	Locale
+            .create({ name: 'Kyoto' })
+            .then(function (locale) {
+                KyotoId = locale._id;
+                Conference.create([
+                {
+                    name: 'Kyoto Vol.13',
+                    date: 'March 3, 2015',
+                    venue: 'Urban Guild',
+                    locale: locale._id,
+                    presenters: [presenterId]
+                },
+                {
+                    name: 'Kyoto Vol.13 1/2',
+                    date: '',
+                    venue: 'Urban Guild',
+                    locale: locale._id
+                }])
+                .then(function (conference) {
+                    //console.log('created this conference: ', conference);
+                    kyotoDate = conference.date;
+                });
+            });
         })
         .then(null, done);
 
@@ -75,10 +85,10 @@ describe('User GET, POST, PUT, DELETE routes', function () {
                 }                
             )
             .then(function (conference) {
-                console.log('created this conference: ', conference);
+                //console.log('created this conference: ', conference);
                 conferenceId = conference._id;
                 done();
-            })            
+            });           
         })
         .then(null, done);
 
@@ -91,45 +101,42 @@ describe('User GET, POST, PUT, DELETE routes', function () {
     describe ("GET", function (){
         it('should return all conferences for given locale', function (done) {
             request(app)
-                .get("/api/conference/" + KyotoId)
+                .get("/api/conference?locale=" + KyotoId)
                 .end( function (err, data) {
                     if (err) done(err);
-                    expect(data.body[1].name).to.equal('Kyoto Vol.13');
-                    expect(data.body[2].name).to.equal('Kyoto Vol.13 1/2');
+                    expect(data.body[0].name).to.equal('Kyoto Vol.13');
+                    expect(data.body[1].name).to.equal('Kyoto Vol.13 1/2');
                     done();
                 });
         });
-    });
-    describe ("GET", function () {
+    
         it("should return a conference by ID", function (done) {
             request(app)
-                .get("api/conference/" + conferenceId)
+                .get("/api/conference?_id=" + conferenceId)
                 .end( function (err, data) {
                     if (err) done(err);
-                    console.log(data.body);
-                    //expect(data.body.name).to.equal();
+                    expect(data.body[0].name).to.equal('New York Vol.7');
+                    done();
                 });
         });
-    });
-    describe ("GET", function () {
+
         it("should return a conference by locale ID and date", function (done) {
             request(app)
-                .get("api/conference/" + KyotoId +'/' + date)
+                .get("/api/conference?locale=" + KyotoId + '&date=' + kyotoDate)
                 .end( function (err, data) {
                     if (err) done(err);
-                    console.log(data.body);
-                    //expect(data.body.name).to.equal();
+                    expect(data.body[0].name).to.equal("Kyoto Vol.13");
+                    done();
                 });
         });
-    });
-    describe ("GET", function () {
-        xit("should return a conference by locale ID and presenter id", function (done) {
+
+        it("should return a conference by locale ID and presenter id", function (done) {
             request(app)
-                .get("api/conference/" + KyotoId +'/' + presenterId) // need to update
+                .get("/api/conference?locale=" + KyotoId +'&presenters=' + presenterId) // need to update
                 .end( function (err, data) {
                     if (err) done(err);
-                    console.log(data.body);
-                    //expect(data.body.name).to.equal();
+                    expect(data.body[0].name).to.equal('Kyoto Vol.13');
+                    done();
                 });
         });
     });

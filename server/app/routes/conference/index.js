@@ -16,65 +16,9 @@ router.post('/',function(req, res, next){
 });
 ////////////////////////////////////////////////////////////////////
 // READ
-// get all conferences
-router.get('/:localeId', function (req, res, next) {
-  var localeId = req.params.localeId;   // locale is an Id
-  Conference.find({ locale: localeId }, function(err, conferences) {
-    if (err) return next(err);
-
-    res.send(conferences);
-  });
-});
-
-// find by conference Id
-router.get('/:conferenceId', function(req, res, next){
-	var conferenceId = req.params.conferenceId;   // locale is an Id
-
-	Conference.findById( conferenceId, function(err, conference){
-		if(err) return next(err);
-		
-		res.send(conference);
-	});
-});
-
-// get conference by date
-router.get('/:localeId/:confDate', function(req, res, next){
-	var localeId = req.params.localeId;   // locale is an Id
-	var confDate = req.params.confDate;   // date format important
-	Conference.find({ locale: localeId, date: confDate }, function(err, conferences){
-		if(err) return next(err);
-		
-		res.send(conferences);
-	});
-});
-
-// find by presenter
-router.get('/:localeId/:presenter', function(req, res, next){
-	var localeId = req.params.localeId;   // locale is an Id
-	var presenterId = req.params.presenterId;   
-	Conference.find({ locale: localeId, presenters: presenterId }, function(err, conferences){
-		if(err) return next(err);
-		
-		res.send(conferences);
-	});
-});
-
-// find by venue
-router.get('/:localeId/:venue', function(req, res, next){
-	var localeId = req.params.localeId;   // locale is an Id
-	var venue = req.params.venue;   
-	Conference.find({ locale: localeId, venue: venue }, function(err, conferences){
-		if(err) return next(err);
-		
-		res.send(conferences);
-	});
-});
-
-// find by conference name
-router.get('/:localeId/:name', function(req, res, next){
-	var localeId = req.params.localeId;   // locale is an Id
-	var name = req.params.name;   
-	Conference.find({ locale: localeId, name: name }, function(err, conferences){
+// find by queries
+router.get('/', function(req, res, next){
+	Conference.find(req.query, function(err, conferences){
 		if(err) return next(err);
 		
 		res.send(conferences);
