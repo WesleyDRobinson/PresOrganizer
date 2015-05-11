@@ -97,7 +97,24 @@ describe('Conference GET, POST, PUT, DELETE routes', function () {
     after('Clear test database', function (done) {
         clearDB(done);
     });
-   
+    
+    describe ("POST", function () {
+        it('should exist after creation', function (done) {
+            var newConf = {
+                name: 'Brooklyn Vol. 3',
+                date: 'June 3, 2015'
+            }
+            request(app)
+                .post("/api/conference/")
+                .send(newConf)
+                .end( function (err, data) {
+                    if (err) done(err);
+                    expect(data.body.name).to.equal('Brooklyn Vol. 3');
+                    done();
+                });
+        });        
+    });
+
     describe ("GET", function (){
         it('should return all conferences for given locale', function (done) {
             request(app)
@@ -132,7 +149,7 @@ describe('Conference GET, POST, PUT, DELETE routes', function () {
 
         it("should return a conference by locale ID and presenter id", function (done) {
             request(app)
-                .get("/api/conference?locale=" + KyotoId +'&presenters=' + presenterId) // need to update
+                .get("/api/conference?locale=" + KyotoId +'&presenters=' + presenterId)
                 .end( function (err, data) {
                     if (err) done(err);
                     expect(data.body[0].name).to.equal('Kyoto Vol.13');
@@ -140,119 +157,56 @@ describe('Conference GET, POST, PUT, DELETE routes', function () {
                 });
         });
     });
+
+    describe ("PUT", function (){
+        it("should be able to update conference name", function (done){
+
+            var info = { name: 'New York Vol. 20' };
+
+            request(app)
+                .put("/api/conference/" + conferenceId)
+                .send(info)
+                .end(function (err, res){
+                    if (err) return done(err);
+                    expect(res.status).to.equal(200);
+
+                    request(app).get("/api/conference?_id=" + conferenceId)
+                        .end (function (err, data){
+                            if(err) return done(err);
+                            expect(data.body[0].name).to.equal('New York Vol. 20');
+                            done();
+                    });
+
+                });
+        });
+    });
+
+    describe ("DELETE", function (){
+        it("should delete a conference by id", function (done){
+
+            var newConf = {
+                name: 'Harlem Vol. 8',
+                date: 'November 19, 2015'
+            }
+            request(app)
+                .post("/api/conference/")
+                .send(newConf)
+                .end( function (err, data) {
+                    if (err) done(err);
+
+                    var delConf = data.body._id;
+                    request(app).del("/api/conference/" + delConf)
+                        .end(function (err, res){
+                        if (err) return done(err);
+                        expect(res.status).to.equal(200);
+
+                        request(app).get("/api/conference?_id=" + delConf).end (function (err, res){
+                            if(err) return done(err);
+                            expect(res.body).to.be.empty;
+                            done();
+                        });
+                    });
+            });
+        });
+    });
 });
-
-
-//         // Visually confirmed working, test not working;
-//         // TODO -- optional -- make test work
-//         it('should return a user based on search by Id', function (done) {
-//             request(app)
-//                 .get("/api/user/" + userId)
-//                 //receive array of items with category === category we submitted
-//                 .end( function (err, data){
-//                     expect(data.body.name).to.equal('Ash');
-//                     done();
-//                 });
-//         });
-
-//     describe ("DELETE", function (){
-//         it("should delete a user by id", function (done){
-//             request(app).del("/api/user/" + userId)
-//                 .end(function (err, response){
-//                     if (err) return done(err);
-//                     expect(response.status).to.equal(200);
-
-//                     request(app).get("/api/user" + userId).end (function (err, response){
-//                         if(err) return done(err);
-//                         expect(response.status).to.equal(404);
-//                         done();
-//                     });
-//                 });
-//         });
-//     });
-
-//     describe ("PUT", function (){
-
-//         it("should be able to update a user's email", function (done){
-
-//             var info = { email: 'ash@ryan.com' };
-
-//             request(app).put("/api/user/" + userId + "/changeEmail").send(info)
-//                 .end(function (err, response){
-//                     if (err) return done(err);
-//                     expect(response.status).to.equal(200);
-
-//                     request(app).get("/api/user/" + userId).end (function (err, response){
-//                         if(err) return done(err);
-//                         response.res.body.should.have.property("email", info.email);
-//                         done();
-//                     });
-
-//                 });
-//         });
-//     });
-
-// // TODO make available to admin and superuser only
-//         it('should return collection of listitems created by a user AND only items created by that user ', function (done) {
-//             request(app)
-//                 .get("/api/listitems/user/" + testUser._id)
-//                 //receive array of itmes with category === category we submitted
-//                 .end( function (err, data){
-//                     //console.log("listItemArr at test: ", data.res.body);
-//                     data.res.body[0].creator.firstName.should.equal('Ned');
-//                     done();
-//                 });
-//         });
-
-// // TODO make available to admin only
-//         it('should return collection of listitems based on a product AND only items based on that Product', function (done) {
-//             request(app)
-//                 .get("/api/listitems/product/" + testProduct._id)
-//                 .end( function (err, data){
-//                     data.res.body[0].product.name.should.equal('Space Toilet Paper');
-//                     done()
-//                 });
-//         });
-
-//         it('should return a single listitem', function (done) {
-//             request(app)
-//                 .get("/api/listitems/item/" + testListItem._id)
-//                 .end(function (err, data) {
-//                     data.res.body.should.have.property('_id', testListItem._id.toString());
-//                     done();
-//                 });
-//         });
-
-// //TODO make POST, PUT, DEL available to admin and superuser only
-//     describe ("POST", function (){
-
-// //posting to listitem should create a new listitem
-//         it("should create a new listitem", function (done){
-//             var newListItem = {
-//                 quantity : 10,
-//                 price: 1000, //we are storing this in cents
-//                 product : altProduct._id,
-//                 category: altCategory._id,
-//                 creator: altUser._id
-//             };
-//             var testListItem;
-
-//             request(app).post("/api/listitems/").send(newListItem)
-//                 .end(function (err, response){
-//                     if (err) return done(err);
-
-//                     expect(response.status).to.be.equal(200);
-
-//                     testListItem = response.body; //capture the newly created and returned list item
-
-//                     //Check that it is in database
-//                     request(app).get("/api/listitems/item/" + testListItem._id).end (function (err, response){
-//                         if(err) return done(err);
-//                         //console.log("response.res.body: ", response.res.body);
-//                         response.res.body.should.have.property("_id", testListItem._id);
-//                         done();
-//                     });
-//                 });
-//         });
-
-//     });
