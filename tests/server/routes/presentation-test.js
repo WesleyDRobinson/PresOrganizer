@@ -88,7 +88,6 @@ describe('Presentation GET, POST, PUT, DELETE routes', function () {
                 .get("/api/presentation")
                 .end(function (err, data) {
                     if (err) done(err);
-                    console.log(data.body);
                     expect(data.body.length).to.equal(2);
                     expect(data.body[0].title).to.equal('Presentation 1');
                     expect(data.body[1].title).to.equal('Presentation 2');

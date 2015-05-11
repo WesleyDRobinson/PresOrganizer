@@ -34,20 +34,15 @@ router.get('/:id', function(req,res,next){
 	});
 });
 
-//update Media
+//update Presentation
 router.put('/:id',function(req,res,next) {
 	var id = req.params.id;
-	var mediaArr = req.body.media;
-	var title = req.body.title;
-	var presenter = req.body.presenter;
 	Presentation.findByIdAndUpdate(id, req.body, function(err,presentation){
 		if(err){
 			return next(err);
 		}
-	
 		res.send(presentation);
 	});
-
 
 });
 
