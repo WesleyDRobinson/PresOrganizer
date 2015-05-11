@@ -76,7 +76,7 @@ describe('Conference model', function () {
     });
 
     // Test visually confirmed to work. Can't get it to pass.
-    xit('adds a timeline to a conference', function(done) {
+    it('adds a timeline to a conference', function(done) {
         var arr = [testTimeLineItem._id.toString()];
         console.log(testTimeLineItem);
 
