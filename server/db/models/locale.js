@@ -9,6 +9,7 @@ var schema = new mongoose.Schema({
     description: String
 });
 
+mongoose.model('Locale', schema);
 
 // schema.method('removeOrganizer', function(organizerId, callback){
 
@@ -21,7 +22,3 @@ var schema = new mongoose.Schema({
 // schema.method('removeLeader', function(organizerId, callback){
 
 // });
-
-
-
-mongoose.model('Locale', schema);
