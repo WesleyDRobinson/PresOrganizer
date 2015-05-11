@@ -40,41 +40,21 @@ router.get('/:id', function(req,res,next){
 
 //update Media
 router.put('/:id/Media',function(req,res,next){
-
 	var id = req.params.id;
 	var mediaArr = req.body.media;
-	Presentation.findById(id, function(err,presentation){
-		if(err)
+	var title = req.body.title;
+	var presenter = req.body.presenter;
+	Presentation.findByIdAndUpdate(id, req.body, function(err,presentation){
+		if(err){
 			return next(err);
-		presentation.media = mediaArr;
-		presentation.save(function(err,presentation){
-			if(err)
-				return next(err);
-			res.send(presentation);
-		});
+		}
+	
+		res.send(presentation);
 	});
 
 
 });
 
-
-//delete contents of media array
-router.delete('/:id/Media',function(req,res,next){
-	var id = req.params.id;
-	var mediaArr = req.body.media;
-	Presentation.findById(id, function(err,presentation){
-		if(err)
-			return next(err);
-		presentation.media = [];
-		presentation.save(function(err,presentation){
-			if(err)
-				return next(err);
-			res.send(presentation);
-		});
-	});
-
-
-});
 
 // //add media item to media array
 // router.put('/:id/MediaItem',function(req,res,next){
