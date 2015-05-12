@@ -1,6 +1,8 @@
 var router = require('express').Router();
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Locale = mongoose.model('Locale');
+var Conference = mongoose.model('Conference');
 //var bluebird = require('bluebird');
 
 
@@ -11,7 +13,7 @@ router.post('/',function(req,res,next){
 	.then(function(user){
 		res.send(user);
 	})
-	.catch(function(err){
+	.then(null, function(err){
 		return next(err);
 	});
 });
@@ -25,6 +27,37 @@ router.get('/', function (req, res, next) {
     res.send(users);
   });
 });
+
+//Determine whether user is Organizer based on Locale Search
+router.get('/isOrganizer/:id', function(req,res,next){
+	var id = req.params.id;
+
+	Locale.find({organizers:id}, function(err, locales){
+		if(locales.length>0)
+			res.send(true);
+		else
+			res.send(false);
+
+	});
+	
+	
+});
+
+//Determine whether user is Presenter based on Locale Search
+router.get('/isPresenter/:id', function(req,res,next){
+	var id = req.params.id;
+
+	Conference.find({organizers:id}, function(err, locales){
+		if(locales.length>0)
+			res.send(true);
+		else
+			res.send(false);
+
+	});
+	
+	
+});
+
 
 //get user by id
 router.get('/:id', function(req,res,next){
