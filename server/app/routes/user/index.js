@@ -6,7 +6,6 @@ var Conference = mongoose.model('Conference');
 //var bluebird = require('bluebird');
 
 
-
 //Create a user
 router.post('/',function(req,res,next){
 	User.create(req.body)
@@ -28,49 +27,33 @@ router.get('/', function (req, res, next) {
 	});
 });
  
-
 //Determine whether user is Organizer based on Locale Search
-router.get('/isOrganizer/:id', function(req,res,next){
-	var id = req.params.id;
-
-	Locale.find({organizers:id}, function(err, locales){
-		if(locales.length>0)
-			res.send(true);
-		else
-			res.send(false);
-
-	});
-	
-	
-});
-
-//Determine whether user is Presenter based on Locale Search
-router.get('/isPresenter/:id', function(req,res,next){
-	var id = req.params.id;
-
-	Conference.find({organizers:id}, function(err, locales){
-		if(locales.length>0)
+router.get('/isOrganizer/:id', function (req,res,next){
+	Locale.find({ organizers: req.params.id }, function (err, locales){
+		if (locales.length > 0)
 			res.send(true);
 		else
 			res.send(false);
 	});
-	
-	
 });
 
-
-
-
+//Determine whether user is Presenter based on Conference Search
+router.get('/isPresenter/:id', function (req,res,next){
+	Conference.find({ presenters: req.params.id }, function (err, conferences){
+		if (conferences.length > 0)
+			res.send(true);
+		else
+			res.send(false);
+	});
+});
 
 // delete a user
-router.delete('/:id',function(req,res,next) {
+router.delete('/:id',function (req,res,next) {
 	User.findByIdAndRemove(req.params.id, function (err, user) {
 		if (err) return next(err);
 		res.send(user);
 	});
 });
-
-
 
 // Update a user's attributes
 router.put('/:id', function (req, res, next) {
