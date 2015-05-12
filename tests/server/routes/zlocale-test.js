@@ -41,7 +41,7 @@ describe('Locale GET, POST, PUT, DELETE routes', function () {
                     name: 'Brooklyn'
                 }])
             .then(function (data) {
-                testLocale = data;
+                testLocale = data;  // returns Kyoto
                 done();
             })
             .then(null, done);
@@ -62,6 +62,7 @@ describe('Locale GET, POST, PUT, DELETE routes', function () {
                     if (err) done(err);
                     expect(data.body.length).to.equal(3);
                     expect(data.body[0].name).to.equal('Kyoto');
+                    expect(data.body[1].name).to.equal('Tokyo');
                     expect(data.body[2].name).to.equal('Brooklyn');
                     done();
                 });
@@ -69,10 +70,17 @@ describe('Locale GET, POST, PUT, DELETE routes', function () {
 
         it('should return a single locale by Id', function (done) {
             request(app)
-                .get("/api/locale/" + testLocale._id)
-                //receive array of items with category === category we submitted
+                .get("/api/locale?_id=" + testLocale._id)
                 .end(function (err, data) {
-                    expect(data.body.name).to.equal('Kyoto');
+                    expect(data.body[0].name).to.equal('Kyoto');
+                    done();
+                });
+        });
+        it('should return a single locale by name', function (done) {
+            request(app)
+                .get("/api/locale?name=" + testLocale.name)
+                .end(function (err, data) {
+                    expect(data.body[0].name).to.equal('Kyoto');
                     done();
                 });
         });
@@ -102,10 +110,9 @@ describe('Locale GET, POST, PUT, DELETE routes', function () {
     });
 
     describe("PUT", function () {
-        it("should be able to update a locale", function (done) {
+        it("should be able to update a locale's name", function (done) {
 
             var newTitle = {name: 'Locale 4'};
-
             request(app).put("/api/locale/" + testLocale._id)
                 .send(newTitle)
                 .end(function (err, response) {
@@ -113,11 +120,27 @@ describe('Locale GET, POST, PUT, DELETE routes', function () {
                     expect(response.status).to.equal(200);
                     expect(response.body.name).to.equal("Locale 4");
 
-                    request(app).get("/api/locale").end(function (err, response) {
+                    request(app).get("/api/locale?name=" + newTitle.name).end(function (err, response) {
                         if (err) return done(err);
-                        //console.log(response.res.body);
-                        expect(response.res.body.length).to.equal(3);
-                        expect(response.res.body[0].name).to.equal("Locale 4");
+                        expect(response.body[0].name).to.equal("Locale 4");
+                        done();
+                    });
+
+                });
+        });
+        it("should be able to update a locale's description", function (done) {
+
+            var newDesc = {description: 'Groovy laid back city'};
+            request(app).put("/api/locale/" + testLocale._id)
+                .send(newDesc)
+                .end(function (err, response) {
+                    if (err) return done(err);
+                    expect(response.status).to.equal(200);
+                    expect(response.body.name).to.equal("Kyoto");
+
+                    request(app).get("/api/locale?name=" + testLocale.name).end(function (err, response) {
+                        if (err) return done(err);
+                        expect(response.body[0].description).to.equal(newDesc.description);
                         done();
                     });
 
@@ -132,7 +155,6 @@ describe('Locale GET, POST, PUT, DELETE routes', function () {
             request(app).del("/api/locale/" + testLocale._id)
                 .end(function (err, response) {
                     if (err) return done(err);
-
                     expect(response.status).to.be.equal(200);
 
                     request(app).get("/api/locale")

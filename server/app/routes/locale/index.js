@@ -15,21 +15,11 @@ router.post('/', function (req, res, next) {
 
 //get all Locales
 router.get('/', function (req, res, next) {
-    Locale.find({}, function (err, locales) {
+    Locale.find(req.query, function (err, locales) {
         if (err)
             return next(err);
 
         res.send(locales);
-    });
-});
-
-//get locale by id
-router.get('/:id', function (req, res, next) {
-    var id = req.params.id;
-    Locale.findById(id, function (err, locale) {
-        if (err)
-            return next(err);
-        res.send(locale);
     });
 });
 

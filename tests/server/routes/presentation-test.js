@@ -97,10 +97,10 @@ describe('Presentation GET, POST, PUT, DELETE routes', function () {
 
         it('should return a single presentation by Id', function (done) {
             request(app)
-                .get("/api/presentation/" + testPresentation._id)
+                .get("/api/presentation?_id=" + testPresentation._id)
                 //receive array of items with category === category we submitted
                 .end(function (err, data) {
-                    expect(data.body.title).to.equal('Presentation 1');
+                    expect(data.body[0].title).to.equal('Presentation 1');
                     done();
                 });
         });
