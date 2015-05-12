@@ -52,7 +52,7 @@ describe('User GET, POST, PUT, DELETE routes', function () {
             name: 'Evan'
         }])
         .then(function(user){   // user is an array
-            userId = user[0]._id;
+            userId = user._id;
             done();
         })
         .then(null,done);
@@ -70,7 +70,6 @@ describe('User GET, POST, PUT, DELETE routes', function () {
                 .get("/api/user")
                 .end( function (err, data) {
                     if (err) done(err);
-                    console.log('data body', data.body);
                     expect(data.body[1].name).to.equal('Wesley');
                     expect(data.body[2].name).to.equal('Sam');
                     expect(data.body[3].name).to.equal('Evan');
@@ -89,6 +88,7 @@ describe('User GET, POST, PUT, DELETE routes', function () {
                     done();
                 });
         });
+    });
     
 
     describe ("DELETE", function (){
@@ -126,7 +126,6 @@ describe('User GET, POST, PUT, DELETE routes', function () {
 
                 });
         });
-    });
     });
 });
 // // TODO make available to admin and superuser only
