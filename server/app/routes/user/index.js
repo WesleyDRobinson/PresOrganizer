@@ -7,6 +7,23 @@ var Conference = mongoose.model('Conference');
 
 
 
+
+//Determine whether user is Presenter based on Locale Search
+router.get('/isPresenter/:id', function(req,res,next){
+	var id = req.params.id;
+	console.log('presenters1');
+	Conference.find({presenters:id}, function(err, presenters){
+		console.log('presenters2', presenters);
+		if(presenters.length>0)
+			res.send(true);
+		else
+			res.send(false);
+	});
+	
+	
+});
+
+
 //Create a user
 router.post('/',function(req,res,next){
 	User.create(req.body)
@@ -20,6 +37,7 @@ router.post('/',function(req,res,next){
 
 //get all users or 1 user by a specific search query
 router.get('/', function (req, res, next) {
+	console.log("hitting");
 	User.find(req.query, function (err, users) {
 		if (err) 
 
@@ -32,7 +50,7 @@ router.get('/', function (req, res, next) {
 //Determine whether user is Organizer based on Locale Search
 router.get('/isOrganizer/:id', function(req,res,next){
 	var id = req.params.id;
-
+	console.log('organizers1');
 	Locale.find({organizers:id}, function(err, locales){
 		if(locales.length>0)
 			res.send(true);
@@ -44,19 +62,6 @@ router.get('/isOrganizer/:id', function(req,res,next){
 	
 });
 
-//Determine whether user is Presenter based on Locale Search
-router.get('/isPresenter/:id', function(req,res,next){
-	var id = req.params.id;
-
-	Conference.find({organizers:id}, function(err, locales){
-		if(locales.length>0)
-			res.send(true);
-		else
-			res.send(false);
-	});
-	
-	
-});
 
 
 

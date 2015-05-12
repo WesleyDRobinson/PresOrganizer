@@ -6,12 +6,12 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
         scope: {},
         templateUrl: 'js/common/directives/navbar/navbar.html',
         link: function (scope) {
-
+           
             scope.items = [
-                { label: 'Home', state: 'home' },
-                { label: 'About', state: 'about' },
-                { label: 'Tutorial', state: 'tutorial' },
-                { label: 'Members Only', state: 'membersOnly', auth: true }
+                { label: 'Home', state: 'home', auth:true },
+                { label: 'My Conferences', state: 'conferences',  auth: false },
+                { label: 'My Presentation', state: 'presentations', auth: false },
+                { label: 'My Account', state: 'account', auth: true }
             ];
 
             scope.user = null;
@@ -25,7 +25,18 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
                    $state.go('home');
                 });
             };
+            
 
+            
+            AuthService.isOrganizer().then(function(data){
+            console.log('organizer data',data);
+                scope.items[1].auth = data;
+            });
+            AuthService.isPresenter().then(function(data){
+                console.log('presenter data',data);
+                scope.items[2].auth = data;
+            });
+    
             var setUser = function () {
                 AuthService.getLoggedInUser().then(function (user) {
                     scope.user = user;
@@ -42,7 +53,9 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
             $rootScope.$on(AUTH_EVENTS.logoutSuccess, removeUser);
             $rootScope.$on(AUTH_EVENTS.sessionTimeout, removeUser);
 
-        }
+        },
+       
+
 
     };
 
