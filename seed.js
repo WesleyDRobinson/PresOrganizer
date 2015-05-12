@@ -172,6 +172,7 @@ var seedConferences = function(userIds,timeLineIds,localeIds, num){
 
 
 connectToDb.then(function () {
+    console.log("PLEASE DROP DATABASE BEFORE USING. THANKS");
     var userIds = seedUsers(NUM_OF_USERS);
     var presentationIds = seedPresentations(userIds, NUM_OF_PRESENTATIONS);
     var timeLineIds = seedTimeLineItems(presentationIds);
