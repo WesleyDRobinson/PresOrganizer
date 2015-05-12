@@ -103,37 +103,6 @@ describe('User GET, POST, PUT, DELETE routes', function () {
                 });
         });
     });
-    
-    describe ("GET for organizer / presenter check", function () {
-        it('should check using user id if user is an organizer in a given locale', function (done) {
-            request(app)
-                .get("/api/user/isOrganizer/" + testUser._id)
-                .end( function (err, data){
-                    expect(data.body).to.equal(true);
-                    done();
-                });
-        });
-        it('should check using user id if user is an presenter in a given conference', function (done) {
-            request(app)
-                .get("/api/user/isPresenter/" + testUser._id)
-                .end( function (err, data){
-                    expect(data.body).to.equal(true);
-                    done();
-                });
-        });    
-        it('should return false if id does not match a presenter in db', function (done) {
-            User.create({ name: 'Rando Calrissian'})
-                .then(function (someUser) {
-                    request(app)
-                        .get("/api/user/isPresenter/" + someUser._id)
-                        .end( function (err, data){
-                            console.log('data body', data.body);
-                            expect(data.body).to.equal('{}');
-                            done();
-                        });
-                });
-        });  
-    });
 
     describe ("DELETE", function (){
         it("should delete a user by id", function (done){

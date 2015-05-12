@@ -26,26 +26,6 @@ router.get('/', function (req, res, next) {
 		res.send(users);
 	});
 });
- 
-//Determine whether user is Organizer based on Locale Search
-router.get('/isOrganizer/:id', function (req,res,next){
-	Locale.find({ organizers: req.params.id }, function (err, locales){
-		if (locales.length > 0)
-			res.send(true);
-		else
-			res.send(false);
-	});
-});
-
-//Determine whether user is Presenter based on Conference Search
-router.get('/isPresenter/:id', function (req,res,next){
-	Conference.find({ presenters: req.params.id }, function (err, conferences){
-		if (conferences.length > 0)
-			res.send(true);
-		else
-			res.send(false);
-	});
-});
 
 // delete a user
 router.delete('/:id',function (req,res,next) {
