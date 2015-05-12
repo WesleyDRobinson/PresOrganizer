@@ -6,7 +6,7 @@ var Presentation = mongoose.model('Presentation');
 
 
 //Create a Presentation
-router.post('/',function(req,res,next){
+router.post('/',function (req,res,next){
 	Presentation.create(req.body)
 	.then(function(presentation){
 		res.send(presentation);
@@ -14,9 +14,9 @@ router.post('/',function(req,res,next){
 	.then(null, next);
 });
 
-//get all Presentations
+//get Presentations by query
 router.get('/', function (req, res, next) {
-  Presentation.find({}, function(err, presentations) {
+  Presentation.find(req.query, function (err, presentations) {
     if (err)  
         return next(err);
       
@@ -24,20 +24,10 @@ router.get('/', function (req, res, next) {
   });
 });
 
-//get presentation by id
-router.get('/:id', function(req,res,next){
-	var id = req.params.id;
-	Presentation.findById(id ,function(err,presentation){
-		if(err)
-			return next(err);
-		res.send(presentation);
-	});
-});
-
 //update Presentation
 router.put('/:id',function(req,res,next) {
 	var id = req.params.id;
-	Presentation.findByIdAndUpdate(id, req.body, function(err,presentation){
+	Presentation.findByIdAndUpdate(id, req.body, function (err,presentation){
 		if(err){
 			return next(err);
 		}

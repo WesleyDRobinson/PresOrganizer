@@ -18,20 +18,11 @@ router.post('/',function(req,res,next){
 
 //get all users or 1 user by a specific search query
 router.get('/', function (req, res, next) {
-	if (req.query) {
-		User.find(req.query, function (err, user) {
-			if (err) 
-				return next(err);
-			res.send(user);
-		});
-	} else {
-		User.find({}, function (err, users) {
-			if (err)
-				return next(err);
-
-			res.send(users);
-		});
-	}
+	User.find(req.query, function (err, users) {
+		if (err) 
+			return next(err);
+		res.send(users);
+	});
 });
 
 
@@ -56,22 +47,6 @@ router.put('/:id', function (req, res, next) {
 		next();
 	}
 });
-
-// router.put('/:id/changeEmail/', function (req, res, next) {
-//     User.findById(req.params.id, function (err, user){
-
-//       user.email = req.body.email;
-//       //req.body is empty
-//       //console.log('req',req.body);
-//       user.save(function(err, savedUser){
-//          if (err)  { 
-//             console.log(err);
-//             return next(err);
-//           }
-//          res.send(savedUser);
-//       });
-//     });
-// });
 
 
 module.exports = router;

@@ -108,7 +108,6 @@ describe('User GET, POST, PUT, DELETE routes', function () {
                     expect(response.status).to.equal(200);
 
                     request(app).get("/api/user?_id=" + testUser._id).end (function (err, response){
-                        console.log(response.body);
                         if(err) return done(err);
                         expect(response.body).to.have.length(0);
                         done();
@@ -147,7 +146,6 @@ describe('User GET, POST, PUT, DELETE routes', function () {
 
                     request(app).get("/api/user?_id=" + testUser._id).end (function (err, response){
                         if(err) return done(err);
-                        console.log(response.body);
                         response.body[0].should.have.property("email", info.email);
                         expect(response.body[0].name).to.equal("Jack Ryan");
                         done();
