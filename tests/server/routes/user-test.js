@@ -29,7 +29,7 @@ describe('User GET, POST, PUT, DELETE routes', function () {
     var altProduct;
     var altListItem;
     var altUser;
-    var userId;
+    var testUser;
 
     beforeEach('Establish DB connection', function (done) {
         if (mongoose.connection.db) return done();
@@ -40,7 +40,7 @@ describe('User GET, POST, PUT, DELETE routes', function () {
 
         User.create([
         {
-            name: 'Ash',
+            name: 'Ash Ryan',
             email: 'ash@beats.com'},
         {
             name: 'Wesley'
@@ -52,7 +52,7 @@ describe('User GET, POST, PUT, DELETE routes', function () {
             name: 'Evan'
         }])
         .then(function(user){   // user is an array
-            userId = user._id;
+            testUser = user;
             done();
         })
         .then(null,done);
@@ -81,10 +81,19 @@ describe('User GET, POST, PUT, DELETE routes', function () {
         // TODO -- optional -- make test work
         it('should return a user based on search by Id', function (done) {
             request(app)
-                .get("/api/user/" + userId)
+                .get("/api/user?_id=" + testUser._id)
                 //receive array of items with category === category we submitted
                 .end( function (err, data){
-                    expect(data.body.name).to.equal('Ash');
+                    expect(data.body[0].name).to.equal('Ash Ryan');
+                    done();
+                });
+        });
+        it('should return a user based on search by name', function (done) {
+            request(app)
+                .get("/api/user?name=" + testUser.name)
+                //receive array of items with category === category we submitted
+                .end( function (err, data){
+                    expect(data.body[0].name).to.equal('Ash Ryan');
                     done();
                 });
         });
@@ -93,14 +102,14 @@ describe('User GET, POST, PUT, DELETE routes', function () {
 
     describe ("DELETE", function (){
         it("should delete a user by id", function (done){
-            request(app).del("/api/user/" + userId)
+            request(app).del("/api/user/" + testUser._id)
                 .end(function (err, response){
                     if (err) return done(err);
                     expect(response.status).to.equal(200);
 
-                    request(app).get("/api/user" + userId).end (function (err, response){
+                    request(app).get("/api/user?_id=" + testUser._id).end (function (err, response){
                         if(err) return done(err);
-                        expect(response.status).to.equal(404);
+                        expect(response.body).to.have.length(0);
                         done();
                     });
                 });
@@ -113,14 +122,47 @@ describe('User GET, POST, PUT, DELETE routes', function () {
 
             var info = { email: 'ash@ryan.com' };
 
-            request(app).put("/api/user/" + userId + "/changeEmail").send(info)
+            request(app).put("/api/user/" + testUser._id).send(info)
                 .end(function (err, response){
                     if (err) return done(err);
                     expect(response.status).to.equal(200);
 
-                    request(app).get("/api/user/" + userId).end (function (err, response){
+                    request(app).get("/api/user?_id=" + testUser._id).end (function (err, response){
                         if(err) return done(err);
-                        response.res.body.should.have.property("email", info.email);
+                        response.body[0].should.have.property("email", info.email);
+                        done();
+                    });
+
+                });
+        });
+        it("should be able to update a user's email and name", function (done){
+
+            var info = { email: 'JACK@ryan.com', name: 'Jack Ryan' };
+
+            request(app).put("/api/user/" + testUser._id).send(info)
+                .end(function (err, response){
+                    if (err) return done(err);
+                    expect(response.status).to.equal(200);
+
+                    request(app).get("/api/user?_id=" + testUser._id).end (function (err, response){
+                        if(err) return done(err);
+                        response.body[0].should.have.property("email", info.email);
+                        expect(response.body[0].name).to.equal("Jack Ryan");
+                        done();
+                    });
+
+                });
+        });
+        it("should not update anything if no new attributes are sent", function (done) {
+            var info = {};
+            request(app).put("/api/user/" + testUser._id).send(info)
+                .end(function (err, response){
+                    if (err) return done(err);
+                    expect(response.status).to.equal(200);
+
+                    request(app).get("/api/user?_id=" + testUser._id).end (function (err, response){
+                        if(err) return done(err);
+                        response.body[0].should.have.property("email", "ash@beats.com");
                         done();
                     });
 
@@ -128,68 +170,3 @@ describe('User GET, POST, PUT, DELETE routes', function () {
         });
     });
 });
-// // TODO make available to admin and superuser only
-//         it('should return collection of listitems created by a user AND only items created by that user ', function (done) {
-//             request(app)
-//                 .get("/api/listitems/user/" + testUser._id)
-//                 //receive array of itmes with category === category we submitted
-//                 .end( function (err, data){
-//                     //console.log("listItemArr at test: ", data.res.body);
-//                     data.res.body[0].creator.firstName.should.equal('Ned');
-//                     done();
-//                 });
-//         });
-
-// // TODO make available to admin only
-//         it('should return collection of listitems based on a product AND only items based on that Product', function (done) {
-//             request(app)
-//                 .get("/api/listitems/product/" + testProduct._id)
-//                 .end( function (err, data){
-//                     data.res.body[0].product.name.should.equal('Space Toilet Paper');
-//                     done()
-//                 });
-//         });
-
-//         it('should return a single listitem', function (done) {
-//             request(app)
-//                 .get("/api/listitems/item/" + testListItem._id)
-//                 .end(function (err, data) {
-//                     data.res.body.should.have.property('_id', testListItem._id.toString());
-//                     done();
-//                 });
-//         });
-
-
-// //TODO make POST, PUT, DEL available to admin and superuser only
-//     describe ("POST", function (){
-
-// //posting to listitem should create a new listitem
-//         it("should create a new listitem", function (done){
-//             var newListItem = {
-//                 quantity : 10,
-//                 price: 1000, //we are storing this in cents
-//                 product : altProduct._id,
-//                 category: altCategory._id,
-//                 creator: altUser._id
-//             };
-//             var testListItem;
-
-//             request(app).post("/api/listitems/").send(newListItem)
-//                 .end(function (err, response){
-//                     if (err) return done(err);
-
-//                     expect(response.status).to.be.equal(200);
-
-//                     testListItem = response.body; //capture the newly created and returned list item
-
-//                     //Check that it is in database
-//                     request(app).get("/api/listitems/item/" + testListItem._id).end (function (err, response){
-//                         if(err) return done(err);
-//                         //console.log("response.res.body: ", response.res.body);
-//                         response.res.body.should.have.property("_id", testListItem._id);
-//                         done();
-//                     });
-//                 });
-//         });
-
-//     });
