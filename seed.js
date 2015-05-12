@@ -91,7 +91,6 @@ var createPresentation = function(userId){
 
 };
 
-
 var seedTimeLineItems = function(presentationIds){
     var timeLineItemsArr = presentationIds.map(function(id){
         var timeLineItem =  new TimeLineItem({title:'presentation', presentation: id });
@@ -163,12 +162,7 @@ var seedConferences = function(userIds,timeLineIds,localeIds, num){
     });
     return conferenceArr;
 
-
-
-
-
 };
-
 
 
 connectToDb.then(function () {
