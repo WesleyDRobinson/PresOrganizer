@@ -8,20 +8,20 @@ var Conference = mongoose.model('Conference');
 
 
 
-//Determine whether user is Presenter based on Locale Search
-router.get('/isPresenter/:id', function(req,res,next){
-	var id = req.params.id;
-	console.log('presenters1');
-	Conference.find({presenters:id}, function(err, presenters){
-		console.log('presenters2', presenters);
-		if(presenters.length>0)
-			res.send(true);
-		else
-			res.send(false);
-	});
+// //Determine whether user is Presenter based on Locale Search
+// router.get('/isPresenter/:id', function(req,res,next){
+// 	var id = req.params.id;
+// 	console.log('presenters1');
+// 	Conference.find({presenters:id}, function(err, presenters){
+// 		console.log('presenters2', presenters);
+// 		if(presenters.length>0)
+// 			res.send({bool: true});
+// 		else
+// 			res.send({bool:false});
+// 	});
 	
 	
-});
+// });
 
 
 //Create a user
@@ -53,9 +53,9 @@ router.get('/isOrganizer/:id', function(req,res,next){
 	console.log('organizers1');
 	Locale.find({organizers:id}, function(err, locales){
 		if(locales.length>0)
-			res.send(true);
+			res.send({bool: true});
 		else
-			res.send(false);
+			res.send({bool: false});
 
 	});
 	

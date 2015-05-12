@@ -37,17 +37,6 @@ router.put('/:id',function(req,res,next) {
 });
 
 
-// //add media item to media array
-// router.put('/:id/MediaItem',function(req,res,next){
-	
-
-// });
-
-// //remove media item from media array
-// router.delete('/:id/MediaItem',function(req,res,next){
-	
-
-// });
 
 
 // delete a presentation
