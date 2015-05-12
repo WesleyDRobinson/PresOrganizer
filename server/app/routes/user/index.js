@@ -16,26 +16,23 @@ router.post('/',function(req,res,next){
 	});
 });
 
-//get all users
+//get all users or 1 user by a specific search query
 router.get('/', function (req, res, next) {
-  User.find({}, function(err, users) {
-    if (err)  
-        return next(err);
-      
-    res.send(users);
-  });
-});
+	if (req.query) {
+		User.find(req.query, function (err, user) {
+			if (err) 
+				return next(err);
+			res.send(user);
+		});
+	} else {
+		User.find({}, function (err, users) {
+			if (err)
+				return next(err);
 
-//get user by id
-router.get('/:id', function(req,res,next){
-	var id = req.params.id;
-	User.findById(id ,function(err,user){
-		if(err)
-			return next(err);
-		res.send(user);
-	});
+			res.send(users);
+		});
+	}
 });
-
 
 
 // delete a user
@@ -48,22 +45,33 @@ router.delete('/:id',function(req,res,next) {
 
 
 
-// //Update a Particular User email address
-router.put('/:id/changeEmail/', function (req, res, next) {
-    User.findById(req.params.id, function (err, user){
-
-      user.email = req.body.email;
-      //req.body is empty
-      //console.log('req',req.body);
-      user.save(function(err, savedUser){
-         if (err)  { 
-            console.log(err);
-            return next(err);
-          }
-         res.send(savedUser);
-      });
-    });
+// Update a user's attributes
+router.put('/:id', function (req, res, next) {
+	var id = req.params.id;
+	if (req.body) {
+		User.findByIdAndUpdate(id, req.body, function (updatedUser) {
+			res.send(updatedUser);
+		});
+	} else {
+		next();
+	}
 });
+
+// router.put('/:id/changeEmail/', function (req, res, next) {
+//     User.findById(req.params.id, function (err, user){
+
+//       user.email = req.body.email;
+//       //req.body is empty
+//       //console.log('req',req.body);
+//       user.save(function(err, savedUser){
+//          if (err)  { 
+//             console.log(err);
+//             return next(err);
+//           }
+//          res.send(savedUser);
+//       });
+//     });
+// });
 
 
 module.exports = router;
