@@ -122,6 +122,7 @@ describe('Conference GET, POST, PUT, DELETE routes', function () {
                 .end( function (err, data) {
                     if (err) done(err);
                     expect(data.body[0].name).to.equal('Kyoto Vol.13');
+                    expect(data.body[0].presenters[0].name).to.equal('Evan');
                     expect(data.body[1].name).to.equal('Kyoto Vol.13 1/2');
                     done();
                 });
