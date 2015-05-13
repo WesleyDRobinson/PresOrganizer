@@ -67,41 +67,6 @@
             return !!Session.user;
         };
 
-        // this.isOrganizer = function(){
-        //     return Session.user.accountType ==='organizer' && this.isAuthenticated();
-        // };
-        // 
-        this.isOrganizer = function(){
-
-            return this.getLoggedInUser().then(function(){
-                return $http.get('/api/user/isOrganizer/'+Session.user._id).then(function(res){
-                    console.log('isOrganizer', res.data);
-                    return res.data;
-                });
-
-            });
-        };
-
-
-                
-
-    
-        this.isPresenter = function(){
-
-            return this.getLoggedInUser().then(function(){
-                return $http.get('/api/user/isPresenter/'+Session.user._id).then(function(res){
-                    console.log('isPresenter', res.data);
-                    return res.data;
-                });
-            });
-
-                
-        };
-
-
-
-
-
         this.getLoggedInUser = function () {
 
             // If an authenticated session exists, we

@@ -15,10 +15,12 @@ var request = require("supertest");
 
 
 require('../../../server/db/models/user');
-
+require('../../../server/db/models/conference');
+require('../../../server/db/models/locale');
 
 var User = Promise.promisifyAll(mongoose.model('User'));
-
+var Conference = Promise.promisifyAll(mongoose.model('Conference'));
+var Locale = Promise.promisifyAll(mongoose.model('Locale'));
 
 describe('User GET, POST, PUT, DELETE routes', function () {
     var testCategory;
@@ -36,7 +38,7 @@ describe('User GET, POST, PUT, DELETE routes', function () {
         mongoose.connect(dbURI, done);
     });
 
-    beforeEach('Make a User', function (done) {
+    beforeEach('Make a User, a Locale and Conference', function (done) {
 
         User.create([
         {
@@ -53,6 +55,16 @@ describe('User GET, POST, PUT, DELETE routes', function () {
         }])
         .then(function(user){   // user is an array
             testUser = user;
+            return Locale.create({ name: 'Kyoto', organizers: user._id })
+        })
+        .then(function (locale) {
+            return Conference.create({ 
+                    name: 'Kyoto PK presents...', 
+                    venue: 'Kiyomizudera',
+                    date: 'July 15, 2015',
+                    presenters: testUser._id })
+        })
+        .then(function (conference) {
             done();
         })
         .then(null,done);
@@ -63,8 +75,6 @@ describe('User GET, POST, PUT, DELETE routes', function () {
     });
 
     describe ("GET", function (){
-
-// TODO make available to admin only
         it('should return collection of all users', function (done) {
             request(app)
                 .get("/api/user")
@@ -76,13 +86,9 @@ describe('User GET, POST, PUT, DELETE routes', function () {
                     done();
                 });
         });
-
-        // Visually confirmed working, test not working;
-        // TODO -- optional -- make test work
         it('should return a user based on search by Id', function (done) {
             request(app)
                 .get("/api/user?_id=" + testUser._id)
-                //receive array of items with category === category we submitted
                 .end( function (err, data){
                     expect(data.body[0].name).to.equal('Ash Ryan');
                     done();
@@ -91,14 +97,12 @@ describe('User GET, POST, PUT, DELETE routes', function () {
         it('should return a user based on search by name', function (done) {
             request(app)
                 .get("/api/user?name=" + testUser.name)
-                //receive array of items with category === category we submitted
                 .end( function (err, data){
                     expect(data.body[0].name).to.equal('Ash Ryan');
                     done();
                 });
         });
     });
-    
 
     describe ("DELETE", function (){
         it("should delete a user by id", function (done){
