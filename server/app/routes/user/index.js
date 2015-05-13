@@ -20,7 +20,6 @@ router.post('/',function(req,res,next){
 
 //get all users or 1 user by a specific search query
 router.get('/', function (req, res, next) {
-	console.log("hitting");
 	User.find(req.query, function (err, users) {
 		if (err) 
 

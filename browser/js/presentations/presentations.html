@@ -1,1 +1,12 @@
-<h1>Hello World</h1>
+
+<button  ng-click="toggleImages()">Show Images</button>
+<div ng-repeat="presentation in presentations"><h1>{{presentation.title}}</h1>
+
+	<div ng-if="showImages">
+		<div ng-repeat="media in presentation.media">
+
+		<img src="{{media.url}}"></div>
+		<div>
+			
+	</div>
+</div>
