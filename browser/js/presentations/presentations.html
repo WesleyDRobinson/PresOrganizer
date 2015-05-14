@@ -1,12 +1,30 @@
 
-<button  ng-click="toggleImages()">Show Images</button>
-<div ng-repeat="presentation in presentations"><h1>{{presentation.title}}</h1>
 
-	<div ng-if="showImages">
-		<div ng-repeat="media in presentation.media">
+<h1 ng-repeat="presentation in presentations"><a ng-click="setPresentationMedia(presentation._id)">	{{presentation.title}}</a></h1>
+<div id='#board'>
 
-		<img src="{{media.url}}"></div>
-		<div>
-			
+
+<div ng-if="presentationMedia" >
+	<button ng-click="savePresentation()">Save Presentation Order</button>
+
+	<ul  as-sortable="sortableOptions" ng-model="presentationMedia">
+
+
+		<li ng-repeat="media in presentationMedia" as-sortable-item>
+				
+				<div as-sortable-item-handle >
+				{{media.url}}
+
+				
+				</div>
+				<a data-no-drag ng-click="removeCard($index)">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				
+
+
+					
+		</li>
+	</ul>
 	</div>
 </div>

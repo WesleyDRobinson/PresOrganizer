@@ -4,7 +4,7 @@ app.config(function ($stateProvider) {
         url: '/conferences',
         templateUrl: 'js/conferences/conferences.html',
         controller: function ($scope, ConferenceFactory) {
-            $scope.showImages = false;
+            $scope.showConferences = false;
             
             ConferenceFactory.getConferences().then(function(conferences){
                 $scope.conferences = conferences;

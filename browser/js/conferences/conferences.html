@@ -1,7 +1,12 @@
-{{conferences}}
-<button  ng-click="toggleConference()">Show Conference</button>
-<div ng-repeat="conference in conferences"><h1>{{conference.name}}</h1>
-	<div ng-if="showConference">
+<button  ng-click="toggleConferences()">Show Conference</button>
+<div ng-repeat="conference in conferences"><h1>{{conference.name}} at {{conference.venue}}</h1>
+	<div ng-if="showConferences">
+	<h4>Presenters</h4>
+	<div ng-repeat="presenter in conference.presenters"> presenterId: {{presenter}}</div>
+	<h4>TimeLine</h4>
+	<div ng-repeat="timeLineItems in conference.timeline">
+		timeLineItemId : {{timeLineItems}}
+	</div>
 		
 
 		
