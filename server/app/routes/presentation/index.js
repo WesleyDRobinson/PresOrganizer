@@ -16,10 +16,9 @@ router.post('/',function (req,res,next){
 
 //get Presentations by query
 router.get('/', function (req, res, next) {
-  Presentation.find(req.query, function (err, presentations) {
-    if (err)  
-        return next(err);
-      
+  Presentation.find(req.query).populate('presenter').exec()
+  .then(function (presentations) {
+   
     res.send(presentations);
   });
 });

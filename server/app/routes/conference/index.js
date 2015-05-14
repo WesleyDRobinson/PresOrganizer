@@ -1,9 +1,8 @@
 var router = require('express').Router();
 var mongoose = require('mongoose');
-var Conference = mongoose.model('Conference');
-//var Promise = require('bluebird');
+var Promise = require('bluebird');
 //require('../../../../server/db/models/conference');
-//var Conference = Promise.promisifyAll(mongoose.model('Conference'));
+var Conference = Promise.promisifyAll(mongoose.model('Conference'));
 ////////////////////////////////////////////////////////////////////
 // CREATE
 // Create a conference
@@ -18,10 +17,11 @@ router.post('/',function(req, res, next){
 // READ
 // find by queries
 router.get('/', function(req, res, next){
-	Conference.find(req.query, function (err, conferences){
+	Conference.find(req.query).populate('timeline').exec(
+		function (err, conferences){
 		if(err) return next(err);
-		
 		res.send(conferences);
+		
 	});
 });
 ////////////////////////////////////////////////////////////////////
