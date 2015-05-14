@@ -1,0 +1,7 @@
+<div>
+    <div class="container slider">
+        <img ng-repeat="slide in currentSlides" class="slide" 
+            ng-hide="!isCurrentSlideIndex($index)" ng-src="{{slide.image}}">
+    </div>
+    <a ng-click="killTimer()">KILL TIMER</a>
+</div>
