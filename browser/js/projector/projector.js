@@ -36,25 +36,31 @@ app.controller('ProjectorCtrl', function ($scope, $timeout) {
         return $scope.currentIndex === index;
     }
 	
-	$scope.nextSlide = function () {
-		$scope.slideCounter++;
-		console.log('next slide running ', $scope.slideCounter);
+	function nextSlide () {
+		console.log('next slide running ', $scope.currentIndex);
 		// if ($scope.slideCounter > 2) {
 		// 	$scope.currentSlides = getNextPresentation();
 		// 	loadSlides();
 		// }
         $scope.currentIndex = ($scope.currentIndex < $scope.currentSlides.length - 1) ? ++$scope.currentIndex : 0;
-        timers.push($timeout($scope.nextSlide, INTERVAL));
+        timers.push($timeout(nextSlide, INTERVAL));
     }
 
     function loadSlides () {
-        timers.push($timeout($scope.nextSlide, INTERVAL));
+        timers.push($timeout(nextSlide, INTERVAL));
         console.log(timers);
     }
     
-    $scope.killTimer = function () {   // not working for some reason
+    $scope.killTimer = function () {   // now working for some reason
     	console.log('kill');
+    	console.log('current index: ', $scope.currentIndex);
     	timers.forEach($timeout.cancel);
+    	timers = [];
+    }
+
+    $scope.restart = function () {
+    	console.log('restart');
+    	timers.push($timeout(nextSlide, INTERVAL));
     }
 
     $scope.currentIndex = 0;
@@ -62,13 +68,6 @@ app.controller('ProjectorCtrl', function ($scope, $timeout) {
     $scope.isCurrentSlideIndex = isCurrentSlideIndex;
 
     loadSlides();
-    // $scope.prevSlide = function () {
-    //         $scope.currentIndex = ($scope.currentIndex < $scope.slides.length - 1) ? ++$scope.currentIndex : 0;
-    //     };
-
-    // $scope.nextSlide = function () {
-    //     $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.slides.length - 1;
-    // };
 });
 
 
