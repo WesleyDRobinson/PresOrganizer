@@ -22,17 +22,6 @@ var TimeLineItem = new mongoose.Schema({
 
 Conference.plugin(deepPopulate);
 
-// schema.method('insertInTimeline', function(presentationId, callback){
-
-// });
-
-// schema.method('deleteFromTimeline', function(presentationId, callback){
-
-// });
-
-// schema.method('adjustTimeline', function(presentationId, newPosition, callback){
-
-// });
 
 mongoose.model('Conference', Conference);
 mongoose.model('TimeLineItem', TimeLineItem);

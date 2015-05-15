@@ -6,22 +6,25 @@ app.controller('ConferencesCtrl',function($q, $scope, ConferenceFactory){
 		
     });
 
+    $scope.timeLineOptions = {
+        containment: '#timeline'
+    };
+
     $scope.setConference = function(id){
-    	console.log(id);
         $scope.timeLine = _.find($scope.conferences, {_id: id}).timeline;
-    	ConferenceFactory.getPresentations(id).then(function(presentations){
-    		
+    	ConferenceFactory.getPresentations(id).then(function(presentations){	
             //initailize variable for presentations that can be added to the timeline
             //remove possible conference presentations if they are already existing in the timeline
             $scope.conferencePresentations = removeExistingTimeLineItems(presentations, $scope.timeLine);
+
+            //convert these into same format as the TimeLineItems
+            $scope.conferencePresentations = ConferenceFactory.convertToTimeLineItem($scope.conferencePresentations);
+
 
     	});
     	
     };
 
-    // $scope.toggleConferences = function(){
-    //     $scope.showConferences = $scope.showConferences ? false : true;
-    // };
 });
 
 function removeExistingTimeLineItems(presentations, timeLine){

@@ -1,33 +1,22 @@
-<!-- 
-<div ng-repeat="conference in conferences"><h1>{{conference.name}} at {{conference.venue}}</h1>
-	<div ng-if="showConferences">
-	<h4>Presenters</h4>
-	<div ng-repeat="presenter in conference.presenters"> presenterId: {{presenter}}</div>
-	<h4>TimeLine</h4>
-	<div ng-repeat="timeLineItems in conference.timeline">
-		timeLineItemId : {{timeLineItems}}
-	</div>
-		
-
-		
-			
-	</div>
-</div> -->
+{{timeLine}}
 
 <h4 ng-repeat="conference in conferences"><a ng-click="setConference(conference._id)">	{{conference.name}}</a></h4>
 <div ng-if="conferencePresentations" >
+	<h1>Presentations</h1>
 	<ul as-sortable ng-model="conferencePresentations">
 		<li ng-repeat="presentation in conferencePresentations" as-sortable-item as-sortable-item-handle>
-			{{presentation.title+" by "+presentation.presenter.name}}
+			{{presentation.presentation.title+" by "+presentation.presentation.presenter.name}}
 
 		</li>
 	</ul>
 
 </div>
 
-<div ng-if="timeLine">
+
+<div id="timeline" ng-if="timeLine">
+<h1>Timeline</h1>
 	<ul as-sortable ng-model="timeLine">
-		<li ng-repeat="timeLineItem in timeLine" >
+		<li ng-repeat="timeLineItem in timeLine" as-sortable-item as-sortable-item-handle>
 			<span ng-if="!timeLineItem.presentation">{{timeLineItem.title}}</span>
 			<span ng-if="timeLineItem.presentation">{{timeLineItem.presentation.title+" by "+timeLineItem.presentation.presenter.name}}</span>
 

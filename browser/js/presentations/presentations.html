@@ -1,5 +1,5 @@
 
-
+{{presentationMedia}}
 <h1 ng-repeat="presentation in presentations"><a ng-click="setPresentationMedia(presentation._id)">	{{presentation.title}}</a></h1>
 <div id='#board'>
 
@@ -10,12 +10,12 @@
 	<ul  as-sortable="sortableOptions" ng-model="presentationMedia">
 
 
-		<li ng-repeat="media in presentationMedia" as-sortable-item>
-				
+		<li ng-repeat="media in presentationMedia" as-sortable-item > 
+				<span as-sortable-item-handle>
 				{{media.url}}
-
+				</span>
 				
-				</div>
+				
 				<a data-no-drag ng-click="removeCard($index)">
 					<span class="glyphicon glyphicon-remove"></span>
 				</a>
@@ -25,5 +25,5 @@
 					
 		</li>
 	</ul>
-	</div>
+
 </div>

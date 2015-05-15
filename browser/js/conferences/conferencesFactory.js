@@ -27,6 +27,14 @@ app.factory('ConferenceFactory', function($q, $http,AuthService){
 					});
 				});
 
+		},
+		convertToTimeLineItem: function(presentations){
+			return presentations.map(function(presentation){
+				return {title: 'presentation', presentation: presentation};
+
+			});
+
+
 		}
 
 	};
