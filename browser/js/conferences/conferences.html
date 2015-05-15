@@ -4,7 +4,7 @@
 <div ng-if="conferencePresentations" >
 	<h1>Managing {{currentPresentationTitle}}</h1>
 	<h1>Presentations</h1>
-	<ul as-sortable ng-model="conferencePresentations">
+	<ul as-sortable="conferenceOptions" ng-model="conferencePresentations">
 		<li ng-repeat="presentation in conferencePresentations" as-sortable-item>
 			<span as-sortable-item-handle>
 			{{presentation.presentation.title+" by "+presentation.presentation.presenter.name}}

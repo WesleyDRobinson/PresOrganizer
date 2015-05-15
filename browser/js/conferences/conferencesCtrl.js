@@ -25,9 +25,16 @@ app.controller('ConferencesCtrl',function($q, $scope, ConferenceFactory){
             
         },
         accept: function (sourceItemHandleScope, destSortableScope) {
-            return sourceItemHandleScope.itemScope.sortableScope.$id !== destSortableScope.$id;
+            return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
         },
         containment: '#board'
+    };
+
+    $scope.conferenceOptions = {
+        accept: function (sourceItemHandleScope, destSortableScope) {
+            return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
+        }
+
     };
 
 
