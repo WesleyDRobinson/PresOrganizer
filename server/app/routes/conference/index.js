@@ -17,6 +17,7 @@ router.post('/',function(req, res, next){
 // READ
 // find by queries
 router.get('/', function(req, res, next){
+
 	Conference.find(req.query).deepPopulate('timeline.presentation.presenter').exec(
 		function (err, conferences){
 		if(err) return next(err);
@@ -24,6 +25,18 @@ router.get('/', function(req, res, next){
 		
 	});
 });
+// //Evans Code
+// 	Conference.find(req.query)
+// 	.populate('presenters', 'name _id')
+// 	.populate('locale')
+// 	//.populate('locale.organizers')
+// 	.exec()
+// 	.then(function (conferences){
+// 		console.log('populated:', conferences);
+// 		res.send(conferences);
+// 	})
+// 	.then(null, function(err){
+// 		return next(err);
 ////////////////////////////////////////////////////////////////////
 // UPDATE
 // update by conference Id
