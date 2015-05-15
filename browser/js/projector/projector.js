@@ -9,26 +9,15 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('ProjectorCtrl', function ($scope, $timeout) {
+app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorFactory) {
 	var INTERVAL = 2000;
 	var PROGRESSED_TIME = 0;
 	var timers = [];
 
 	$scope.slideCounter = 0;
 
-	$scope.currentSlides = [
-		{ image: 'http://www.da-files.com/contests/wechat/mon01.gif'},
-		{ image: 'http://www.da-files.com/contests/wechat/mon02.gif'},
-		{ image: 'http://www.da-files.com/contests/wechat/mon03.gif'}
-	];
-
-	// function getNextPresentation () {
-	// 	return [
-	// 		{ image: 'next presentation 1' },
-	// 		{ image: 'next presentation 2' },
-	// 		{ image: 'next presentation 3' }
-	// 	]
-	// }
+    $scope.currentTimeline = ProjectorFactory.timeline();
+    $scope.currentTimelineFlat = ProjectorFactory.timelineFlat($scope.currentTimeline);
 
     function setCurrentSlideIndex (index) {
         $scope.currentIndex = index;
@@ -41,10 +30,10 @@ app.controller('ProjectorCtrl', function ($scope, $timeout) {
 	function nextSlide () {
 		console.log('next slide running ', $scope.currentIndex);
 		// if ($scope.slideCounter > 2) {
-		// 	$scope.currentSlides = getNextPresentation();
+		// 	$scope.currentTimelineFlat = getNextPresentation();
 		// 	loadSlides();
 		// }
-        $scope.currentIndex = ($scope.currentIndex < $scope.currentSlides.length - 1) ? ++$scope.currentIndex : 0;
+        $scope.currentIndex = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? ++$scope.currentIndex : 0;
         timers.push($timeout(nextSlide, INTERVAL));
     }
 
@@ -58,12 +47,12 @@ app.controller('ProjectorCtrl', function ($scope, $timeout) {
     	console.log('current index: ', $scope.currentIndex);
     	timers.forEach($timeout.cancel);
     	timers = [];
-    }
+    };
 
     $scope.restart = function () {
     	console.log('restart');
     	timers.push($timeout(nextSlide, INTERVAL));
-    }
+    };
 
     $scope.currentIndex = 0;
     $scope.setCurrentSlideIndex = setCurrentSlideIndex;
