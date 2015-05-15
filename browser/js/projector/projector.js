@@ -12,9 +12,8 @@ app.config(function ($stateProvider) {
 app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorFactory) {
 	var INTERVAL = 2000;
 	var PROGRESSED_TIME = 0;
-	var timers = [];
-
-	$scope.slideCounter = 0;
+	var TIMER;
+    var PAUSED = false;
 
     $scope.currentTimeline = ProjectorFactory.timeline();
     $scope.currentTimelineFlat = ProjectorFactory.timelineFlat($scope.currentTimeline);
@@ -29,40 +28,45 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorFactory) {
 	
     // still working on this
 	function nextSlide () {
-        var next = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? ++$scope.currentIndex : 0;
-        console.log('current index: ', $scope.currentIndex);
-        console.log('next + 1: ', next + 1);
-        console.log('current item: ', $scope.currentTimelineFlat[next]);
-        if ($scope.currentTimelineFlat[next+1].mediaType == "pause") {
-            console.log('currently paused');
+        $scope.currentIndex = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? ++$scope.currentIndex : 0;
+        var next = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? $scope.currentIndex + 1 : 0;
+
+        if ($scope.currentTimelineFlat[next].mediaType === "pause") {
+            //console.log('currently paused');
+            PAUSED = true;
             $scope.killTimer();
         } else {
-            $scope.currentIndex = next;
-            timers.push($timeout(nextSlide, INTERVAL));
+            loadSlides();
         }
     }
 
     function loadSlides () {
-        timers.push($timeout(nextSlide, INTERVAL));
+        if (TIMER) $timeout.cancel(TIMER);
+        TIMER = $timeout(nextSlide, INTERVAL);
         //console.log(timers);
     }
     
     $scope.killTimer = function () {   // now working for some reason
-    	console.log('kill');
-    	//console.log('current index: ', $scope.currentIndex);
-    	timers.forEach($timeout.cancel);
-    	timers = [];
+        if (TIMER) { 
+            //console.log('kill');
+            $timeout.cancel(TIMER);
+            TIMER = null;
+        }
     };
 
-    $scope.restart = function () {
-    	console.log('restart');
-    	timers.push($timeout(nextSlide, INTERVAL));
+    $scope.restart = function () {   // must hide when presentation is playing
+    	//console.log('restart');
+        if (PAUSED) {
+            $scope.currentIndex += 2;    // must consider edge case (phase 2)
+            PAUSED = false;
+        }
+    	loadSlides();
     };
 
     $scope.currentIndex = 0;
     $scope.setCurrentSlideIndex = setCurrentSlideIndex;
     $scope.isCurrentSlideIndex = isCurrentSlideIndex;
-
+    //console.log('current index: ', $scope.currentIndex);
     loadSlides();
 });
 
