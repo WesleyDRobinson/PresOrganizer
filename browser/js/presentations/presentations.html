@@ -1,0 +1,28 @@
+<!-- i am sorry there are no directives here -->
+<h1 ng-repeat="presentation in presentations"><a ng-click="setPresentationMedia(presentation._id)">	{{presentation.title}}</a></h1>
+<div id='#board'>
+
+
+<div ng-if="presentationMedia" >
+	<button ng-click="savePresentation()">Save Presentation</button>
+
+	<ul  as-sortable="sortableOptions" ng-model="presentationMedia">
+
+<!-- i am sorry there are no directives here -->
+		<li ng-repeat="media in presentationMedia" as-sortable-item > 
+				<span as-sortable-item-handle>
+				{{media.url}}
+				</span>
+				
+				
+				<a data-no-drag ng-click="removeCard($index)">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				
+
+
+					
+		</li>
+	</ul>
+
+</div>

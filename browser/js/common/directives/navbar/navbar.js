@@ -7,11 +7,11 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
         templateUrl: 'js/common/directives/navbar/navbar.html',
         link: function (scope) {
 
-            scope.items = [
-                { label: 'Home', state: 'home' },
-                { label: 'About', state: 'about' },
-                { label: 'Tutorial', state: 'tutorial' },
-                { label: 'Members Only', state: 'membersOnly', auth: true }
+           scope.items = [
+                { label: 'Home', state: 'home', auth:true },
+                { label: 'My Conferences', state: 'conferences',  auth: true },
+                { label: 'My Presentation', state: 'presentations', auth: true },
+                { label: 'My Account', state: 'account', auth: true }
             ];
 
             scope.user = null;
@@ -25,7 +25,7 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
                    $state.go('home');
                 });
             };
-
+            
             var setUser = function () {
                 AuthService.getLoggedInUser().then(function (user) {
                     scope.user = user;
@@ -42,7 +42,9 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
             $rootScope.$on(AUTH_EVENTS.logoutSuccess, removeUser);
             $rootScope.$on(AUTH_EVENTS.sessionTimeout, removeUser);
 
-        }
+        },
+       
+
 
     };
 

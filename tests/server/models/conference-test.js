@@ -11,14 +11,12 @@ require('../../../server/db/models/presentation');
 
 var User = mongoose.model('User');
 var Conference = mongoose.model('Conference');
-var TimeLineItem = mongoose.model('TimeLineItem');
 var Presentation = mongoose.model('Presentation');
 
 describe('Conference model', function () {
     var testUser,
         testConference,
-        testPresentation,
-        testTimeLineItem;
+        testPresentation;
 
     beforeEach('Establish DB connection', function (done) {
         if (mongoose.connection.db) return done();
@@ -42,26 +40,19 @@ describe('Conference model', function () {
         .then( function (presentation) {
             testPresentation = presentation;
          
-            return TimeLineItem.create({
-                title: 'TLI presentation',
-                presentation: testPresentation._id
-            })
-        })
-        .then( function (timeLineItem) {
-            testTimeLineItem = timeLineItem;
-
             return Conference.create({
                     name: "BrooklynJune15",
                     date: new Date("June 23, 2015"),
                     venue: "Brooklyn Bowl",
                     presenters: [ testUser._id ],
-                    timeline: [timeLineItem._id]
-            })
+                    timeline: [{title: 'TLI presentation', presentation:testPresentation._id}]
+            });
         })
+
         .then( function (conference) {
             testConference = conference;
             done();
-        })
+        });
         // .catch(function (err) {
         //     done(err);
         // });    
@@ -75,29 +66,29 @@ describe('Conference model', function () {
         expect(Conference).to.be.a('function');
     });
 
-    it('saves a timeline on its own', function (done) {
-        TimeLineItem.findById(testTimeLineItem._id, function (err, item) {
-            if (err) done(err);
+    // it('saves a timeline on its own', function (done) {
+    //     TimeLineItem.findById(testTimeLineItem._id, function (err, item) {
+    //         if (err) done(err);
 
-            expect(item.title).to.equal('TLI presentation');
-            done();
-        });
-    });
+    //         expect(item.title).to.equal('TLI presentation');
+    //         done();
+    //     });
+    // });
 
-    it('adds a timeline item to a conference', function(done) {
-        TimeLineItem.create({ title: 'TLI appended to conference' })
-        .then(function (item) {
-            return Conference.findByIdAndUpdate(
-                    testConference._id, 
-                    { $push: { 'timeline': item }},
-                    { safe: true, upsert: true })
-                    .exec();
-        })
-        .then(function (conference) {
-            expect(conference.timeline).to.have.length(2);
-            done();
-        })
-    });
+    // it('adds a timeline item to a conference', function(done) {
+    //     TimeLineItem.create({ title: 'TLI appended to conference' })
+    //     .then(function (item) {
+    //         return Conference.findByIdAndUpdate(
+    //                 testConference._id, 
+    //                 { $push: { 'timeline': item }},
+    //                 { safe: true, upsert: true })
+    //                 .exec();
+    //     })
+    //     .then(function (conference) {
+    //         expect(conference.timeline).to.have.length(2);
+    //         done();
+    //     })
+    // });
 
     // it('updates a timeline in a conference', function() {
     //     Conference.findOneAndUpdate({ id: testConference._id}, { timeline: ["Added timeline"]}, function(err, conference) {

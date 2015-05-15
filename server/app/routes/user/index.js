@@ -6,6 +6,7 @@ var Conference = mongoose.model('Conference');
 //var bluebird = require('bluebird');
 
 
+
 //Create a user
 router.post('/',function(req,res,next){
 	User.create(req.body)
@@ -26,6 +27,7 @@ router.get('/', function (req, res, next) {
 		res.send(users);
 	});
 });
+
 
 // delete a user
 router.delete('/:id',function (req,res,next) {
