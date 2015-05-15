@@ -1,24 +1,32 @@
-{{timeLine}}
+<!-- i am sorry there are no directives here -->
 
-<h4 ng-repeat="conference in conferences"><a ng-click="setConference(conference._id)">	{{conference.name}}</a></h4>
+<h4 ng-repeat="conference in conferences"><a ng-click="setConference(conference._id, $index)">	{{conference.name}}</a></h4>
 <div ng-if="conferencePresentations" >
+	<h1>Managing {{currentPresentationTitle}}</h1>
 	<h1>Presentations</h1>
 	<ul as-sortable ng-model="conferencePresentations">
-		<li ng-repeat="presentation in conferencePresentations" as-sortable-item as-sortable-item-handle>
+		<li ng-repeat="presentation in conferencePresentations" as-sortable-item>
+			<span as-sortable-item-handle>
 			{{presentation.presentation.title+" by "+presentation.presentation.presenter.name}}
+			</span>
 
 		</li>
 	</ul>
 
 </div>
 
-
+<!-- i am sorry there are no directives here -->
 <div id="timeline" ng-if="timeLine">
-<h1>Timeline</h1>
+<button ng-click="saveTimeLine()">Save Timeline</button>
 	<ul as-sortable ng-model="timeLine">
-		<li ng-repeat="timeLineItem in timeLine" as-sortable-item as-sortable-item-handle>
-			<span ng-if="!timeLineItem.presentation">{{timeLineItem.title}}</span>
-			<span ng-if="timeLineItem.presentation">{{timeLineItem.presentation.title+" by "+timeLineItem.presentation.presenter.name}}</span>
+		<li ng-repeat="timeLineItem in timeLine" as-sortable-item>
+			<span as-sortable-item-handle>
+				<span ng-if="!timeLineItem.presentation">{{timeLineItem.title+'yes'}}</span>
+				<span ng-if="timeLineItem.presentation">{{timeLineItem.presentation.title+" by "+timeLineItem.presentation.presenter.name}}</span>
+			</span>
+			<a data-no-drag ng-click="removeCard($index)">
+					<span class="glyphicon glyphicon-remove"></span>
+			</a>
 
 		</li>
 	</ul>

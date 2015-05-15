@@ -2,7 +2,6 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, PresentationFa
     $scope.showImages = false;
     $scope.presentations = getPresentations;
     $scope.currentPresentationId;
-    $scope.selected = {value: 0};
     $scope.setPresentationMedia = function(id){
        $scope.presentationMedia= _.find($scope.presentations, {_id: id}).media;
        $scope.currentPresentationId = id;

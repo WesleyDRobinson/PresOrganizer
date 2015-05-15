@@ -29,7 +29,6 @@ var mongoose = require('mongoose');
 var connectToDb = require('./server/db');
 var User = mongoose.model('User');
 var Locale = mongoose.model('Locale');
-var TimeLineItem = mongoose.model('TimeLineItem');
 var Presentation = mongoose.model('Presentation');
 var Conference = mongoose.model('Conference');
 var q = require('q');
@@ -93,25 +92,18 @@ var createPresentation = function(userId){
 
 var seedTimeLineItems = function(presentationIds){
     var timeLineItemsArr = presentationIds.map(function(id){
-        var timeLineItem =  new TimeLineItem({title:'presentation', presentation: id });
-        timeLineItem.save(function(err, data){
-            if(err)console.error('error on timelineItem save',err);
-        });
-        return timeLineItem.id;
+        var timeLineItem =  {title:'presentation', presentation: id };
+        return timeLineItem;
     });
 
-    var play =  new TimeLineItem({title:'play' });
-    timeLineItemsArr.push(play.id);
-    play.save();
-    var pause= new TimeLineItem({title:'pause' });
-    timeLineItemsArr.push(pause.id);
-    pause.save();
-    var loopStart = new TimeLineItem({title:'loopStart' });
-    timeLineItemsArr.push(loopStart.id);
-    loopStart.save();
-    var loopEnd = new TimeLineItem({title:'loopEnd' });
-    timeLineItemsArr.push(loopEnd.id);
-    loopEnd.save();
+    var play =  {title:'play'};
+    timeLineItemsArr.push(play);
+    var pause= {title:'pause'};
+    timeLineItemsArr.push(pause);
+    var loopStart = {title:'loopStart'};
+    timeLineItemsArr.push(loopStart);
+    var loopEnd = {title:'loopEnd'};
+    timeLineItemsArr.push(loopEnd);
 
     return timeLineItemsArr;
 };
@@ -165,13 +157,13 @@ var seedConferences = function(userIds,timeLineIds,localeIds, num){
 };
 
 
-connectToDb.then(function () {
+connectToDb.then(function (db) {
     console.log("PLEASE DROP DATABASE BEFORE USING. THANKS");
     var userIds = seedUsers(NUM_OF_USERS);
     var presentationIds = seedPresentations(userIds, NUM_OF_PRESENTATIONS);
-    var timeLineIds = seedTimeLineItems(presentationIds);
+    var timeLineItems = seedTimeLineItems(presentationIds);
     var localeIds = seedLocale(userIds, NUM_OF_LOCALES);
-    var conferencesIds = seedConferences(userIds,timeLineIds,localeIds, NUM_OF_CONFERENCES);
+    var conferencesIds = seedConferences(userIds,timeLineItems,localeIds, NUM_OF_CONFERENCES);
     console.log("FINISHED SEEDING");
     return;
     

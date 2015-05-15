@@ -29,6 +29,7 @@ router.get('/', function(req, res, next){
 // update by conference Id
 router.put('/:conferenceId', function(req, res, next){
 	var conferenceId = req.params.conferenceId;   // locale is an Id
+	console.log('we are updating conference', req.body);
 
 	Conference.findByIdAndUpdate( conferenceId, req.body, function(err, conference){
 		if(err) return next(err);
@@ -39,6 +40,14 @@ router.put('/:conferenceId', function(req, res, next){
 ////////////////////////////////////////////////////////////////////
 // DELETE
 // delete a conference
+
+// router.put('/:conferenceId/addTimeLineItem',function(req,res,next){
+// 	var conferenceId = req.params.conferenceId;
+// 	var timeLineObj = req.body;
+// 	console.log(timeLineObj);
+
+// });
+
 router.delete('/:id',function(req, res, next) {
 	Conference.findByIdAndRemove(req.params.id, function (err, conference) {
 		if (err) return next(err);

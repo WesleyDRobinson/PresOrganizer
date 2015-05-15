@@ -35,6 +35,25 @@ app.factory('ConferenceFactory', function($q, $http,AuthService){
 			});
 
 
+		},
+		saveTimeLine: function(conferenceId, timeLine){
+
+			var newTimeLineObj = timeLine.map(function(timeLineItem){
+				var newTimeLineItem = {title: timeLineItem.title};
+				if(timeLineItem.presentation){
+					newTimeLineItem.presentation = timeLineItem.presentation._id;
+
+				}
+				return newTimeLineItem;
+
+			});
+
+			return $http.put('/api/conference/'+conferenceId, {timeline: newTimeLineObj})
+			.then(function(res){
+				return res.data;
+			});			
+
+		
 		}
 
 	};

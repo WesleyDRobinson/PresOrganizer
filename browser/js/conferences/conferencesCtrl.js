@@ -1,5 +1,6 @@
 app.controller('ConferencesCtrl',function($q, $scope, ConferenceFactory){
 	 $scope.showConferences = false;
+     $scope.timeLine = [];
             
     ConferenceFactory.getConferences().then(function(conferences){
         $scope.conferences = conferences;
@@ -9,9 +10,23 @@ app.controller('ConferencesCtrl',function($q, $scope, ConferenceFactory){
     $scope.timeLineOptions = {
         containment: '#timeline'
     };
+    $scope.saveTimeLine = function(){
+        ConferenceFactory.saveTimeLine($scope.conferenceId, $scope.timeLine);
+    };
 
-    $scope.setConference = function(id){
+    $scope.removeCard = function(index){
+        console.log("deleting card at",$scope.timeLine[index]);
+
+        if($scope.timeLine[index].title==='presentation'){
+            $scope.conferencePresentations.push($scope.timeLine[index]);
+        }
+        $scope.timeLine.splice(index,1);
+    };
+
+    $scope.setConference = function(id, $index){
         $scope.timeLine = _.find($scope.conferences, {_id: id}).timeline;
+        $scope.conferenceId = id;
+        $scope.currentPresentationTitle = $scope.conferences[$index].name;
     	ConferenceFactory.getPresentations(id).then(function(presentations){	
             //initailize variable for presentations that can be added to the timeline
             //remove possible conference presentations if they are already existing in the timeline
@@ -28,6 +43,8 @@ app.controller('ConferencesCtrl',function($q, $scope, ConferenceFactory){
 });
 
 function removeExistingTimeLineItems(presentations, timeLine){
+    console.log("presentations",presentations);
+    console.log("timeLine", timeLine);
     return _.remove(presentations, function(presentation){
 
         //get the index if the presentation is in the timeLine Item
