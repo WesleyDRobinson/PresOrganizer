@@ -43,8 +43,9 @@ app.controller('ConferencesCtrl',function($q, $scope, ConferenceFactory){
 });
 
 function removeExistingTimeLineItems(presentations, timeLine){
-    console.log("presentations",presentations);
-    console.log("timeLine", timeLine);
+    // console.log("presentations",presentations);
+    // presentations.forEach(function(presentation){console.log(presentation.title)});
+    // console.log("timeLine", timeLine.title);
     return _.remove(presentations, function(presentation){
 
         //get the index if the presentation is in the timeLine Item
