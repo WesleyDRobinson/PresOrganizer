@@ -43,9 +43,22 @@ app.factory('ProjectorFactory', function() {
 		}
 	};
 
-	function timeline() {
+	var pauseItem = {
+		title: "pause",
+		presentation: {
+			media: [
+				{
+					mediaType: "pause",
+					url: ""
+				}
+			],
+			title: "",
+			presenter: ""
+		}
+	};
 
-		return [timelineItem1, timelineItem2];
+	function timeline() {
+		return [timelineItem1, pauseItem, timelineItem2 ];
 	}
 
 	function timelineFlat(timeline) {

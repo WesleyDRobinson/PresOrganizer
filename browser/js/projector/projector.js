@@ -27,24 +27,29 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorFactory) {
         return $scope.currentIndex === index;
     }
 	
+    // still working on this
 	function nextSlide () {
-		console.log('next slide running ', $scope.currentIndex);
-		// if ($scope.slideCounter > 2) {
-		// 	$scope.currentTimelineFlat = getNextPresentation();
-		// 	loadSlides();
-		// }
-        $scope.currentIndex = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? ++$scope.currentIndex : 0;
-        timers.push($timeout(nextSlide, INTERVAL));
+        var next = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? ++$scope.currentIndex : 0;
+        console.log('current index: ', $scope.currentIndex);
+        console.log('next + 1: ', next + 1);
+        console.log('current item: ', $scope.currentTimelineFlat[next]);
+        if ($scope.currentTimelineFlat[next+1].mediaType == "pause") {
+            console.log('currently paused');
+            $scope.killTimer();
+        } else {
+            $scope.currentIndex = next;
+            timers.push($timeout(nextSlide, INTERVAL));
+        }
     }
 
     function loadSlides () {
         timers.push($timeout(nextSlide, INTERVAL));
-        console.log(timers);
+        //console.log(timers);
     }
     
     $scope.killTimer = function () {   // now working for some reason
     	console.log('kill');
-    	console.log('current index: ', $scope.currentIndex);
+    	//console.log('current index: ', $scope.currentIndex);
     	timers.forEach($timeout.cancel);
     	timers = [];
     };
