@@ -1,21 +1,49 @@
 app.controller('ConferencesCtrl',function($q, $scope, ConferenceFactory){
 	 $scope.showConferences = false;
      $scope.timeLine = [];
+
+     $scope.controlItems = [{title:'pause'},{title:'loopStart'},{title:'loopEnd'}];
             
     ConferenceFactory.getConferences().then(function(conferences){
         $scope.conferences = conferences;
 		
     });
+    $scope.controlItemOptions = {
 
-    $scope.timeLineOptions = {
-        containment: '#timeline'
+        //restrict move across columns. move only within column.
+        /*accept: function (sourceItemHandleScope, destSortableScope) {
+         return sourceItemHandleScope.itemScope.sortableScope.$id !== destSortableScope.$id;
+         },*/
+        dragStart: function(event){
+
+        },
+        itemMoved: function (event) {
+            $scope.controlItems = [{title:'pause'},{title:'loopStart'},{title:'loopEnd'}];
+          
+        },
+        orderChanged: function (event) {
+            
+        },
+        accept: function (sourceItemHandleScope, destSortableScope) {
+            return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
+        },
+        containment: '#board'
     };
+
+    $scope.conferenceOptions = {
+        accept: function (sourceItemHandleScope, destSortableScope) {
+            return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
+        }
+
+    };
+
+
     $scope.saveTimeLine = function(){
         ConferenceFactory.saveTimeLine($scope.conferenceId, $scope.timeLine);
     };
 
     $scope.removeCard = function(index){
-        console.log("deleting card at",$scope.timeLine[index]);
+        //console.log("deleting card at",$scope.timeLine[index]);
 
         if($scope.timeLine[index].title==='presentation'){
             $scope.conferencePresentations.push($scope.timeLine[index]);
@@ -43,9 +71,10 @@ app.controller('ConferencesCtrl',function($q, $scope, ConferenceFactory){
 });
 
 function removeExistingTimeLineItems(presentations, timeLine){
-    // console.log("presentations",presentations);
+    // console.log("PRESENTATIONS");
     // presentations.forEach(function(presentation){console.log(presentation.title)});
-    // console.log("timeLine", timeLine.title);
+    // console.log("TIMELINE");
+    // timeLine.forEach(function(timeLine){if(timeLine.presentation)console.log(timeLine.presentation.title)});
     return _.remove(presentations, function(presentation){
 
         //get the index if the presentation is in the timeLine Item
