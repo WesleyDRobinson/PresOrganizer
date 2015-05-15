@@ -3,13 +3,15 @@ app.config(function ($stateProvider) {
     $stateProvider.state('projector', {
         url: '/projector',
         templateUrl: 'js/projector/projector.html',
-        controller: 'ProjectorCtrl'
+        controller: 'ProjectorCtrl', 
+        resolve: ''
     });
 
 });
 
 app.controller('ProjectorCtrl', function ($scope, $timeout) {
 	var INTERVAL = 2000;
+	var PROGRESSED_TIME = 0;
 	var timers = [];
 
 	$scope.slideCounter = 0;
