@@ -33,10 +33,12 @@ app.factory('ConferenceFactory', function($q, $http,AuthService){
 });
 
 function flatten(arr) {
+  //flatten multidimensional array into single array
   var arr2 = arr.reduce(function (flat, toFlatten) {
     return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
   }, []);
 
+  //remove undefined spaces in array
   return arr2.filter(function(item){
   	return item !== undefined;
     		

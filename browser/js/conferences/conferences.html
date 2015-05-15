@@ -14,13 +14,22 @@
 	</div>
 </div> -->
 
-
 <h4 ng-repeat="conference in conferences"><a ng-click="setConference(conference._id)">	{{conference.name}}</a></h4>
-
-<div ng-if="conferencePresentations">
-	<ul>
-		<li ng-repeat="presentation in conferencePresentations">
+<div ng-if="conferencePresentations" >
+	<ul as-sortable ng-model="conferencePresentations">
+		<li ng-repeat="presentation in conferencePresentations" as-sortable-item as-sortable-item-handle>
 			{{presentation.title+" by "+presentation.presenter.name}}
+
+		</li>
+	</ul>
+
+</div>
+
+<div ng-if="timeLine">
+	<ul as-sortable ng-model="timeLine">
+		<li ng-repeat="timeLineItem in timeLine" >
+			<span ng-if="!timeLineItem.presentation">{{timeLineItem.title}}</span>
+			<span ng-if="timeLineItem.presentation">{{timeLineItem.presentation.title+" by "+timeLineItem.presentation.presenter.name}}</span>
 
 		</li>
 	</ul>

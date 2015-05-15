@@ -7,48 +7,38 @@ app.controller('ConferencesCtrl',function($q, $scope, ConferenceFactory){
     });
 
     $scope.setConference = function(id){
-
+    	console.log(id);
+        $scope.timeLine = _.find($scope.conferences, {_id: id}).timeline;
     	ConferenceFactory.getPresentations(id).then(function(presentations){
-    		$scope.conferencePresentations = presentations;
+    		
+            //initailize variable for presentations that can be added to the timeline
+            //remove possible conference presentations if they are already existing in the timeline
+            $scope.conferencePresentations = removeExistingTimeLineItems(presentations, $scope.timeLine);
+
     	});
+    	
     };
 
-  //   $scope.getConference = function(){
-  //   	var promises = [];
-		// angular.forEach($scope.conferences, function(conference){
-		// 	var promise = ConferenceFactory.getPresentations(conference._id);
-		// 	promises.push(promise);
-		// 	// var usedTimeLineItems = conference.timeline.map(function(timeLineItems){
-		// 	// 	//if we have a presentation
-		// 	// 	if(timeLineItems.presentation)
-		// 	// 		return timeLineItems.presentation;
-		// 	// 	//otherwise we have a transport item
-		// 	// 	else
-		// 	// 		return timeLineItems.title;
-		// 	// });
-
-
-		// 	// var promise = ConferenceFactory.getPresentations();
-
-		// 	// var promise = ConferenceFactory.getPresentations
-		// 	// .then()
-		// });
-		// return $q.all(promises);
-  //   }).then(function(all){
-  //   	var arr = flatten(all);
-
-  //   	console.log(arr);
-  //   }
-    
-    $scope.toggleConferences = function(){
-        $scope.showConferences = $scope.showConferences ? false : true;
-    };
+    // $scope.toggleConferences = function(){
+    //     $scope.showConferences = $scope.showConferences ? false : true;
+    // };
 });
 
+function removeExistingTimeLineItems(presentations, timeLine){
+    return _.remove(presentations, function(presentation){
+
+        //get the index if the presentation is in the timeLine Item
+           var index =  _.findIndex(timeLine, function(timeLineItem){
+            if(timeLineItem.presentation)
+                return timeLineItem.presentation._id === presentation._id;
+            });
+           //if the timeline item is not in presentation return true and have it deleted from array
+            return index === -1;
+        });
+}
+
 function flatten(arr) {
-  var arr2 = arr.reduce(function (flat, toFlatten) {
-    return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
-  }, []);
+  var arr2 = _.flatten(arr, true);
 
   return arr2.filter(function(item){
   	return item !== undefined;

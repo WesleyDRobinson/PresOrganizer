@@ -1,5 +1,6 @@
 'use strict';
 var mongoose = require('mongoose');
+var deepPopulate = require('mongoose-deep-populate');
 
 var Conference = new mongoose.Schema({
 
@@ -19,6 +20,7 @@ var TimeLineItem = new mongoose.Schema({
     presentation: {type: mongoose.Schema.ObjectId, ref: 'Presentation'}
 });
 
+Conference.plugin(deepPopulate);
 
 // schema.method('insertInTimeline', function(presentationId, callback){
 
