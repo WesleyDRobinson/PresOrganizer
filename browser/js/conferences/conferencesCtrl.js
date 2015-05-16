@@ -1,12 +1,14 @@
-app.controller('ConferencesCtrl',function ($q, $scope, $state, ConferenceFactory){
-	 $scope.showConferences = false;
-     $scope.timeLine = [];
+app.controller('ConferencesCtrl',function ($q, $scope, $state, ConferenceFactory, ProjectorModeFactory){
+	$scope.showConferences = false;
+    $scope.timeLine = [];
 
-     $scope.controlItems = [{title:'pause'},{title:'loopStart'},{title:'loopEnd'}];
+    $scope.controlItems = [{title:'pause'},{title:'loopStart'},{title:'loopEnd'}];
             
     ConferenceFactory.getConferences().then(function(conferences){
+
         $scope.conferences = conferences;
     });
+    
     $scope.controlItemOptions = {
 
         //restrict move across columns. move only within column.
@@ -38,6 +40,7 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, ConferenceFactory
 
 
     $scope.saveTimeLine = function(){
+
         ConferenceFactory.saveTimeLine($scope.conferenceId, $scope.timeLine);
     };
 
@@ -66,13 +69,17 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, ConferenceFactory
 
     // added by Evan
     $scope.goToAdmin = function (id) {
+
         $state.go('conferences-admin', { id: id } );
-    }
+    };
 
     $scope.goToConferences = function () {
-        $state.go('conferences');
-    }
 
+        $state.go('conferences');
+    };
+
+
+    // Play button
     $scope.playing = false;
     $scope.playButtonText = "Play";
     $scope.playToggle = function() {

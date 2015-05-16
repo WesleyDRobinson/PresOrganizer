@@ -70,5 +70,5 @@ function flatten(arr) {
   return arr2.filter(function(item){
   	return item !== undefined;
     		
-    	});
+  });
 }

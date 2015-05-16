@@ -9,14 +9,14 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorFactory) {
+app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory) {
 	var INTERVAL = 2000;
 	var PROGRESSED_TIME = 0;
 	var TIMER;
     var PAUSED = false;
 
-    $scope.currentTimeline = ProjectorFactory.timeline();
-    $scope.currentTimelineFlat = ProjectorFactory.timelineFlat($scope.currentTimeline);
+    $scope.currentTimeline = ProjectorModeFactory.timeline();
+    $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.currentTimeline);
 
     function setCurrentSlideIndex (index) {
         $scope.currentIndex = index;
