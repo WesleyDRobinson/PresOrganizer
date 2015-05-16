@@ -1,11 +1,13 @@
 <!-- Added By Evan (below) -->
 
-<div>
+<!-- <div>
 	<h4 ng-repeat="conference in conferences">
-		<a ng-click="goToAdmin(conference._id)" style="font-family:verdana">{{conference.name}}</a>
+		<a ng-click="goToAdmin(conference._id); setConference(conference._id, $index)">
+			{{conference.name}}
+		</a>
 	</h4>
 </div>
-<ui-view></ui-view>
+<ui-view></ui-view> -->
 <!-- Added By Evan (above) -->
 
 <h4 ng-repeat="conference in conferences">

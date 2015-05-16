@@ -6,7 +6,6 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, ConferenceFactory
             
     ConferenceFactory.getConferences().then(function(conferences){
         $scope.conferences = conferences;
-		
     });
     $scope.controlItemOptions = {
 
@@ -62,15 +61,16 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, ConferenceFactory
 
             //convert these into same format as the TimeLineItems
             $scope.conferencePresentations = ConferenceFactory.convertToTimeLineItem($scope.conferencePresentations);
-
-
     	});
-    	
     };
 
     // added by Evan
     $scope.goToAdmin = function (id) {
         $state.go('conferences-admin', { id: id } );
+    }
+
+    $scope.goToConferences = function () {
+        $state.go('conferences');
     }
 
     $scope.playing = false;

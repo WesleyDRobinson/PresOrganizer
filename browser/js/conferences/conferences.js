@@ -14,7 +14,7 @@ app.config(function ($stateProvider) {
 
     $stateProvider.state('conferences-admin', {
         url: 'conferences/:id/admin',
-        template: '<div>This is the conference admin page</div>',
+        templateUrl: 'js/conferences/admin/admin.html',
         controller: 'ConferencesCtrl'
     });
 });
