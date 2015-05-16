@@ -29,7 +29,7 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory
 
     function isNextSlideIndex (index) {
         //console.log("next index:", index);
-        return $scope.currentIndex + 1 === index;
+        return $scope.currentIndex + 1 === index;  
     }
 
 
