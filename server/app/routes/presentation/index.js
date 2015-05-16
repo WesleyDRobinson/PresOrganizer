@@ -36,6 +36,19 @@ router.put('/:id',function(req,res,next) {
 });
 
 
+//get all of the current users presentaitons
+router.get('/user/me',function(req,res,next){
+
+	Presentation.find({presenter:req.user.id}).populate('presenter').exec()
+	  .then(function (presentations) {
+	   
+	    res.send(presentations);
+	  });
+
+
+});
+
+
 
 
 // delete a presentation

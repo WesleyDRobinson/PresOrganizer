@@ -43,19 +43,6 @@ router.delete('/:id',function (req,res,next) {
 });
 
 
-router.put('/changeEmail/', function (req, res, next) {
-    User.findById(req.user.id, function (err, user){
-      console.log(req.body.email);	
-      user.email = req.body.email;
-      user.save(function(err, savedUser){
-         if (err)  { 
-          console.log(err);
-            return next(err);
-          }
-         res.send(savedUser);
-      });
-    });
-});
 
 //Update User Password
 router.put('/changePassword', function (req, res, next) {
@@ -70,6 +57,17 @@ router.put('/changePassword', function (req, res, next) {
 });
 
 
+// Update the current user's attributes
+router.put('/me', function (req, res, next) {
+	var id = req.user.id;
+	if (req.body) {
+		User.findByIdAndUpdate(id, req.body, function (updatedUser) {
+			res.send(updatedUser);
+		});
+	} else {
+		next();
+	}
+});
 
 
 

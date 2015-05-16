@@ -50,6 +50,19 @@ router.put('/:conferenceId', function(req, res, next){
 		res.send(conference);
 	});
 });
+
+
+//get all of the current users presentaitons
+router.get('/user/me',function(req,res,next){
+
+	Conference.find({presenters: req.user.id}).deepPopulate('timeline.presentation.presenter').exec(
+		function (err, conferences){
+		if(err) return next(err);
+		res.send(conferences);
+		
+	});
+
+});
 ////////////////////////////////////////////////////////////////////
 // DELETE
 // delete a conference

@@ -101,7 +101,7 @@ function flatten(arr) {
   var arr2 = _.flatten(arr, true);
 
   return arr2.filter(function(item){
-  	return item !== undefined;
-    		
-    	});
+    return item !== undefined;
+            
+        });
 }

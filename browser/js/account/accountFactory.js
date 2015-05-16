@@ -8,7 +8,7 @@ app.factory('AccountFactory', function($http,AuthService){
 			
 		},
 		changeEmail: function(email){
-			return $http.put('/api/user/changeEmail',{email: email});
+			return $http.put('/api/user/me',{email: email});
 
 		},
 		changePassword:  function(password){
