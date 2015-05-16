@@ -65,7 +65,7 @@ app.factory('ProjectorFactory', function() {
 		var flattenedTimeline = [];
 
 		for (var i = 0; i < timeline.length; i++) {
-			Array.prototype.push.apply(flattenedTimeline, timeline[i].presentation.media);
+			flattenedTimeline = flattenedTimeline.concat(timeline[i].presentation.media);
 		} 
 
 		return flattenedTimeline;

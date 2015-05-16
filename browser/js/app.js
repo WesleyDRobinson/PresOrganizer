@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('FullstackGeneratedApp', ['ui.sortable','ui.router', 'fsaPreBuilt', 'ngAnimate']);
+var app = angular.module('FullstackGeneratedApp', ['ui.sortable','ui.router', 'fsaPreBuilt', 'ngAnimate', 'FBAngular']);
 
 app.config(function ($urlRouterProvider, $locationProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)
@@ -48,5 +48,26 @@ app.run(function ($rootScope, AuthService, $state) {
         });
 
     });
+
+});
+
+app.controller('FullscreenCtrl', function($scope, Fullscreen) {
+    $scope.isFullscreen = false;
+
+    $scope.goFullscreen = function () {
+
+        if (Fullscreen.isEnabled()) {
+            Fullscreen.cancel();
+            $scope.isFullscreen = false;
+        } 
+        else {
+            Fullscreen.all();
+            $scope.isFullscreen = true;
+        }
+
+        // Set Fullscreen to a specific element (bad practice)
+        // Fullscreen.enable( document.getElementById('img') )
+
+   };
 
 });

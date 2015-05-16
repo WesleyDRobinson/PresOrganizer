@@ -1,4 +1,5 @@
 <div>
+	<button class="btn" ng-click="goFullscreen()">Go Fullscreen</button>
     <div class="container slider">
         <img ng-repeat="slide in currentTimelineFlat" class="slide" 
             ng-show="isCurrentSlideIndex($index)" ng-src="{{slide.url}}">

@@ -69,6 +69,15 @@ app.controller('ConferencesCtrl',function($q, $scope, ConferenceFactory){
     	
     };
 
+    $scope.playing = false;
+    $scope.playButtonText = "Play";
+    $scope.playToggle = function() {
+        $scope.playing = !$scope.playing;
+
+        if ($scope.playing) $scope.playButtonText = "Pause";
+        else $scope.playButtonText = "Play";
+    };
+
 });
 
 function removeExistingTimeLineItems(presentations, timeLine){
