@@ -19,6 +19,7 @@ app.controller('ConferencesCtrl',function($q, $scope, ConferenceFactory){
         },
         itemMoved: function (event) {
             $scope.controlItems = [{title:'pause'},{title:'loopStart'},{title:'loopEnd'}];
+            
           
         },
         orderChanged: function (event) {
