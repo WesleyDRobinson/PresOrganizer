@@ -23,8 +23,17 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory
     }
 
     function isCurrentSlideIndex (index) {
+        //console.log("current index:", index);
         return $scope.currentIndex === index;
     }
+
+    function isNextSlideIndex (index) {
+        //console.log("next index:", index);
+        return $scope.currentIndex + 1 === index;
+    }
+
+
+
 	
     // still working on this
 	function nextSlide () {
@@ -71,7 +80,6 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory
     $scope.playing = false;
     $scope.playButtonText = "Play";
     $scope.playToggle = function() {
-        console.log($scope.playing);
         if(!$scope.playing) {
             if(!PAUSED) {
                 loadSlides();
@@ -86,6 +94,7 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory
     $scope.currentIndex = 0;
     $scope.setCurrentSlideIndex = setCurrentSlideIndex;
     $scope.isCurrentSlideIndex = isCurrentSlideIndex;
+    $scope.isNextSlideIndex = isNextSlideIndex;
 });
 
 

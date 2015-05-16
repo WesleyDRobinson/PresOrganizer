@@ -81,6 +81,9 @@
 					<!-- Next slide -->
 					<div class="col-md-6">
 						<h2>Next</h2>
+						<img 	ng-repeat="slide in currentTimelineFlat" 
+					         	ng-show="isNextSlideIndex($index)" 
+					         	ng-src="{{slide.url}}">
 					</div>
 				</div>
 			</div>
