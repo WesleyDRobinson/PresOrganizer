@@ -6,7 +6,6 @@ var Conference = mongoose.model('Conference');
 //var bluebird = require('bluebird');
 
 
-
 //Create a user
 router.post('/',function(req,res,next){
 	User.create(req.body)
@@ -28,7 +27,13 @@ router.get('/', function (req, res, next) {
 	});
 });
 
+router.get('/me', function (req, res, next) {
 
+	res.send(req.user);
+
+
+	
+});
 // delete a user
 router.delete('/:id',function (req,res,next) {
 	User.findByIdAndRemove(req.params.id, function (err, user) {
@@ -36,6 +41,38 @@ router.delete('/:id',function (req,res,next) {
 		res.send(user);
 	});
 });
+
+
+router.put('/changeEmail/', function (req, res, next) {
+    User.findById(req.user.id, function (err, user){
+      console.log(req.body.email);	
+      user.email = req.body.email;
+      user.save(function(err, savedUser){
+         if (err)  { 
+          console.log(err);
+            return next(err);
+          }
+         res.send(savedUser);
+      });
+    });
+});
+
+//Update User Password
+router.put('/changePassword', function (req, res, next) {
+    var id = req.user.id;
+    User.findById(id, function (err, user){
+     user.password = req.body.password;
+      user.save(function(err, savedUser){
+         if (err) return next(err);
+         res.send(savedUser);
+      });
+    });
+});
+
+
+
+
+
 
 // Update a user's attributes
 router.put('/:id', function (req, res, next) {
@@ -48,6 +85,8 @@ router.put('/:id', function (req, res, next) {
 		next();
 	}
 });
+
+
 
 
 module.exports = router;
