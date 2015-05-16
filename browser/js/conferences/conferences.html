@@ -64,16 +64,28 @@
 			</div>
 
 			<div id="projector-preview" ng-controller="ProjectorCtrl">
-				<h1>Projector mode <button ng-click="playToggle()" class="btn">{{ playButtonText }}</button></h1>
-				<div>
-				    <div class="container slider">
-				        <img ng-repeat="slide in currentTimelineFlat" class="slide" 
-				            ng-show="isCurrentSlideIndex($index)" ng-src="{{slide.url}}">
-				    </div>
-				    <a ng-click="killTimer()">KILL TIMER</a>
-				    <a ng-click="restart()">RESTART</a>
+				<h1>Projector mode 
+					<button ng-click="playToggle()" class="btn">{{ playButtonText }}</button>
+					<a ng-click="killTimer()">KILL TIMER</a>
+					<a ng-click="restart()">RESTART</a>
+				</h1>
+
+				<div class="row">
+
+					<!-- Current slide -->
+					<div class="col-md-6">
+						<h2>Current</h2>		
+					    <img 	ng-repeat="slide in currentTimelineFlat" 
+					         	ng-show="isCurrentSlideIndex($index)" 
+					         	ng-src="{{slide.url}}">
+					</div>
+
+					<!-- Next slide -->
+					<div class="col-md-6">
+						<h2>Next</h2>
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+		</div> <!-- end editing and preview column -->
+	</div> <!-- end #admin-dashboard row -->
 </div>

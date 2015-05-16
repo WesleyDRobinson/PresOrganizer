@@ -77,18 +77,6 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, ConferenceFactory
 
         $state.go('conferences');
     };
-
-
-    // Play button
-    $scope.playing = false;
-    $scope.playButtonText = "Play";
-    $scope.playToggle = function() {
-        $scope.playing = !$scope.playing;
-
-        if ($scope.playing) $scope.playButtonText = "Pause";
-        else $scope.playButtonText = "Play";
-    };
-
 });
 
 function removeExistingTimeLineItems(presentations, timeLine){
