@@ -1,6 +1,19 @@
 <!-- i am sorry there are no directives here -->
 
-<h4 ng-repeat="conference in conferences"><a ng-click="setConference(conference._id, $index)">	{{conference.name}}</a></h4>
+<!-- Added By Evan (below) -->
+
+<div>
+	<h4 ng-repeat="conference in conferences">
+		<a ng-click="goToAdmin(conference._id)" style="font-family:verdana">{{conference.name}}</a>
+	</h4>
+</div>
+<ui-view></ui-view>
+<!-- Added By Evan (above) -->
+
+
+<h4 ng-repeat="conference in conferences">
+	<a ng-click="setConference(conference._id, $index)">{{conference.name}}</a>
+</h4>
 <div ng-if="conferencePresentations" >
 	<h1>Managing {{currentPresentationTitle}}</h1>
 	<h1>Presentations</h1>

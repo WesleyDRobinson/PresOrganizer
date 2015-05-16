@@ -51,6 +51,7 @@ app.run(function ($rootScope, AuthService, $state) {
 
 });
 
+// for toggling full screen mode
 app.controller('FullscreenCtrl', function($scope, Fullscreen) {
     $scope.isFullscreen = false;
 

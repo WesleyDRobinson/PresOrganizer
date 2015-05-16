@@ -1,4 +1,4 @@
-app.controller('ConferencesCtrl',function($q, $scope, ConferenceFactory){
+app.controller('ConferencesCtrl',function ($q, $scope, $state, ConferenceFactory){
 	 $scope.showConferences = false;
      $scope.timeLine = [];
 
@@ -67,6 +67,11 @@ app.controller('ConferencesCtrl',function($q, $scope, ConferenceFactory){
     	});
     	
     };
+
+    // added by Evan
+    $scope.goToAdmin = function (id) {
+        $state.go('conferences-admin', { id: id } );
+    }
 
 });
 
