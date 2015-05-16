@@ -77,6 +77,7 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, ConferenceFactory
 
         $state.go('conferences');
     };
+
 });
 
 function removeExistingTimeLineItems(presentations, timeLine){

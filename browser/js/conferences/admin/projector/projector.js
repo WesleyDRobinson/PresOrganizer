@@ -43,7 +43,8 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory
     function loadSlides () {
         if (TIMER) $timeout.cancel(TIMER);
         TIMER = $timeout(nextSlide, INTERVAL);
-        //console.log(timers);
+        $scope.playing = true;
+        $scope.playButtonText = "Pause";
     }
     
     $scope.killTimer = function () {   // now working for some reason
@@ -51,6 +52,8 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory
             //console.log('kill');
             $timeout.cancel(TIMER);
             TIMER = null;
+            $scope.playing = false;
+            $scope.playButtonText = "Play";
         }
     };
 
@@ -60,14 +63,29 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory
             $scope.currentIndex += 2;    // must consider edge case (phase 2)
             PAUSED = false;
         }
-    	loadSlides();
+    	
+        loadSlides();
+    };
+
+    // Play button
+    $scope.playing = false;
+    $scope.playButtonText = "Play";
+    $scope.playToggle = function() {
+        console.log($scope.playing);
+        if(!$scope.playing) {
+            if(!PAUSED) {
+                loadSlides();
+            }
+            else $scope.restart();
+        }
+        else {
+            $scope.killTimer();
+        }
     };
 
     $scope.currentIndex = 0;
     $scope.setCurrentSlideIndex = setCurrentSlideIndex;
     $scope.isCurrentSlideIndex = isCurrentSlideIndex;
-    //console.log('current index: ', $scope.currentIndex);
-    loadSlides();
 });
 
 

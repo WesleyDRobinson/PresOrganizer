@@ -65,9 +65,7 @@
 
 			<div id="projector-preview" ng-controller="ProjectorCtrl">
 				<h1>Projector mode 
-					<button ng-click="playToggle()" class="btn">{{ playButtonText }}</button>
-					<a ng-click="killTimer()">KILL TIMER</a>
-					<a ng-click="restart()">RESTART</a>
+					<button ng-click="playToggle()" class="btn" ng-class="playing ? '' : 'btn-success'">{{ playButtonText }}</button>
 				</h1>
 
 				<div class="row">
