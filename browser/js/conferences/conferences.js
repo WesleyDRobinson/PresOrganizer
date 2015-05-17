@@ -12,5 +12,9 @@ app.config(function ($stateProvider) {
         // }
     });
 
+    $stateProvider.state('conferences-admin', {
+        url: 'conferences/:id/admin',
+        templateUrl: 'js/conferences/admin/admin.html',
+        controller: 'ConferencesCtrl'
+    });
 });
-

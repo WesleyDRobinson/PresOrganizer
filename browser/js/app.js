@@ -51,18 +51,21 @@ app.run(function ($rootScope, AuthService, $state) {
 
 });
 
+// for toggling full screen mode
 app.controller('FullscreenCtrl', function($scope, Fullscreen) {
     $scope.isFullscreen = false;
-
+    $scope.fullscreenBtnText = "Enter Fullscreen";
     $scope.goFullscreen = function () {
 
         if (Fullscreen.isEnabled()) {
             Fullscreen.cancel();
             $scope.isFullscreen = false;
+            $scope.fullscreenBtnText = "Enter Fullscreen";
         } 
         else {
             Fullscreen.all();
             $scope.isFullscreen = true;
+            $scope.fullscreenBtnText = "Exit Fullscreen"
         }
 
         // Set Fullscreen to a specific element (bad practice)

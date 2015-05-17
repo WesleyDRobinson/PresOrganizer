@@ -1,13 +1,14 @@
-app.controller('ConferencesCtrl',function($q, $scope, ConferenceFactory){
-	 $scope.showConferences = false;
-     $scope.timeLine = [];
+app.controller('ConferencesCtrl',function ($q, $scope, $state, ConferenceFactory, ProjectorModeFactory){
+	$scope.showConferences = false;
+    $scope.timeLine = [];
 
-     $scope.controlItems = [{title:'pause'},{title:'loopStart'},{title:'loopEnd'}];
+    $scope.controlItems = [{title:'pause'},{title:'loopStart'},{title:'loopEnd'}];
             
     ConferenceFactory.getConferences().then(function(conferences){
+
         $scope.conferences = conferences;
-		
     });
+    
     $scope.controlItemOptions = {
 
         //restrict move across columns. move only within column.
@@ -39,6 +40,7 @@ app.controller('ConferencesCtrl',function($q, $scope, ConferenceFactory){
 
 
     $scope.saveTimeLine = function(){
+
         ConferenceFactory.saveTimeLine($scope.conferenceId, $scope.timeLine);
     };
 
@@ -62,19 +64,18 @@ app.controller('ConferencesCtrl',function($q, $scope, ConferenceFactory){
 
             //convert these into same format as the TimeLineItems
             $scope.conferencePresentations = ConferenceFactory.convertToTimeLineItem($scope.conferencePresentations);
-
-
     	});
-    	
     };
 
-    $scope.playing = false;
-    $scope.playButtonText = "Play";
-    $scope.playToggle = function() {
-        $scope.playing = !$scope.playing;
+    // added by Evan
+    $scope.goToAdmin = function (id) {
 
-        if ($scope.playing) $scope.playButtonText = "Pause";
-        else $scope.playButtonText = "Play";
+        $state.go('conferences-admin', { id: id } );
+    };
+
+    $scope.goToConferences = function () {
+
+        $state.go('conferences');
     };
 
 });

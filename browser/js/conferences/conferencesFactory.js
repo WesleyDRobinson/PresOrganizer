@@ -5,6 +5,7 @@ app.factory('ConferenceFactory', function($q, $http,AuthService){
 				.then(function(user){
 					return $http.get('/api/conference?presenters='+user._id);
 				}).then(function(res){
+					console.log(res.data);
 					return res.data;
 				});
 			
@@ -69,5 +70,5 @@ function flatten(arr) {
   return arr2.filter(function(item){
   	return item !== undefined;
     		
-    	});
+  });
 }
