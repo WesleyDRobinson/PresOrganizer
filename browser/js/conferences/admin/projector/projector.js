@@ -84,7 +84,7 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory
 
     // Play button
     $scope.playing = false;
-    $scope.playButtonText = "Play";
+    $scope.playButtonText = 'Play';
     $scope.playToggle = function() {
         if(!$scope.playing) {
             if(!PAUSED) {
