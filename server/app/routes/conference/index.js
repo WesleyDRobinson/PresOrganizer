@@ -52,7 +52,7 @@ router.put('/:conferenceId', function(req, res, next){
 });
 
 
-//get all of the current users presentaitons
+//get all of the current users conferences
 router.get('/user/me',function(req,res,next){
 
 	Conference.find({presenters: req.user.id}).deepPopulate('timeline.presentation.presenter').exec(

@@ -1,7 +1,7 @@
 app.factory('ConferenceFactory', function($q, $http,AuthService){
 	return {
 		getConferences: function(){
-
+			//get the conferences that the user is managing
 			return $http.get('/api/conference/user/me').then(function(res){
 					return res.data;
 				});
