@@ -29,7 +29,13 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory
 
     function isNextSlideIndex (index) {
         //console.log("next index:", index);
-        return $scope.currentIndex + 1 === index;  
+        if ($scope.currentIndex + 1 >= $scope.currentTimelineFlat.length){
+            return 0 === index;
+        }
+        else if ($scope.currentTimelineFlat[$scope.currentIndex + 1].mediaType === "pause") {
+            return $scope.currentIndex + 2 === index;  
+        }
+        else return $scope.currentIndex + 1 === index;  
     }
 
 
