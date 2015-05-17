@@ -1,3 +1,4 @@
+
 app.controller("ProjectorView", function($scope){
 	var socket = io();
 	$scope.mouse = function() {
@@ -6,7 +7,7 @@ app.controller("ProjectorView", function($scope){
 	console.log('here!!!');
 	socket.on("play", function(data){
 		console.log('play index', data);
-	});
 
+	});
 
 });
