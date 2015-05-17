@@ -1,14 +1,3 @@
-app.config(function ($stateProvider) {
-
-    $stateProvider.state('projector', {
-        url: '/projector',
-        templateUrl: '/js/conferences/admin/projector/projector.html',
-        controller: 'ProjectorCtrl', 
-        resolve: ''
-    });
-
-});
-
 app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory) {
 	var INTERVAL = 2000;
 	var PROGRESSED_TIME = 0;
