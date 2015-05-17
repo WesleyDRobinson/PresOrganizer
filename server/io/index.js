@@ -11,7 +11,7 @@ module.exports = function (server) {
     io.on('connection', function (socket) {
 
         socket.on('play',function(data){
-        	io.sockets.emit('play',data);
+        	socket.broadcast.emit('play',data);
         });
     });
     
