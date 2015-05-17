@@ -50,6 +50,8 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory
         $scope.playing = true;
         $scope.playButtonText = "Pause";
     }
+
+    $scope.loadSlides = loadSlides;
     
     $scope.killTimer = function () {   // now working for some reason
         if (TIMER) { 
@@ -84,6 +86,10 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory
         else {
             $scope.killTimer();
         }
+    };
+
+    $scope.mouse = function() {
+        console.log("hi");
     };
 
     $scope.currentIndex = 0;

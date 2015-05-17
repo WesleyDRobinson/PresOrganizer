@@ -1,7 +1,11 @@
 <div id="projector-view" ng-class="isFullscreen ? 'black-background' : ''" ng-mousemove="isFullscreen && mouse()">
 	<button class="btn" ng-click="goFullscreen()">{{ fullscreenBtnText }}</button>
-    <div class="container slider">
-        <img ng-repeat="slide in currentTimelineFlat" class="slide" 
-            ng-show="isCurrentSlideIndex($index)" ng-src="{{slide.url}}">
-    </div>
+    
+    <div class="row">
+		<div class="col-md-12">
+		    <img 	ng-repeat="slide in currentTimelineFlat" 
+					ng-show="isCurrentSlideIndex($index)" 
+					ng-src="{{slide.url}}">
+		</div>
+	</div>
 </div>
