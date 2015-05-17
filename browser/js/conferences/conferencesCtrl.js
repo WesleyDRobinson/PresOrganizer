@@ -20,6 +20,7 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, ConferenceFactory
         },
         itemMoved: function (event) {
             $scope.controlItems = [{title:'pause'},{title:'loopStart'},{title:'loopEnd'}];
+            
           
         },
         orderChanged: function (event) {
@@ -101,7 +102,7 @@ function flatten(arr) {
   var arr2 = _.flatten(arr, true);
 
   return arr2.filter(function(item){
-  	return item !== undefined;
-    		
-    	});
+    return item !== undefined;
+            
+        });
 }
