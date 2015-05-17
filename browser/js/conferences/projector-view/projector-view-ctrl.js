@@ -7,8 +7,9 @@ app.controller("ProjectorView", function($scope){
 	};
 	//console.log('here!!!');
 	socket.on("play", function(data){
-		console.log('play index', data);
-
+		$scope.data = data;
+		console.log(data);
+		$scope.$digest();
 	});
 
 });
