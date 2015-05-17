@@ -17,9 +17,9 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory
 
     function isCurrentSlideIndex (index) {
          //socket.emit('play', index);
+        //socket.emit('play', {index: index, image: image});
+        socket.emit('play', {index: index, url: $scope.currentTimelineFlat[index].url});
 
-        //console.log('sending play',index);
-        socket.emit('play', index);
         //console.log("current index:", index);
         return $scope.currentIndex === index;
     }
