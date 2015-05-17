@@ -10,15 +10,16 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory
     $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.currentTimeline);
 
     function setCurrentSlideIndex (index) {
-        //console.log('setting current slide',index);
+        console.log('setting current slide');
 
         $scope.currentIndex = index;
     }
 
     function isCurrentSlideIndex (index) {
-         //socket.emit('play', index);
-        //socket.emit('play', {index: index, image: image});
-        socket.emit('play', {index: index, url: $scope.currentTimelineFlat[index].url});
+        if ($scope.currentIndex === index) {
+            console.log(index);
+            socket.emit('play', {index: index, url: $scope.currentTimelineFlat[index].url});
+        }
 
         //console.log("current index:", index);
         return $scope.currentIndex === index;
