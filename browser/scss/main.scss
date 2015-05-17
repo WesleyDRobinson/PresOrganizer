@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+html, body, #primary-ui-view {
+	height: 100%;
+}
+
 @mixin clearfix {
   &:after {
     content: "";
@@ -16,3 +20,4 @@
 @import 'tutorial/main';
 @import 'login/main';
 @import 'conferences/main';
+@import 'projector-view/main';

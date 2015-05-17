@@ -1,6 +1,7 @@
 app.factory('ConferenceFactory', function($q, $http,AuthService){
 	return {
 		getConferences: function(){
+
 			return $http.get('/api/conference/user/me').then(function(res){
 					return res.data;
 				});
@@ -62,5 +63,5 @@ function flatten(arr) {
   return arr2.filter(function(item){
   	return item !== undefined;
     		
-    	});
+  });
 }

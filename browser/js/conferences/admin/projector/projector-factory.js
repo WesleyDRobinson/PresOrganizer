@@ -1,4 +1,4 @@
-app.factory('ProjectorFactory', function() {
+app.factory('ProjectorModeFactory', function() {
 	var timelineItem1 = {
 		title: "presentation",
 		presentation: {
@@ -70,6 +70,7 @@ app.factory('ProjectorFactory', function() {
 
 		return flattenedTimeline;
 	}
+
 
 	return {
 		timeline: timeline,

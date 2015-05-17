@@ -1,30 +1,34 @@
-app.config(function ($stateProvider) {
-
-    $stateProvider.state('projector', {
-        url: '/projector',
-        templateUrl: 'js/projector/projector.html',
-        controller: 'ProjectorCtrl', 
-        resolve: ''
-    });
-
-});
-
-app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorFactory) {
+app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory) {
 	var INTERVAL = 2000;
 	var PROGRESSED_TIME = 0;
 	var TIMER;
     var PAUSED = false;
 
-    $scope.currentTimeline = ProjectorFactory.timeline();
-    $scope.currentTimelineFlat = ProjectorFactory.timelineFlat($scope.currentTimeline);
+    $scope.currentTimeline = ProjectorModeFactory.timeline();
+    $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.currentTimeline);
 
     function setCurrentSlideIndex (index) {
         $scope.currentIndex = index;
     }
 
     function isCurrentSlideIndex (index) {
+        //console.log("current index:", index);
         return $scope.currentIndex === index;
     }
+
+    function isNextSlideIndex (index) {
+        //console.log("next index:", index);
+        if ($scope.currentIndex + 1 >= $scope.currentTimelineFlat.length){
+            return 0 === index;
+        }
+        else if ($scope.currentTimelineFlat[$scope.currentIndex + 1].mediaType === "pause") {
+            return $scope.currentIndex + 2 === index;  
+        }
+        else return $scope.currentIndex + 1 === index;  
+    }
+
+
+
 	
     // still working on this
 	function nextSlide () {
@@ -43,7 +47,8 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorFactory) {
     function loadSlides () {
         if (TIMER) $timeout.cancel(TIMER);
         TIMER = $timeout(nextSlide, INTERVAL);
-        //console.log(timers);
+        $scope.playing = true;
+        $scope.playButtonText = "Pause";
     }
     
     $scope.killTimer = function () {   // now working for some reason
@@ -51,6 +56,8 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorFactory) {
             //console.log('kill');
             $timeout.cancel(TIMER);
             TIMER = null;
+            $scope.playing = false;
+            $scope.playButtonText = "Play";
         }
     };
 
@@ -60,14 +67,29 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorFactory) {
             $scope.currentIndex += 2;    // must consider edge case (phase 2)
             PAUSED = false;
         }
-    	loadSlides();
+    	
+        loadSlides();
+    };
+
+    // Play button
+    $scope.playing = false;
+    $scope.playButtonText = "Play";
+    $scope.playToggle = function() {
+        if(!$scope.playing) {
+            if(!PAUSED) {
+                loadSlides();
+            }
+            else $scope.restart();
+        }
+        else {
+            $scope.killTimer();
+        }
     };
 
     $scope.currentIndex = 0;
     $scope.setCurrentSlideIndex = setCurrentSlideIndex;
     $scope.isCurrentSlideIndex = isCurrentSlideIndex;
-    //console.log('current index: ', $scope.currentIndex);
-    loadSlides();
+    $scope.isNextSlideIndex = isNextSlideIndex;
 });
 
 
