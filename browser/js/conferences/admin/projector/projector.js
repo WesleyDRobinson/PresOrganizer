@@ -3,15 +3,23 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory
 	var PROGRESSED_TIME = 0;
 	var TIMER;
     var PAUSED = false;
+    var socket = io();
+   
 
     $scope.currentTimeline = ProjectorModeFactory.timeline();
     $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.currentTimeline);
 
     function setCurrentSlideIndex (index) {
+        //console.log('setting current slide',index);
+
         $scope.currentIndex = index;
     }
 
     function isCurrentSlideIndex (index) {
+         //socket.emit('play', index);
+        //socket.emit('play', {index: index, image: image});
+        socket.emit('play', {index: index, url: $scope.currentTimelineFlat[index].url});
+
         //console.log("current index:", index);
         return $scope.currentIndex === index;
     }

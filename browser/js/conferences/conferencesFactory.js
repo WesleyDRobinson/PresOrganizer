@@ -1,11 +1,8 @@
 app.factory('ConferenceFactory', function($q, $http,AuthService){
 	return {
 		getConferences: function(){
-			return AuthService.getLoggedInUser()
-				.then(function(user){
-					return $http.get('/api/conference?presenters='+user._id);
-				}).then(function(res){
-					console.log(res.data);
+			//get the conferences that the user is managing
+			return $http.get('/api/conference/user/me').then(function(res){
 					return res.data;
 				});
 			
@@ -13,15 +10,15 @@ app.factory('ConferenceFactory', function($q, $http,AuthService){
 		getPresentations: function(conferenceId){
 			return $http.get('api/conference?_id='+conferenceId)
 				.then(function(res){
-					var promises = [];
 					var presenters = res.data[0].presenters;
-					angular.forEach(presenters, function(presenter){
-						var promise = $http.get('/api/presentation?presenter='+presenter)
+
+					var promises = presenters.map(function(presenter){
+						return $http.get('/api/presentation?presenter='+presenter)
 						.then(function(res){
 							return res.data;
 						});
-						promises.push(promise);
 					});
+					
 					return $q.all(promises).then(function(presentationArr){
 						
 						return flatten(presentationArr);
@@ -61,12 +58,8 @@ app.factory('ConferenceFactory', function($q, $http,AuthService){
 });
 
 function flatten(arr) {
-  //flatten multidimensional array into single array
-  var arr2 = arr.reduce(function (flat, toFlatten) {
-    return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
-  }, []);
+  var arr2 = _.flatten(arr, true);
 
-  //remove undefined spaces in array
   return arr2.filter(function(item){
   	return item !== undefined;
     		
