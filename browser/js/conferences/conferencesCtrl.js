@@ -5,9 +5,13 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, ConferenceFactory
     $scope.controlItems = [{title:'pause'},{title:'loopStart'},{title:'loopEnd'}];
             
     ConferenceFactory.getConferences().then(function(conferences){
-
         $scope.conferences = conferences;
     });
+
+    // this takes you back to the locales view
+    $scope.goToLocales = function () {
+        $state.go('locales');
+    };   
     
     $scope.controlItemOptions = {
 

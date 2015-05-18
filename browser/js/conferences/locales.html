@@ -1,0 +1,11 @@
+<h3>My Locales</h3>
+<h4 ng-repeat="locale in locales">
+	<a ng-click="loadConferences(locale._id)">{{locale.name}}</a>
+	<div>Organizers: {{locale.organizers}}</div>
+</h4>
+
+<h3>Conferences for selected Locale:</h3>
+<h4 ng-repeat="conference in conferences">
+	<a ng-click="goToAdmin(conference._id, conference.name)">{{conference.name}}</a>
+<!-- 	<div>{{conference.timeline[0]}}</div> -->
+</h4>
