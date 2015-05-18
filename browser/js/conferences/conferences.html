@@ -1,16 +1,4 @@
-<!-- Added By Evan (below) -->
- <a ng-click="goToLocales()">Return to My Locales</a>
- <h3>Conference Name: {{currentConf.name}}</h3>
- <h3>Conference Id: {{currentConf._id}}</h3>
-<!-- Added By Evan (above) -->
-
-<!-- <ul class="list-unstyled">
-	<li>
-		<a ng-click="retrievePresentations(currentConf._id)">
-			{{currentConf.name}}
-		</a>
-	</li>
-</ul> -->
+<a ng-click="goToLocales()">Return to My Locales</a>
 
 <div ng-if="conferencePresentations">
 	<div class="row" id="admin-dashboard">
@@ -89,6 +77,7 @@
 					         	ng-show="isNextSlideIndex($index)" 
 					         	ng-src="{{slide.url}}">
 					</div>
+					<a ui-sref="projector({id: currentConf._id })">Projector</a>
 				</div>
 			</div>
 		</div>
