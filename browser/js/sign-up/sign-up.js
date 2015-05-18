@@ -19,5 +19,6 @@ app.controller('SignUpCtrl', function ($scope, SignUpFactory, $state) {
         $scope.formInfo = {};
 
     };
+    
 
 });

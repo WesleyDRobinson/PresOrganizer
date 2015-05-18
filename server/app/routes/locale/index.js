@@ -15,10 +15,9 @@ router.post('/', function (req, res, next) {
 
 //get all Locales
 router.get('/', function (req, res, next) {
-    Locale.find(req.query, function (err, locales) {
-        if (err)
-            return next(err);
-
+    Locale.find(req.query).populate('organizers', 'name')
+    .exec()
+    .then(function (locales) {
         res.send(locales);
     });
 });
