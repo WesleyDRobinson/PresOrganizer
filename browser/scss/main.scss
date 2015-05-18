@@ -25,6 +25,10 @@ html, body, #primary-ui-view {
     opacity: 0;
 }
 
+.fade-in{
+  opacity:100;
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
