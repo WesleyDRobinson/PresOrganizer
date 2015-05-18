@@ -25,6 +25,10 @@ html, body, #primary-ui-view {
     opacity: 0;
 }
 
+.fade-in{
+  opacity:100;
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
@@ -32,3 +36,4 @@ html, body, #primary-ui-view {
 @import 'login/main';
 @import 'conferences/main';
 @import 'projector-view/main';
+@import 'locales/main';

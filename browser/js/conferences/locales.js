@@ -27,7 +27,7 @@ app.controller('localesCtrl', function ($scope, $state, $stateParams, localesFac
                 $scope.conferences = conferences;
             }
         });
-    }
+    };
 
     $scope.goToAdmin = function (conf_id, conf_name) {  // admin view but called "conferences"
         console.log('go to admin view');
