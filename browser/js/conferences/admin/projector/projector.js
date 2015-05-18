@@ -11,17 +11,13 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory
     //$scope.currentTimeline = ProjectorModeFactory.timeline();
     $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.timeLine);
 
-    console.log($scope.currentTimelineFlat);
-
+    // might not be used currently
     function setCurrentSlideIndex (index) {
-        console.log('setting current slide');
-
         $scope.currentIndex = index;
     }
 
     function isCurrentSlideIndex (index) {
         if ($scope.currentIndex === index) {
-            console.log(index);
             socket.emit('play', {index: index, url: $scope.currentTimelineFlat[index].url});
         }
 
@@ -40,10 +36,6 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory
         else return $scope.currentIndex + 1 === index;  
     }
 
-
-
-	
-    // still working on this
 	function nextSlide () {
         $scope.currentIndex = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? ++$scope.currentIndex : 0;
         var next = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? $scope.currentIndex + 1 : 0;
@@ -82,7 +74,6 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory
             $scope.currentIndex += 2;    // must consider edge case (phase 2)
             PAUSED = false;
         }
-    	
         loadSlides();
     };
 
@@ -99,10 +90,6 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory
         else {
             $scope.killTimer();
         }
-    };
-
-    $scope.mouse = function() {
-        console.log("hi");
     };
 
     $scope.currentIndex = 0;
