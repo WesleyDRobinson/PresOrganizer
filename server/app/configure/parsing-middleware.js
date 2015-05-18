@@ -1,6 +1,7 @@
 'use strict';
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var busboy = require('connect-busboy');
 
 module.exports = function (app) {
 
@@ -8,6 +9,8 @@ module.exports = function (app) {
     // because what is a session without a cookie?
     // No session at all.
     app.use(cookieParser());
+
+    app.use(busboy());
 
     // Parse our POST and PUT bodies.
     app.use(bodyParser.json());

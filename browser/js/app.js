@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('FullstackGeneratedApp', ['ui.sortable','ui.router', 'fsaPreBuilt', 'ngAnimate', 'FBAngular']);
+var app = angular.module('FullstackGeneratedApp', ['ui.sortable','ui.router', 'fsaPreBuilt', 'ngAnimate', 'FBAngular', 'ngFileUpload']);
 
 app.config(function ($urlRouterProvider, $locationProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)

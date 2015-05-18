@@ -1,3 +1,29 @@
+.button {
+  -moz-appearance: button;
+  /* Firefox */
+  -webkit-appearance: button;
+  /* Safari and Chrome */
+  padding: 10px;
+  margin: 10px;
+  width: 70px;
+}
+
+.drop-box {
+  background: #F8F8F8;
+  border: 5px double #DDD;
+  width: 500px;
+  height: 100px;
+  text-align: center;
+  margin: 10px;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.dragover {
+  border: 5px dashed blue;
+}
+
+
 .uploader-drop-zone
 {
   /* Static height drop zone that also contains the file list, with a border */
