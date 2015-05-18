@@ -1,4 +1,5 @@
-app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, ConferenceFactory, ProjectorModeFactory){
+app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, ConferenceFactory){
+
 	$scope.showConferences = false;
     $scope.timeLine = [];
     $scope.controlItems = [{title:'pause'},{title:'loopStart'},{title:'loopEnd'}];

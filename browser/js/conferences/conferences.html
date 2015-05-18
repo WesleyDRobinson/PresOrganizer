@@ -20,7 +20,7 @@
 		</div>
 
 		<!-- timeline column -->
-		<div class="col-md-6">
+		<div class="col-md-4">
 			<h2>Timeline <button class="btn" ng-click="saveTimeLine()">Save</button></h2>
 			<ul as-sortable ng-model="timeLine">
 				<li ng-repeat="timeLineItem in timeLine" as-sortable-item>
@@ -37,9 +37,21 @@
 		</div>
 
 		<!-- editing and preview column -->
-		<div class="col-md-6">
+		<div class="col-md-4">
+			<div id="control-items">
+				<h2>Timeline items</h2>
+				<h3>Controls</h3>
+				<ul as-sortable="controlItemOptions" ng-model="controlItems">
+					<li style="display: inline" ng-repeat="controlItem in controlItems" as-sortable-item>
+						<span as-sortable-item-handle>
+							{{controlItem.title}}
+						</span>
+					</li>
+				</ul>
+			</div>
+
 			<div id="presentation-items">
-				<h2>Presentations</h2>
+				<h3>Presentations</h3>
 				<ul as-sortable="conferenceOptions" ng-model="conferencePresentations">
 					<li ng-repeat="presentation in conferencePresentations" as-sortable-item>
 						<div as-sortable-item-handle>
@@ -49,27 +61,22 @@
 				</ul>
 			</div>
 
-			<div id="control-items">
-				<h2>Control Items</h2>
-				<ul as-sortable="controlItemOptions" ng-model="controlItems">
-					<li ng-repeat="controlItem in controlItems" as-sortable-item>
-						<div as-sortable-item-handle>
-							{{controlItem.title}}
-						</div>
-					</li>
-				</ul>
-			</div>
+		</div> <!-- end editing and preview column -->
 
+		<div class="col-md-4">
 			<div id="projector-preview" ng-controller="ProjectorCtrl">
 				<h2>Projector mode 
-					<button ng-click="playToggle()" class="btn" ng-class="playing ? '' : 'btn-success'">{{ playButtonText }}</button>
+					<button ng-click="playToggle()" class="btn" ng-class="playing ? '' : 'btn-success'">
+						<i ng-class="playing ? 'fa fa-pause' : 'fa fa-play'"></i>
+					</button>
 				</h2>
 
 				<div class="row">
 
 					<!-- Current slide -->
 					<div class="col-md-6">
-						<h3>Current</h3>		
+						<h3>Current</h3>
+
 					    <img 	ng-repeat="slide in currentTimelineFlat" 
 					         	ng-show="isCurrentSlideIndex($index)" 
 					         	ng-src="{{slide.url}}">
@@ -84,6 +91,6 @@
 					</div>
 				</div>
 			</div>
-		</div> <!-- end editing and preview column -->
+		</div>
 	</div> <!-- end #admin-dashboard row -->
 </div>
