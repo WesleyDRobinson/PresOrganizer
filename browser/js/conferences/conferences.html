@@ -6,7 +6,7 @@
 
 <ul class="list-unstyled">
 	<li ng-repeat="conference in conferences">
-		<a ng-click="retrievePresentations(conference._id, conference.name)">
+		<a ng-click="retrievePresentations(conference._id)">
 			{{conference.name}}
 		</a>
 	</li>
@@ -16,7 +16,7 @@
 	<div class="row" id="admin-dashboard">
 		<!-- view title -->
 		<div class="col-md-12">
-			<h1 class="text-center">Managing {{currentPresentationTitle}}</h1>
+			<h1 class="text-center">Managing {{currentConf.name}}</h1>
 		</div>
 
 		<!-- timeline column -->

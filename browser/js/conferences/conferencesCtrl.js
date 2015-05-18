@@ -6,13 +6,12 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
 
     // added by evan /////////////
     console.log('state params', $stateParams);
-    // this should be in a resolve
+    // this should be in a resolve - working on this
     ConferenceFactory.getConferencesById($stateParams.id).then(function (conferences) {
         $scope.currentConf = conferences[0];
         $scope.conferences = conferences;
     })
     /////////////////////////////
-
     $scope.controlItemOptions = {
 
         //restrict move across columns. move only within column.
@@ -39,7 +38,6 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
     };
 
     $scope.saveTimeLine = function(){
-
         ConferenceFactory.saveTimeLine($scope.conferenceId, $scope.timeLine);
     };
 
@@ -52,10 +50,9 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
         $scope.timeLine.splice(index,1);
     };
 
-    $scope.retrievePresentations = function(id, name){
+    $scope.retrievePresentations = function(id){
         $scope.timeLine = $scope.currentConf.timeline;
         $scope.conferenceId = $scope.currentConf._id;
-        $scope.currentPresentationTitle = name;
     	ConferenceFactory.getPresentations($scope.currentConf._id).then(function(presentations){	
             //initailize variable for presentations that can be added to the timeline
             //remove possible conference presentations if they are already existing in the timeline
