@@ -1,7 +1,42 @@
-#projector-view {
-	height: 100%;
-}
-
 .black-background {
 	background: black;
+}
+
+.projector-small {
+  height:80%;
+  width: 80%;
+}
+
+.projector-large {
+	height: 100%;
+	width: 100%;
+}
+
+#projector-view {
+  margin-bottom: 40px;
+  display:table;
+  padding: 0;	
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#projector-view .button-row {
+	display: table-row;
+	height: 10px;
+}
+
+#projector-view .projector-image {
+	height: 50%;
+	border-radius: 5px; 
+	display: table-cell; 
+	vertical-align: middle;
+	background: black;
+}
+
+#projector-view img {
+ 	max-width: 100%;
+	height: auto;
+	display: block;	
+	margin: 0 auto;
+    vertical-align: middle;
 }

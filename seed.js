@@ -65,7 +65,7 @@ var seedUsers = function (num) {
 };
 
 var createMedia = function(){
-    return {mediaType: 'image', url:'www.image.com/'+chance.natural()};
+    return {mediaType: 'image', url:'http://dummyimage.com/600x400/000/fff&text='+chance.natural()};
 };
 var createMediaArr = function(){
     var mediaArr = Array.apply(null, new Array(20));
@@ -133,11 +133,14 @@ var seedLocale = function(userIds, num){
 
 var seedConferences = function(userIds,timeLineIds,localeIds, num){
     var conferenceArr = Array.apply(null, new Array(num));
-    var userIdsRand= _.shuffle(userIds);
-    var localeId = chance.pick(localeIds);
-    var timeLineIdsRand = _.shuffle(timeLineIds);
+    // var userIdsRand= _.shuffle(userIds);
+    // var localeId = chance.pick(localeIds);
+    // var timeLineIdsRand = _.shuffle(timeLineIds);
 
     conferenceArr = conferenceArr.map(function(){
+        var userIdsRand= _.shuffle(userIds);
+        var localeId = chance.pick(localeIds);
+        var timeLineIdsRand = _.shuffle(timeLineIds);
         
         var conference = new Conference({
             name: chance.city(),

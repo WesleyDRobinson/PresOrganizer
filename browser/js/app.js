@@ -45,32 +45,82 @@ app.run(function ($rootScope, AuthService, $state) {
             } else {
                 $state.go('login');
             }
-        });
+        }); $scope.isFullscreen = false;
+    $scope.fullscreenBtnText = "Enter Fullscreen";
+   //  $scope.goFullscreen = function () {
+
+   //      if (Fullscreen.isEnabled()) {
+   //          Fullscreen.cancel();
+   //          $scope.isFullscreen = false;
+   //          $scope.fullscreenBtnText = "Enter Fullscreen";
+   //      } 
+   //      else {
+   //          Fullscreen.all();
+   //          $scope.isFullscreen = true;
+   //          $scope.fullscreenBtnText = "Exit Fullscreen";
+   //      }
+
+   // };
+
+    $scope.goFullscreen = function() {
+        Fullscreen.toggleAll();
+    };
+
+    Fullscreen.$on('FBFullscreen.change', function() {
+
+        if (Fullscreen.isEnabled()) {
+            $scope.isFullscreen = true;
+            $scope.fullscreenBtnText = "Exit Fullscreen";
+        }
+        else {
+            $scope.isFullscreen = false;
+            $scope.fullscreenBtnText = "Enter Fullscreen";
+
+        } 
+
+    });
 
     });
 
 });
 
 // for toggling full screen mode
-app.controller('FullscreenCtrl', function($scope, Fullscreen) {
+app.controller('FullscreenCtrl', function($scope, $rootScope, Fullscreen) {
     $scope.isFullscreen = false;
     $scope.fullscreenBtnText = "Enter Fullscreen";
-    $scope.goFullscreen = function () {
+   //  $scope.goFullscreen = function () {
+
+   //      if (Fullscreen.isEnabled()) {
+   //          Fullscreen.cancel();
+   //          $scope.isFullscreen = false;
+   //          $scope.fullscreenBtnText = "Enter Fullscreen";
+   //      } 
+   //      else {
+   //          Fullscreen.all();
+   //          $scope.isFullscreen = true;
+   //          $scope.fullscreenBtnText = "Exit Fullscreen";
+   //      }
+
+   // };
+
+    $scope.goFullscreen = function() {
+        Fullscreen.toggleAll();
+    };
+
+    Fullscreen.$on('FBFullscreen.change', function() {
 
         if (Fullscreen.isEnabled()) {
-            Fullscreen.cancel();
+            $scope.isFullscreen = true;
+            $scope.fullscreenBtnText = "Exit Fullscreen";
+        }
+        else {
             $scope.isFullscreen = false;
             $scope.fullscreenBtnText = "Enter Fullscreen";
+            
+
         } 
-        else {
-            Fullscreen.all();
-            $scope.isFullscreen = true;
-            $scope.fullscreenBtnText = "Exit Fullscreen"
-        }
 
-        // Set Fullscreen to a specific element (bad practice)
-        // Fullscreen.enable( document.getElementById('img') )
+    });
 
-   };
 
 });
