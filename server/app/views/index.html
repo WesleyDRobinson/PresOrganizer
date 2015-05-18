@@ -21,6 +21,6 @@
 </head>
 <body ng-app="FullstackGeneratedApp" ng-controller="FullscreenCtrl">
     <navbar ng-hide="isFullscreen"></navbar>
-    <div id="primary-ui-view" ui-view></div>
+    <div ng-class="isFullscreen ? '' : 'container'" id="primary-ui-view" ui-view></div>
 </body>
 </html>

@@ -134,6 +134,7 @@ var seedLocale = function(userIds, num){
 var seedConferences = function(userIds,timeLineIds,localeIds, num){
     var conferenceArr = Array.apply(null, new Array(num));
     var userIdsRand= _.shuffle(userIds);
+    var localeId = chance.pick(localeIds);
     var timeLineIdsRand = _.shuffle(timeLineIds);
 
     conferenceArr = conferenceArr.map(function(){
@@ -142,13 +143,13 @@ var seedConferences = function(userIds,timeLineIds,localeIds, num){
             name: chance.city(),
             date: chance.date(),
             venue: chance.city(),
+            locale: localeId,
             presenters: [userIdsRand[0],userIdsRand[1],userIdsRand[2],userIdsRand[3],userIdsRand[4],userIdsRand[5]],
             timeline: [timeLineIdsRand[0],timeLineIdsRand[1],timeLineIdsRand[2],timeLineIdsRand[3],timeLineIdsRand[4],timeLineIdsRand[5],timeLineIdsRand[6],timeLineIdsRand[7],timeLineIdsRand[8]]
         });
         conference.save();
+        
 
-        userIdsRand= _.shuffle(userIds);
-        timeLineIdsRand = _.shuffle(timeLineIds);
         return conference.id;
 
     });
