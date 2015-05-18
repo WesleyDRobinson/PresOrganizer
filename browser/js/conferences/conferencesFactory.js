@@ -51,6 +51,11 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService){
 			.then(function(res){
 				return res.data;
 			});			
+		},
+		newConference: function(conference){
+			return $http.post('/api/conference', conference).then(function(res){
+				return res.data;
+			});
 		}
 	};
 });

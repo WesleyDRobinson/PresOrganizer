@@ -1,1 +1,23 @@
-<h1>{{$rootScope.$state}}</h1>
+<form id="conference-form" name="conferenceForm" ng-submit="createConference()">
+    <h1>Add New Conference To {{localeName}}</h1>
+    <div class="form-group">
+        <label for="name">Conference Title</label>
+        <input type="text" ng-model="conference.name" class="form-control" id="name" placeholder="Conference Name">
+    </div>
+     <div class="form-group">
+        <label for="name">Venue Name</label>
+        <input type="text" ng-model="conference.venue" class="form-control" id="name" placeholder="Venue Name">
+    </div>
+     <div class="form-group">
+        <label for="name">Date</label>
+        <input type="text" ng-model="conference.date" class="form-control" id="name" placeholder="Date">
+    </div>
+     <div class="form-group">
+        <label for="name">Venue Name</label>
+        <input type="text" ng-model="formInfo.name" class="form-control" id="name" placeholder="Venue Name">
+    </div>
+   
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+{{conference}}

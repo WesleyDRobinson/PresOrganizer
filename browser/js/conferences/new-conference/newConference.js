@@ -4,6 +4,6 @@ app.config(function ($stateProvider) {
         url: '/conferences/new-conference', 
         templateUrl: 'js/conferences/new-conference/new-conference.html',
         controller: 'NewConferenceCtrl',
-        params: {localeId: null}
+        params: {localeId: null, localeName: null}
     });
 });
