@@ -1,4 +1,4 @@
-app.factory('localesFactory', function ($q, $http, AuthService){
+app.factory('localesFactory', function ($http, AuthService){
 	return {
 
 		getLocales: function () {
