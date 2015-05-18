@@ -1,3 +1,12 @@
+app.config(function ($stateProvider) {
+
+    $stateProvider.state('locales', {
+        url: 'locales',
+        templateUrl: 'js/conferences/locales.html',
+        controller: 'localesCtrl'
+    });
+});
+
 app.controller('localesCtrl', function ($scope, $state, $stateParams, localesFactory) {
 
 	$scope.currentConf = { timeline: [] };

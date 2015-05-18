@@ -5,10 +5,4 @@ app.config(function ($stateProvider) {
         templateUrl: 'js/conferences/conferences.html',
         controller: 'ConferencesCtrl'
     });
-
-    $stateProvider.state('locales', {
-        url: 'locales',
-        templateUrl: 'js/conferences/locales.html',
-        controller: 'localesCtrl'
-    });
 });

@@ -1,18 +1,17 @@
-app.controller('ConferencesCtrl',function ($q, $scope, $state, ConferenceFactory, ProjectorModeFactory){
+app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, ConferenceFactory, ProjectorModeFactory){
 	$scope.showConferences = false;
     $scope.timeLine = [];
-
     $scope.controlItems = [{title:'pause'},{title:'loopStart'},{title:'loopEnd'}];
-            
-    ConferenceFactory.getConferences().then(function(conferences){
-        $scope.conferences = conferences;
-    });
 
-    // this takes you back to the locales view
-    $scope.goToLocales = function () {
-        $state.go('locales');
-    };   
-    
+    // added by evan /////////////
+    console.log('state params', $stateParams);
+    // this should be in a resolve
+    ConferenceFactory.getConferencesById($stateParams.id).then(function (conferences) {
+        $scope.currentConf = conferences[0];
+        $scope.conferences = conferences;
+    })
+    /////////////////////////////
+
     $scope.controlItemOptions = {
 
         //restrict move across columns. move only within column.
@@ -20,15 +19,11 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, ConferenceFactory
          return sourceItemHandleScope.itemScope.sortableScope.$id !== destSortableScope.$id;
          },*/
         dragStart: function(event){
-
         },
         itemMoved: function (event) {
             $scope.controlItems = [{title:'pause'},{title:'loopStart'},{title:'loopEnd'}];
-            
-          
         },
-        orderChanged: function (event) {
-            
+        orderChanged: function (event) {  
         },
         accept: function (sourceItemHandleScope, destSortableScope) {
             return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
@@ -40,9 +35,7 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, ConferenceFactory
         accept: function (sourceItemHandleScope, destSortableScope) {
             return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
         }
-
     };
-
 
     $scope.saveTimeLine = function(){
 
@@ -58,31 +51,25 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, ConferenceFactory
         $scope.timeLine.splice(index,1);
     };
 
-    $scope.setConference = function(id, $index){
-        $scope.timeLine = _.find($scope.conferences, {_id: id}).timeline;
-        $scope.conferenceId = id;
-        $scope.currentPresentationTitle = $scope.conferences[$index].name;
-    	ConferenceFactory.getPresentations(id).then(function(presentations){	
+    $scope.retrievePresentations = function(id, name){
+        $scope.timeLine = $scope.currentConf.timeline;
+        $scope.conferenceId = $scope.currentConf._id;
+        $scope.currentPresentationTitle = name;
+    	ConferenceFactory.getPresentations($scope.currentConf._id).then(function(presentations){	
             //initailize variable for presentations that can be added to the timeline
             //remove possible conference presentations if they are already existing in the timeline
-            $scope.conferencePresentations = removeExistingTimeLineItems(presentations, $scope.timeLine);
+            $scope.conferencePresentations = removeExistingTimeLineItems(presentations, $scope.currentConf.timeline);
 
             //convert these into same format as the TimeLineItems
             $scope.conferencePresentations = ConferenceFactory.convertToTimeLineItem($scope.conferencePresentations);
     	});
     };
+    // $scope.restrievePresentations($stateParams.id, $stateParams.name);
 
-    // added by Evan
-    $scope.goToAdmin = function (id) {
-
-        $state.go('conferences-admin', { id: id } );
-    };
-
-    $scope.goToConferences = function () {
-
-        $state.go('conferences');
-    };
-
+    // this takes you back to the locales view
+    $scope.goToLocales = function () {
+        $state.go('locales');
+    };  
 });
 
 function removeExistingTimeLineItems(presentations, timeLine){

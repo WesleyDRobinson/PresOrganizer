@@ -1,12 +1,12 @@
 <!-- Added By Evan (below) -->
-
  <a ng-click="goToLocales()">Return to My Locales</a>
-
+ <h3>Conference Name: {{currentConf.name}}</h3>
+ <h3>Conference Id: {{currentConf._id}}</h3>
 <!-- Added By Evan (above) -->
 
 <ul class="list-unstyled">
 	<li ng-repeat="conference in conferences">
-		<a ng-click="setConference(conference._id, $index)">
+		<a ng-click="retrievePresentations(conference._id, conference.name)">
 			{{conference.name}}
 		</a>
 	</li>

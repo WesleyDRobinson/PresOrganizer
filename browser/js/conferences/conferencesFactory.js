@@ -5,7 +5,12 @@ app.factory('ConferenceFactory', function($q, $http,AuthService){
 			return $http.get('/api/conference/user/me').then(function(res){
 					return res.data;
 				});
-			
+		},
+		getConferencesById: function(id){
+			//get the conferences by id
+			return $http.get('/api/conference?_id=' + id).then(function(res){
+					return res.data;
+				});
 		},
 		getPresentations: function(conferenceId){
 			return $http.get('api/conference?_id='+conferenceId)
