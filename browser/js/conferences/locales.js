@@ -1,7 +1,7 @@
 app.config(function ($stateProvider) {
 
     $stateProvider.state('locales', {
-        url: 'locales',
+        url: '/locales',
         templateUrl: 'js/conferences/locales.html',
         controller: 'localesCtrl'
     });
@@ -25,7 +25,7 @@ app.controller('localesCtrl', function ($scope, $state, $stateParams, localesFac
                 $scope.conferences = conferences;
             }
         });
-    }
+    };
 
     $scope.goToAdmin = function (conf_id, conf_name) {
         console.log('go to admin view');
