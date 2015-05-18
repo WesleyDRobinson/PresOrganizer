@@ -6,8 +6,12 @@ app.controller('ProjectorCtrl', function ($scope, $timeout, ProjectorModeFactory
     var socket = io();
    
 
-    $scope.currentTimeline = ProjectorModeFactory.timeline();
-    $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.currentTimeline);
+    // $scope.currentTimeline = ProjectorModeFactory.timeline();
+    // $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.currentTimeline);
+    //$scope.currentTimeline = ProjectorModeFactory.timeline();
+    $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.timeLine);
+
+    console.log($scope.currentTimelineFlat);
 
     function setCurrentSlideIndex (index) {
         console.log('setting current slide');

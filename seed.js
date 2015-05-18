@@ -65,7 +65,7 @@ var seedUsers = function (num) {
 };
 
 var createMedia = function(){
-    return {mediaType: 'image', url:'www.image.com/'+chance.natural()};
+    return {mediaType: 'image', url:'http://dummyimage.com/600x400/000/fff&text='+chance.natural()};
 };
 var createMediaArr = function(){
     var mediaArr = Array.apply(null, new Array(20));
