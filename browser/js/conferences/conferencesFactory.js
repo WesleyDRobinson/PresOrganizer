@@ -1,4 +1,4 @@
-app.factory('ConferenceFactory', function($q, $http,AuthService){
+app.factory('ConferenceFactory', function ($q, $http, AuthService){
 	return {
 		getConferences: function(){
 			//get the conferences that the user is managing
@@ -6,38 +6,34 @@ app.factory('ConferenceFactory', function($q, $http,AuthService){
 					return res.data;
 				});
 		},
-		getConferencesById: function(id){
+		getConferenceById: function(id){
 			//get the conferences by id
 			return $http.get('/api/conference?_id=' + id).then(function(res){
 					return res.data;
 				});
 		},
 		getPresentations: function(conferenceId){
-			return $http.get('api/conference?_id='+conferenceId)
-				.then(function(res){
+			return $http.get('api/conference?_id=' + conferenceId)
+				.then(function (res) {
 					var presenters = res.data[0].presenters;
-
 					var promises = presenters.map(function(presenter){
 						return $http.get('/api/presentation?presenter='+presenter)
-						.then(function(res){
+						.then(function (res) {
 							return res.data;
 						});
 					});
 					
 					return $q.all(promises).then(function(presentationArr){
-						
+						console.log(presentationArr);
 						return flatten(presentationArr);
 					});
 				});
-
 		},
 		convertToTimeLineItem: function(presentations){
 			return presentations.map(function(presentation){
 				return {title: 'presentation', presentation: presentation};
 
 			});
-
-
 		},
 		saveTimeLine: function(conferenceId, timeLine){
 
@@ -55,10 +51,7 @@ app.factory('ConferenceFactory', function($q, $http,AuthService){
 			.then(function(res){
 				return res.data;
 			});			
-
-		
 		}
-
 	};
 });
 
