@@ -5,7 +5,7 @@
 		<div ng-repeat="locale in locales">
 			<h3>
 				<a ng-click="loadConferences(locale._id)">{{locale.name}}</a>
-				<button class="btn btn-sm"><i class="fa fa-plus"></i></button>
+				<button ui-sref="newConference({localeId:locale._id, localeName: locale.name})"class="btn btn-sm"><i class="fa fa-plus"></i></button>
 			</h3>
 			
 			<div><strong>Description:</strong> {{locale.description}}</div>
