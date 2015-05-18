@@ -1,6 +1,6 @@
 <div id="projector-view" 
 	ng-class="isFullscreen ? 'black-background projector-large' : 'projector-small'"  
-	ng-mousemove="isFullscreen && mouse()">
+	ng-mousemove="isFullscreen && mouse()" ng-keydown="escKey($event)">
 	<div class="row button-row">
 		<div class="col-md-12 text-center">
 			<button class="btn" ng-click="goFullscreen()">{{ fullscreenBtnText }}</button>
