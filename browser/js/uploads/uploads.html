@@ -1,0 +1,13 @@
+<section id="uploads" ng-controller="UploadsCtrl">
+    <input class="bottom-marg-15" type="file" name="file" file></input>
+    <!-- Progress Bar -->
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="{{ uploadProgress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ uploadProgress }}%;">
+            {{ uploadProgress == 0 ? '' : uploadProgress + '%' }}
+        </div>
+    </div>
+    <a class="btn btn-primary btn-block btn-lg" ng-click="upload()">Upload</a>
+    <button ng-click="getObject('next.png')">Get an object!</button>
+    <img src="{{imgUrl}}">
+</section>
+
