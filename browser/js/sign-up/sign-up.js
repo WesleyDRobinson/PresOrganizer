@@ -1,7 +1,7 @@
 app.config(function ($stateProvider) {
 
     $stateProvider.state('sign-up', {
-        url: '/sign-up',
+        url: '/signup',
         templateUrl: 'js/sign-up/sign-up.html',
         controller: 'SignUpCtrl'
     });
@@ -10,7 +10,11 @@ app.config(function ($stateProvider) {
 
 app.controller('SignUpCtrl', function ($scope, SignUpFactory, $state) {
 
-    $scope.createUser = function () {      
+    $scope.formInfo = {};
+
+    $scope.createUser = function () {     
+        SignUpFactory.createUser($scope.formInfo);
+        $scope.formInfo = {};
 
     };
 
