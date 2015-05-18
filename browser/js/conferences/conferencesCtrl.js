@@ -1,19 +1,15 @@
-app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, ConferenceFactory){
+app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, ConferenceFactory, fetchConference){
 
 	$scope.showConferences = false;
     $scope.timeLine = [];
     $scope.controlItems = [{title:'pause'},{title:'loopStart'},{title:'loopEnd'}];
 
-    // added by evan /////////////
-    console.log('state params', $stateParams);
-    // this should be in a resolve - working on this
-    ConferenceFactory.getConferencesById($stateParams.id).then(function (conferences) {
-        $scope.currentConf = conferences[0];
-        $scope.conferences = conferences;
-    })
-    /////////////////////////////
-    $scope.controlItemOptions = {
+    // fetchConference is a resolve method that returns an array of one element
+    // this resolves before the state loads
+    $scope.currentConf = fetchConference[0];   
+    $scope.timeLine = fetchConference[0].timeline;
 
+    $scope.controlItemOptions = {
         //restrict move across columns. move only within column.
         /*accept: function (sourceItemHandleScope, destSortableScope) {
          return sourceItemHandleScope.itemScope.sortableScope.$id !== destSortableScope.$id;
@@ -53,16 +49,17 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
     $scope.retrievePresentations = function(id){
         $scope.timeLine = $scope.currentConf.timeline;
         $scope.conferenceId = $scope.currentConf._id;
-    	ConferenceFactory.getPresentations($scope.currentConf._id).then(function(presentations){	
+    	ConferenceFactory.getPresentations($scope.currentConf._id).then(function (presentations) {	
             //initailize variable for presentations that can be added to the timeline
             //remove possible conference presentations if they are already existing in the timeline
             $scope.conferencePresentations = removeExistingTimeLineItems(presentations, $scope.currentConf.timeline);
-
             //convert these into same format as the TimeLineItems
             $scope.conferencePresentations = ConferenceFactory.convertToTimeLineItem($scope.conferencePresentations);
     	});
     };
-    // $scope.restrievePresentations($stateParams.id, $stateParams.name);
+    
+    // runs when state loads (is there a better way...?)
+    $scope.retrievePresentations($stateParams.id);
 
     // this takes you back to the locales view
     $scope.goToLocales = function () {

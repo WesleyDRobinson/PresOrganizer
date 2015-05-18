@@ -4,13 +4,13 @@
  <h3>Conference Id: {{currentConf._id}}</h3>
 <!-- Added By Evan (above) -->
 
-<ul class="list-unstyled">
-	<li ng-repeat="conference in conferences">
-		<a ng-click="retrievePresentations(conference._id)">
-			{{conference.name}}
+<!-- <ul class="list-unstyled">
+	<li>
+		<a ng-click="retrievePresentations(currentConf._id)">
+			{{currentConf.name}}
 		</a>
 	</li>
-</ul>
+</ul> -->
 
 <div ng-if="conferencePresentations">
 	<div class="row" id="admin-dashboard">
