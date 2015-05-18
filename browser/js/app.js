@@ -65,7 +65,8 @@ app.controller('FullscreenCtrl', function($scope, Fullscreen) {
         else {
             Fullscreen.all();
             $scope.isFullscreen = true;
-            $scope.fullscreenBtnText = "Exit Fullscreen"
+            $scope.fullscreenBtnText = "Exit Fullscreen";
+            $scope.fade = false;
         }
 
         // Set Fullscreen to a specific element (bad practice)

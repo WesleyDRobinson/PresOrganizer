@@ -3,6 +3,8 @@ app.controller("ProjectorView", function($scope, $timeout){
 	var socket = io();
 	//console.log("projector view");
 	if($scope.isFullsceen) $scope.fade=true;
+	else
+		$scope.fade = false;
 	$scope.mouse = function() {
 		// $animate.addClass('.fullScreenBtn', '')
 	
@@ -11,9 +13,7 @@ app.controller("ProjectorView", function($scope, $timeout){
 		$timeout(function(){
 			$scope.fade = true;
 		}, 2000);
-
-		
-		
+				
 		
 	};
 

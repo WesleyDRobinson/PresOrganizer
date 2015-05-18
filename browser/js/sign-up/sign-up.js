@@ -11,7 +11,9 @@ app.config(function ($stateProvider) {
 app.controller('SignUpCtrl', function ($scope, SignUpFactory, $state) {
 
     $scope.formInfo = {};
-
+    $scope.showButton = function(){
+        console.log("YES");
+    };
     $scope.createUser = function () {     
         SignUpFactory.createUser($scope.formInfo);
         $scope.formInfo = {};
