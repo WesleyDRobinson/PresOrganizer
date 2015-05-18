@@ -1,4 +1,4 @@
-app.controller('ConferencesCtrl',function ($q, $scope, $state, ConferenceFactory, ProjectorModeFactory){
+app.controller('ConferencesCtrl',function ($q, $scope, $state, ConferenceFactory){
 	$scope.showConferences = false;
     $scope.timeLine = [];
 
