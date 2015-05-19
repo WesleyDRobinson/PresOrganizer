@@ -32,10 +32,11 @@
 			<ul class="list-unstyled" as-sortable="sortableOptions" ng-model="presentationMedia">
 					<li class="presentation-thumb" ng-repeat="media in presentationMedia" as-sortable-item> 
 						<div as-sortable-item-handle>
-							<img src="{{ media.url }}" class="my-presentation-slide presentation-thumb">
 							<a data-no-drag ng-click="removeCard($index)">
-								<span class="glyphicon glyphicon-remove"></span>
-							</a>				
+									<span class="glyphicon glyphicon-remove"></span>
+							</a>	
+							<img src="{{ media.url }}" class="my-presentation-slide presentation-thumb">
+										
 						</div>					
 					</li>
 			</ul>

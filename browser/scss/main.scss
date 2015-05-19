@@ -23,19 +23,29 @@ html, body, #primary-ui-view {
 
 .presentation-thumb{
   width:124px;
-  height:108px;
+  height:100px;
 
 }
 .as-sortable-item,
 .as-sortable-placeholder {
     display: inline-block;
+    width: 124px;
+    height: 110px;
     float: left;
+    border-radius: 0px ;
 }
+
+/*.sortable-row:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}*/
 
 #sortable-container {
     display: inline-block;
 }
-
 
 .fade-out.fadedOut {
     opacity: 0;
