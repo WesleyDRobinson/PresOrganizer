@@ -1,32 +1,55 @@
 <div class="row">
     <div class="col-md-12">
-        <form id="conference-form" name="conferenceForm" ng-submit="createConference()">
+        <form id="conference-form" name="conferenceForm" ng-submit="conferenceForm.$valid && createConference(conference, conferenceForm.$valid)" novalidate>
+
             <h1>Add New Conference To {{localeName}}</h1>
-            
+
             <div class="row">
+                
                 <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="add-conf-title">Conference Title</label>
-                        <input type="text" ng-model="conference.name" class="form-control" id="add-conf-title" placeholder="Conference Name">
+                    <div    class="form-group" 
+                            ng-class="{ 'has-error' : conferenceForm.$invalid && !conferenceForm.$pristine }">
+                        
+                        <label class="control-label" for="add-conf-title">
+                            Conference Title*
+                        </label>
+                        <input 
+                                type="text" 
+                                ng-model="conference.name" 
+                                class="form-control" 
+                                id="add-conf-title" 
+                                name="add-conf-title" 
+                                placeholder="Conference Name" 
+                                required 
+                                ng-required="true">
                     </div>
                 </div>
+                
                 <div class="col-md-6">                
-                     <div class="form-group">
+                     <div   class="form-group">
+                        
                         <label for="add-conf-venue">Venue Name</label>
-                        <input type="text" ng-model="conference.venue" class="form-control" id="add-conf-venue" placeholder="Venue Name">
+                        <input  type="text" 
+                                ng-model="conference.venue" 
+                                class="form-control" 
+                                id="add-conf-venue" 
+                                placeholder="Venue Name">
                     </div>
                 </div>
+
                 <div class="col-md-6">
                      <div class="form-group">
                         <label for="add-conf-date">Date</label>
-                        <input type="text" ng-model="conference.date" class="form-control" id="add-conf-date" placeholder="Date">
+                        <input  type="date" 
+                                ng-model="conference.date" 
+                                class="form-control" 
+                                id="add-conf-date" 
+                                placeholder="Date">
                     </div>
                 </div>
             </div>
            
-            <button type="submit" class="btn">Submit</button>
+            <button type="submit" class="btn" ng-disabled="conferenceForm.$invalid">Submit</button>
         </form>
     </div>
 </div>
-
-{{conference}}
