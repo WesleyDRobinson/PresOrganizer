@@ -18,18 +18,10 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, PresentationFa
     $scope.toggleImages = function(){
         $scope.showImages = $scope.showImages ? false : true;
     };
+    
     $scope.sortableOptions = {
-        containment: '#board'
+        additionPlaceholderClass: 'presentation-a-s'
+
     };
-            
-    $scope.dragOptions = {
-
-     containment: '#board'
-    };
-
-
-  $scope.sortableOptions = {
-    containment: '#sortable-container'
-  };
             
 });
