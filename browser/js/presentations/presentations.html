@@ -6,39 +6,23 @@
 </form>
 <div class="row">
 	<div class="col-md-12">
-		<ul class="list-unstyled">
-			<li ng-repeat="presentation in presentations | orderBy: 'title'">
-				{{$index}})
-				<a ng-click="displayPresentationMedia(presentation._id)">
-					{{presentation.title}}
-				</a>
-			</li>
-		</ul>
-		<!-- <div id='#board'> -->
+			<ul class="list-unstyled">
+				<li ng-repeat="presentation in presentations">
+					<a ng-click="displayPresentationMedia(presentation._id)">
+						{{presentation.title}}
+					</a>
+				</li>
+			</ul>
 	</div>
-<!-- 
-	<div class="col-md-12" ng-if="presentationMedia">
-		<button class="btn" ng-click="savePresentation()">Save Presentation</button>
 
-		<ul class="list-unstyled" as-sortable="sortableOptions" ng-model="presentationMedia">
-			<li ng-repeat="media in presentationMedia" as-sortable-item > 
-				<div as-sortable-item-handle>
-					{{media.url}}
-					<!-- <img src='{{media.url}}'/> -->
-					<a data-no-drag ng-click="removeCard($index)">
-						<span class="glyphicon glyphicon-remove"></span>
-					</a>				
-				</div>					
-			</li>
-		</ul>
-	</div> -->
+
 
 	<div class="col-md-12" ng-if="presentationMedia">
 		<button class="btn" ng-click="savePresentation()">Save Presentation</button>
 
 		<div class="row">
 			<ul class="list-unstyled" as-sortable="sortableOptions" ng-model="presentationMedia">
-					<li class="presentation-thumb" ng-repeat="media in presentationMedia" as-sortable-item> 
+					<li class="presentation-thumb presentation-a-s" ng-repeat="media in presentationMedia" as-sortable-item> 
 						<div as-sortable-item-handle>
 							<a data-no-drag ng-click="removeCard($index)">
 									<span class="glyphicon glyphicon-remove"></span>
