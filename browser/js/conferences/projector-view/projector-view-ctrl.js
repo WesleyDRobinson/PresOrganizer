@@ -1,9 +1,13 @@
 
-app.controller("ProjectorView", function($scope, $timeout,Fullscreen){
+app.controller("ProjectorView", function($scope, $timeout,Fullscreen, $stateParams){
 	var socket = io();
 	$scope.fade = false;
 	//console.log("projector view");
-
+	//
+	socket.on('connect',function(){
+		socket.emit('join projection', {id: $stateParams.id});
+	});
+	
 	// $scope.mouse = function() {
 	// 	// $animate.addClass('.fullScreenBtn', '')
 
@@ -15,7 +19,6 @@ app.controller("ProjectorView", function($scope, $timeout,Fullscreen){
 				
 		
 	// };
-	
 	
 	Fullscreen.$on('FBFullscreen.change',function(){
 		 if (Fullscreen.isEnabled()) {
@@ -32,8 +35,8 @@ app.controller("ProjectorView", function($scope, $timeout,Fullscreen){
 
 
 
-	//console.log('here!!!');
 	socket.on("play", function(data){
+		console.log('receiving play info',data);
 		$scope.data = data;
 		$scope.$digest();
 	});
