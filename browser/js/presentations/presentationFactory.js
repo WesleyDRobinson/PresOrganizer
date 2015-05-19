@@ -1,8 +1,16 @@
-app.factory('PresentationFactory', function ($http, AuthService){
+app.factory('PresentationFactory', function ($http, Session){
 	return {
+		createPresentation: function (presentationData) {
+			presentationData.presenter = Session.user._id;
+			return $http.post('/api/presentation/', presentationData)
+			.then( function (res) {
+				return res.data;
+			});
+		},
 		getPresentations: function(){
 			return $http.get('/api/presentation/user/me')
 			.then(function (res){
+					console.log('resolve: ', res.data);
 					return res.data;
 				});
 		},

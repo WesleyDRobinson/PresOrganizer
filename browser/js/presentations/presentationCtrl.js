@@ -34,8 +34,21 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, PresentationFa
         $scope.creating = true;
     }
 
-    $scope.createPresentation = function (title) {
+    $scope.newPresentation = {
+        title: '',
+        presenter: null,
+        media: []
+    };
+
+    $scope.createPresentation = function (presentationData) {
         $scope.creating = false;
-        console.log('adding presentation!');
+        return PresentationFactory.createPresentation(presentationData)
+                .then(function (newPresentation) {
+                    console.log(newPresentation);
+                    $scope.presentations.push(newPresentation);
+                })
+        // send ajax post to back end
+        // send back created presentation
+        // add to the list on the state
     }
 });
