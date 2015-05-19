@@ -8,6 +8,7 @@
 	<div class="col-md-12">
 		<ul class="list-unstyled">
 			<li ng-repeat="presentation in presentations | orderBy: 'title'">
+				<input type="checkbox" name="deleteCheck" value='{{presentation._id}}'>
 				{{$index}})
 				<a ng-click="displayPresentationMedia(presentation._id)">
 					{{presentation.title}}
