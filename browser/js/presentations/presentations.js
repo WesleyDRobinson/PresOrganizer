@@ -5,7 +5,7 @@ app.config(function ($stateProvider) {
         templateUrl: 'js/presentations/presentations.html',
         controller: 'PresentationCtrl',
         resolve: {
-            getPresentations: function(PresentationFactory){
+            presentations: function(PresentationFactory){
                 return PresentationFactory.getPresentations();
             }
         }

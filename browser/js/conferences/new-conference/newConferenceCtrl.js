@@ -18,14 +18,12 @@ app.controller('NewConferenceCtrl',function ($scope, $state, $rootScope, $stateP
     var conference = $scope.conference = {};
     conference.locale = $scope.localeId;
 
-    $scope.createConference = function(){
-        ConferenceFactory.createConference(conference).then(function(data){
-            console.log("we have sucessfully created",data);
-        });
 
+    $scope.createConference = function(conference, isValid) {
+        if(isValid) {
+            ConferenceFactory.newConference(conference).then(function(data){
+                console.log("we have sucessfully created",data);
+            });
+        }
     };
-
-
-
-
 });

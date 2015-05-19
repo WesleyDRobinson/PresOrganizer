@@ -1,9 +1,10 @@
-app.controller('PresentationCtrl',function ($scope, $stateParams, PresentationFactory, getPresentations) {
+app.controller('PresentationCtrl',function ($scope, $stateParams, PresentationFactory, presentations) {
     $scope.showImages = false;
-    $scope.presentations = getPresentations;
+    $scope.presentations = presentations;
     $scope.currentPresentationId;
     
     $scope.displayPresentationMedia = function(id){  
+        console.log('displaying',id);
         $scope.presentationMedia = _.find($scope.presentations, {_id: id}).media;
         if ($scope.presentationMedia.length === 0 ) {
             $scope.presentationMedia.push({ 
@@ -26,22 +27,19 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, PresentationFa
     $scope.toggleImages = function(){
         $scope.showImages = $scope.showImages ? false : true;
     };
+    
     $scope.sortableOptions = {
-        containment: '#board'
+
+        additionPlaceholderClass: 'presentation-a-s'
+
     };
             
-    $scope.dragOptions = {
-        containment: '#board'
-    };
 
-    $scope.sortableOptions = {
-        containment: '#sortable-container'
-    };
 
     // creating a new presentation functionality
     $scope.showTitleForm = function () {
         $scope.creating = true;
-    }
+    };
 
     $scope.newPresentation = {
         title: '',
@@ -54,6 +52,7 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, PresentationFa
         return PresentationFactory.createPresentation(presentationData)
                 .then(function (newPresentation) {
                     $scope.presentations.push(newPresentation);
-                })
-    }
+                });
+    };
+
 });

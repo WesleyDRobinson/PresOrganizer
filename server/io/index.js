@@ -10,11 +10,18 @@ module.exports = function (server) {
 
 
     io.on('connection', function (socket) {
+
     	console.log('connected',socket.id);
 
+    	socket.on('join projection', function(room){
+    		console.log('joining', room.id);
+    		socket.join(room.id);
+    	});
+
         socket.on('play',function(data){
-        	socket.broadcast.emit('play',data);
+        	io.to(data.id).emit('play',data);
         });
+        
     });
     
     return io;
