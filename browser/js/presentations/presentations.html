@@ -1,5 +1,4 @@
 
-
 <button class="btn" ng-click="showTitleForm()">Create New Presentation</button>
 <form ng-show="creating" name="titleForm" ng-submit="titleForm.$valid && createPresentation(newPresentation)">
 	<input type='text' ng-model="newPresentation.title" required placeholder="Enter Presentation Title"/>
