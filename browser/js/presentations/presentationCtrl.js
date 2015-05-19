@@ -30,7 +30,7 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, PresentationFa
     
     $scope.sortableOptions = {
 
-        additionPlaceholderClass: 'presentation-a-s'
+         additionalPlaceholderClass: 'presentation-placeholder'
 
     };
             

@@ -21,28 +21,30 @@ html, body, #primary-ui-view {
     transition: opacity 0.7s linear;
 }
 
-.presentation-thumb{
-  width:124px;
-  height:100px;
+.presentation-placeholder{
+  margin-top:10px;
+  display: inline-block;
+  float: left;
 
 }
-// .as-sortable-item,
-// .as-sortable-placeholder {
-//     display: inline-block;
-//     width: 124px;
-//     height: 110px;
-//     float: left;
-//     margin-top: 10px;
-//     border-radius: 0px;
-// }
 
-/*.sortable-row:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-}*/
+.presentation-thumb{
+    display: inline-block;
+    width: 124px;
+    height: 110px;
+    float: left;
+    margin-top: 10px;
+    margin-bottom:25px;
+    border-radius: 0px;
+
+
+}
+
+.presentation-img{
+  width: 122px;
+  height: 110px;
+  margin-right:6px;
+}
 
 #sortable-container {
     display: inline-block;
