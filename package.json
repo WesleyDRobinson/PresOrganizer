@@ -56,8 +56,10 @@
     "q": "^1.2.0",
     "run-sequence": "^1.0.2",
     "serve-favicon": "^2.2.0",
+    "simple-bufferstream": "^1.0.0",
     "sinon": "^1.13.0",
     "socket.io": "^1.3.5",
+    "streamifier": "^0.1.1",
     "supertest": "^0.15.0"
   }
 }
