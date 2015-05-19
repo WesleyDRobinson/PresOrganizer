@@ -2,15 +2,23 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, PresentationFa
     $scope.showImages = false;
     $scope.presentations = getPresentations;
     $scope.currentPresentationId;
-    $scope.setPresentationMedia = function(id){
-       $scope.presentationMedia= _.find($scope.presentations, {_id: id}).media;
-       $scope.currentPresentationId = id;
-
+    
+    $scope.displayPresentationMedia = function(id){  
+        $scope.presentationMedia = _.find($scope.presentations, {_id: id}).media;
+        if ($scope.presentationMedia.length === 0 ) {
+            $scope.presentationMedia.push({ 
+                url: 'Begin adding slides to your presentation! You can delete this message once you\'ve done that!' 
+            });
+        }
+        $scope.currentPresentationId = id;
+        console.log($scope.presentations);
     };
 
+    // corresponding $scope.presentations.media array is also spliced when removeCard runs
     $scope.removeCard = function(index){
-        $scope.presentationMedia.splice(index,1);
+        $scope.presentationMedia.splice(index,1);    
     };
+
     $scope.savePresentation = function(){
         PresentationFactory.savePresentation($scope.currentPresentationId, $scope.presentationMedia);
     };
@@ -23,13 +31,29 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, PresentationFa
     };
             
     $scope.dragOptions = {
-
-     containment: '#board'
+        containment: '#board'
     };
 
+    $scope.sortableOptions = {
+        containment: '#sortable-container'
+    };
 
-  $scope.sortableOptions = {
-    containment: '#sortable-container'
-  };
-            
+    // creating a new presentation functionality
+    $scope.showTitleForm = function () {
+        $scope.creating = true;
+    }
+
+    $scope.newPresentation = {
+        title: '',
+        presenter: null,
+        media: []
+    };
+
+    $scope.createPresentation = function (presentationData) {
+        $scope.creating = false;    // to hide the input box
+        return PresentationFactory.createPresentation(presentationData)
+                .then(function (newPresentation) {
+                    $scope.presentations.push(newPresentation);
+                })
+    }
 });
