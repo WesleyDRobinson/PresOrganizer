@@ -1,9 +1,10 @@
-app.controller('PresentationCtrl',function ($scope, $stateParams, PresentationFactory, getPresentations) {
+app.controller('PresentationCtrl',function ($scope, $stateParams, PresentationFactory, presentations) {
     $scope.showImages = false;
-    $scope.presentations = getPresentations;
+    $scope.presentations = presentations;
     $scope.currentPresentationId;
     
     $scope.displayPresentationMedia = function(id){  
+        console.log('displaying',id);
         $scope.presentationMedia = _.find($scope.presentations, {_id: id}).media;
         if ($scope.presentationMedia.length === 0 ) {
             $scope.presentationMedia.push({ 
