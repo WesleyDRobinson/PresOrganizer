@@ -66,12 +66,15 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
         $state.go('locales');
     };  
 
+    // edit mode for the conf basic info
     $scope.editingInfo = false;
     $scope.editConfInfo = function() {
-        $scope.editingInfo = !$scope.editingInfo;
-        console.log($scope.editingInfo);
+        $scope.editingInfo = true;
+    };
+    $scope.updateConfInfo = function() {
+        $scope.editingInfo = false;
 
-
+        ConferenceFactory.putConferenceById($scope.currentConf);
     };
 });
 

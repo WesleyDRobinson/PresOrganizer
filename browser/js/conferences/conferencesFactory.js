@@ -12,6 +12,15 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService){
 					return res.data;
 				});
 		},
+		putConferenceById: function(conference){
+			//put a conference by id
+			console.log(conference._id);
+			console.log(typeof conference._id);
+			return $http.put('/api/conference/' + conference._id, conference).then(function(res){
+					console.log(res.data);
+					return res.data;
+				});
+		},
 		getPresentations: function(conferenceId){
 			return $http.get('api/conference?_id=' + conferenceId)
 				.then(function (res) {

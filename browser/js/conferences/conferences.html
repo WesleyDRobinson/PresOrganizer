@@ -1,4 +1,4 @@
-<a ng-click="goToLocales()">Return to My Locales</a>
+<a ng-click="goToLocales()"><i class="fa fa-chevron-left"></i> Return to My Locales</a>
 
 <div ng-if="conferencePresentations">
 	<div class="row" id="admin-dashboard">
@@ -9,7 +9,7 @@
 			<div class="row text-center">
 
 				<div class="col-md-6">
-					<i class="fa fa-calendar"></i> {{ currentConf.date | date:'MMM d, y h:mm'}}
+					<i class="fa fa-calendar"></i> {{ currentConf.date | date:'MMM d, y'}}
 				</div>
 				<div class="col-md-6">
 					<i class="fa fa-map-marker"></i> {{ currentConf.venue }}
@@ -22,45 +22,29 @@
 
 		<!-- edit mode -->
 		<div ng-if="editingInfo" class="col-md-12">
-			<h1 class="text-center">Managing <input value="{{currentConf.name}}"> <i ng-click="editConfInfo()" class="fa fa-pencil" id="conference-edit-icon"></i></h1>
+			<h1 class="text-center">Managing <input ng-model="currentConf.name"> <i ng-click="updateConfInfo()" class="fa fa-floppy-o" id="conference-edit-icon"></i></h1>
 
-<!-- 			<div class="row text-center">
+ 			<div class="row text-center">
 
 				<div class="col-md-6">
-					<i class="fa fa-calendar"></i> {{ currentConf.date | date:'MMM d, y h:mm'}}
+					<i class="fa fa-calendar"></i> <input ng-model="currentConf.date" value="{{ currentConf.date | date:'MMM d, y h:mm'}}">
 				</div>
 				<div class="col-md-6">
-					<i class="fa fa-map-marker"></i> {{ currentConf.venue }}
+					<i class="fa fa-map-marker"></i> <input ng-model="currentConf.venue" type="text" value="{{ currentConf.venue }}">
 				</div>
 
 			</div>
 			<hr>
- -->
 		</div>
 
-		<div class="modal fade">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title">Modal title</h4>
-		      </div>
-		      <div class="modal-body">
-		        <p>One fine body&hellip;</p>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Save changes</button>
-		      </div>
-		    </div><!-- /.modal-content -->
-		  </div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
-
+		{{ currentConf.name }}
+		{{ currentConf.date }}
+		{{ currentConf.venue }}
 
 
 		<!-- timeline column -->
 		<div class="col-md-4">
-			<h2>Timeline <button class="btn btn-primary pull-right" ng-click="saveTimeLine()">Save</button></h2>
+			<h2>Timeline <button class="btn btn-primary pull-right" ng-click="saveTimeLine()"><i class="fa fa-floppy-o"></i></button></h2>
 			<form name="timeline-form">
 			<ul as-sortable ng-model="timeLine">
 				<li ng-repeat="timeLineItem in timeLine" as-sortable-item>
