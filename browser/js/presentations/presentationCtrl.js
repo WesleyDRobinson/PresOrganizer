@@ -2,14 +2,23 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, PresentationFa
     $scope.showImages = false;
     $scope.presentations = getPresentations;
     $scope.currentPresentationId;
-    $scope.setPresentationMedia = function(id){     // refactor later include the presentation title
-       $scope.presentationMedia= _.find($scope.presentations, {_id: id}).media;
-       $scope.currentPresentationId = id;
+    
+    $scope.displayPresentationMedia = function(id){  
+        $scope.presentationMedia = _.find($scope.presentations, {_id: id}).media;
+        if ($scope.presentationMedia.length === 0 ) {
+            $scope.presentationMedia.push({ 
+                url: 'Begin adding slides to your presentation! You can delete this message once you\'ve done that!' 
+            });
+        }
+        $scope.currentPresentationId = id;
+        console.log($scope.presentations);
     };
 
+    // corresponding $scope.presentations.media array is also spliced when removeCard runs
     $scope.removeCard = function(index){
-        $scope.presentationMedia.splice(index,1);
+        $scope.presentationMedia.splice(index,1);    
     };
+
     $scope.savePresentation = function(){
         PresentationFactory.savePresentation($scope.currentPresentationId, $scope.presentationMedia);
     };
@@ -41,14 +50,10 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, PresentationFa
     };
 
     $scope.createPresentation = function (presentationData) {
-        $scope.creating = false;
+        $scope.creating = false;    // to hide the input box
         return PresentationFactory.createPresentation(presentationData)
                 .then(function (newPresentation) {
-                    console.log(newPresentation);
                     $scope.presentations.push(newPresentation);
                 })
-        // send ajax post to back end
-        // send back created presentation
-        // add to the list on the state
     }
 });

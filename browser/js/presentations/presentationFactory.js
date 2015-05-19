@@ -10,7 +10,6 @@ app.factory('PresentationFactory', function ($http, Session){
 		getPresentations: function(){
 			return $http.get('/api/presentation/user/me')
 			.then(function (res){
-					console.log('resolve: ', res.data);
 					return res.data;
 				});
 		},
