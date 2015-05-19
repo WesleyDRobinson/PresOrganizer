@@ -3,8 +3,6 @@ var mongoose = require('mongoose');
 var Presentation = mongoose.model('Presentation');
 //var bluebird = require('bluebird');
 
-
-
 //Create a Presentation
 router.post('/',function (req,res,next){
 	Presentation.create(req.body)
@@ -16,7 +14,7 @@ router.post('/',function (req,res,next){
 
 //get Presentations by query
 router.get('/', function (req, res, next) {
-  Presentation.find(req.query).populate('presenter').exec()
+  Presentation.find(req.query).exec()
   .then(function (presentations) {
    
     res.send(presentations);
@@ -24,7 +22,7 @@ router.get('/', function (req, res, next) {
 });
 
 //update Presentation
-router.put('/:id',function(req,res,next) {
+router.put('/:id',function (req, res, next) {
 	var id = req.params.id;
 	Presentation.findByIdAndUpdate(id, req.body, function (err,presentation){
 		if(err){
@@ -35,21 +33,15 @@ router.put('/:id',function(req,res,next) {
 
 });
 
-
 //get all of the current users presentaitons
-router.get('/user/me',function(req,res,next){
+router.get('/user/me',function (req, res, next){
 
-	Presentation.find({presenter:req.user.id}).populate('presenter').exec()
+	Presentation.find({presenter:req.user.id}).exec()
 	  .then(function (presentations) {
 	   
 	    res.send(presentations);
 	  });
-
-
 });
-
-
-
 
 // delete a presentation
 router.delete('/:id',function(req,res,next) {
@@ -58,9 +50,5 @@ router.delete('/:id',function(req,res,next) {
 		res.send(presentation);
 	});
 });
-
-
-
-
 
 module.exports = router;

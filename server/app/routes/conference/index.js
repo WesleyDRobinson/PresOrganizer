@@ -7,6 +7,7 @@ var Conference = Promise.promisifyAll(mongoose.model('Conference'));
 // CREATE
 // Create a conference
 router.post('/',function(req, res, next){
+	console.log("hi");
 	Conference.create(req.body, function (err, conference){
 		if (err) return next(err);
 

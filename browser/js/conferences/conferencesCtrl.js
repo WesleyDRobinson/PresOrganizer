@@ -65,6 +65,14 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
     $scope.goToLocales = function () {
         $state.go('locales');
     };  
+
+    $scope.editingInfo = false;
+    $scope.editConfInfo = function() {
+        $scope.editingInfo = !$scope.editingInfo;
+        console.log($scope.editingInfo);
+
+
+    };
 });
 
 function removeExistingTimeLineItems(presentations, timeLine){
