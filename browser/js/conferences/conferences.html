@@ -111,9 +111,9 @@
 						<button ng-click="playToggle()" class="btn" ng-class="playing ? '' : 'btn-success'">
 							<i ng-class="playing ? 'fa fa-pause' : 'fa fa-play'"></i>
 						</button>
-						<button class="btn btn-default">
-							<a ui-sref="projector({id: currentConf._id })"><i class="fa fa-video-camera"></i></a>
-						</button>
+						<a class="btn btn-default" target="_blank" ui-sref="projector({id: currentConf._id })">
+							<i class="fa fa-video-camera"></i>
+						</a>
 					</div>
 				</h2>
 
