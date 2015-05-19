@@ -16,7 +16,7 @@
 		</ul>
 		<!-- <div id='#board'> -->
 	</div>
-
+<!-- 
 	<div class="col-md-12" ng-if="presentationMedia">
 		<button class="btn" ng-click="savePresentation()">Save Presentation</button>
 
@@ -31,5 +31,24 @@
 				</div>					
 			</li>
 		</ul>
+	</div> -->
+
+	<div class="col-md-12" ng-if="presentationMedia">
+		<button class="btn" ng-click="savePresentation()">Save Presentation</button>
+
+		<div class="row">
+			<ul class="list-unstyled" as-sortable="sortableOptions" ng-model="presentationMedia">
+					<li class="presentation-thumb" ng-repeat="media in presentationMedia" as-sortable-item> 
+						<div as-sortable-item-handle>
+							<a data-no-drag ng-click="removeCard($index)">
+									<span class="glyphicon glyphicon-remove"></span>
+									<span>{{$index+1}}</span>
+							</a>	
+							<img src="{{ media.url }}" class="my-presentation-slide presentation-thumb">
+										
+						</div>					
+					</li>
+			</ul>
+		</div>
 	</div>
 </div>
