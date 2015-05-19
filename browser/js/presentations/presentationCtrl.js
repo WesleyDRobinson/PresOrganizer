@@ -2,10 +2,9 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, PresentationFa
     $scope.showImages = false;
     $scope.presentations = getPresentations;
     $scope.currentPresentationId;
-    $scope.setPresentationMedia = function(id){
+    $scope.setPresentationMedia = function(id){     // refactor later include the presentation title
        $scope.presentationMedia= _.find($scope.presentations, {_id: id}).media;
        $scope.currentPresentationId = id;
-
     };
 
     $scope.removeCard = function(index){
@@ -23,13 +22,20 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, PresentationFa
     };
             
     $scope.dragOptions = {
-
-     containment: '#board'
+        containment: '#board'
     };
 
+    $scope.sortableOptions = {
+        containment: '#sortable-container'
+    };
 
-  $scope.sortableOptions = {
-    containment: '#sortable-container'
-  };
-            
+    // creating a new presentation functionality
+    $scope.showTitleForm = function () {
+        $scope.creating = true;
+    }
+
+    $scope.createPresentation = function (title) {
+        $scope.creating = false;
+        console.log('adding presentation!');
+    }
 });
