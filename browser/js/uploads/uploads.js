@@ -31,12 +31,4 @@ app.controller('UploadsCtrl', function ($scope, Upload) {
 
     };
 
-    $scope.getObject = function (name) {
-        console.log("Fetching object!");
-        var s3 = new AWS.S3();
-        var params = {Bucket: 'pk-usa', Key: name};
-        $scope.imgUrl = s3.getSignedUrl('getObject', params);
-    };
-
-
 });
