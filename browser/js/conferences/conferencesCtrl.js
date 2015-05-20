@@ -45,7 +45,6 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
     $scope.showTimelineSaved = function() {
         $scope.saved = true;
         var savedTimeout = $timeout(function() {
-            console.log("setTimeout");
             $scope.saved = false;
             $timeout.cancel(savedTimeout);
             savedTimeout = null;
