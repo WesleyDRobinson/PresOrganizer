@@ -40,7 +40,7 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService){
 					});
 					
 					return $q.all(promises).then(function(presentationArr){
-						console.log(presentationArr);
+						//console.log(presentationArr);
 						return flatten(presentationArr);
 					});
 				});
