@@ -12,9 +12,9 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
     $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.timeLine);
     
     $scope.$on('refresh-projector-preview', function() {
-        console.log("1", $scope.currentTimelineFlat);
+        //console.log("1", $scope.currentTimelineFlat);
         $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.timeLine);
-        console.log("2", $scope.currentTimelineFlat);
+        //console.log("2", $scope.currentTimelineFlat);
         $scope.isCurrentSlideIndex();
         $scope.isNextSlideIndex();
     });

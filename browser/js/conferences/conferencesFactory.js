@@ -14,17 +14,17 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService){
 		},
 		putConferenceById: function(conference){
 			//put a conference by id
-			console.log(conference);
+			//console.log(conference);
 
 			var basicInfo = {};
 			basicInfo.name = conference.name;
 			basicInfo.date = conference.date;
 			basicInfo.venue = conference.venue;
 
-			console.log(basicInfo);
+			//console.log(basicInfo);
 
 			return $http.put('/api/conference/' + conference._id, basicInfo).then(function(res){
-					console.log(res.data);
+					//console.log(res.data);
 					return res.data;
 				});
 		},
