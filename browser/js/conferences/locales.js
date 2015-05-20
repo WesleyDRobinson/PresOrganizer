@@ -27,11 +27,15 @@ app.controller('localesCtrl', function ($scope, $state, $stateParams, Session, l
         $scope.localeEdit = !$scope.localeEdit;
     };
     // when a locale is clicked
-    $scope.loadConferences = function (locale_id) {
+    $scope.loadConferences = function (locale) {
         $scope.conferencesLoaded =true;
+        $scope.currentLocaleId = locale._id;
+        $scope.currentLocaleName = locale.name;
+        console.log('current',locale._id,"name",locale.name);
 
-        localesFactory.getConferences(locale_id).then(function (conferences) {
+        localesFactory.getConferences(locale._id).then(function (conferences) {
                 $scope.conferences = conferences;
+                console.log('loaded conferences', $scope.conferences);
 
         });
     };
@@ -41,18 +45,26 @@ app.controller('localesCtrl', function ($scope, $state, $stateParams, Session, l
 
 
     $scope.removeConference = function(conferenceId, $index){
-        console.log('conferences', $scope.conferences);
-        console.log('index', $index);
+
         ConferenceFactory.removeConference(conferenceId).then(function(data){
             console.log(data);
         });
         $scope.conferences.splice($index, 1);
 
 
+
     };
 
     $scope.removeOrganizer = function(organizerId, localeId){
-        localesFactory.removeOrganizer(organizerId,localeId);
+        var locale = _.find($scope.locales, {_id: localeId}  );
+        var organizers = locale.organizers;
+        _.remove(organizers, function(organizer){
+            console.log(organizer._id);
+            return organizerId === organizer._id;
+        });
+       
+
+        localesFactory.removeOrganizer(localeId, organizers);
     };
 
     $scope.goToAdmin = function (conf_id, conf_name) {  // admin view but called "conferences"

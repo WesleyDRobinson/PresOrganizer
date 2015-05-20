@@ -12,14 +12,27 @@ app.factory('localesFactory', function ($http, AuthService){
 					return res.data;
 				});
 			},
-		getConferences: function (locale_id) {
-			return $http.get('api/conference?locale=' + locale_id).then(function (res) {
+		getConferences: function (localeId) {
+			return $http.get('api/conference?locale=' + localeId).then(function (res) {
 				return res.data;
 			});
 		},
-		removeOrganizer: function(organizer_id, locale_id){
-			console.log(organizer_id, locale_id);
+		removeOrganizer: function(localeId, organizerArr){
+			console.log(organizerArr);
+			organizerArr = organizerArr.map(function(organizer){
+				return organizer._id;
+			});
+			return $http.put('api/locale/'+localeId,{organizers: organizerArr}).then(function(res){
+				return res.data;
+			});
 
+
+		},
+		addOrganizer: function(localeId, organizerid){
+			
+			// return $http.put('api/locale/'+localeId,{organizers: organizerArr}).then(function(res){
+			// 	return res.data;
+			// });
 		}
  	};
 });
