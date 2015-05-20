@@ -4,6 +4,7 @@
 
 html, body, #primary-ui-view {
 	height: 100%;
+  background-color: #E6F7D5;
 }
 
 @mixin clearfix {
@@ -29,6 +30,7 @@ html, body, #primary-ui-view {
 }
 
 .presentation-thumb{
+
     display: inline-block;
     width: 124px;
     height: 110px;
@@ -36,7 +38,6 @@ html, body, #primary-ui-view {
     margin-top: 10px;
     margin-bottom:25px;
     border-radius: 0px;
-
 
 }
 
@@ -58,6 +59,7 @@ html, body, #primary-ui-view {
   opacity:100;
 }
 
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
@@ -67,3 +69,4 @@ html, body, #primary-ui-view {
 @import 'projector-view/main';
 @import 'uploads/main';
 @import 'locales/main';
+@import 'account/main';
