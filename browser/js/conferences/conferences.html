@@ -11,14 +11,14 @@
 			<div class="row admin-header">
 			
 				<div class="col-md-7">
-					<h1 id="conference-name">{{currentConf.name}} <i ng-click="editConfInfo()" class="fa fa-pencil" id="conference-edit-icon"></i></h1>
+					<h1 id="conference-name" ng-click="editConfInfo()">{{currentConf.name}} <i class="fa fa-pencil" id="conference-edit-icon"></i></h1>
 				</div>
 
 				<div class="col-md-5">
 					<div>Details:</div>
 					<div class="row">
-						<div class="col-md-6"><i class="fa fa-calendar"></i> {{ currentConf.date | date:'MMM d, y'}}</div>
-						<div class="col-md-6"><i class="fa fa-map-marker"></i> {{ currentConf.venue }}</div>
+						<div class="col-md-6" ng-click="editConfInfo()"><i class="fa fa-calendar"></i> {{ currentConf.date | date:'MMM d, y'}}</div>
+						<div class="col-md-6" ng-click="editConfInfo()"><i class="fa fa-map-marker"></i> {{ currentConf.venue }}</div>
 					</div>
 				</div>
 
@@ -65,7 +65,7 @@
 				<li ng-repeat="timeLineItem in timeLine" as-sortable-item>
 					<div as-sortable-item-handle>
 						<span ng-if="!timeLineItem.presentation">{{$index + 1}}. {{timeLineItem.title}}</span>
-						<span ng-if="timeLineItem.presentation">{{timeLineItem.presentation.title+" by "+timeLineItem.presentation.presenter.name}}</span>
+						<span ng-if="timeLineItem.presentation">{{$index + 1}}. {{timeLineItem.presentation.title+" by "+timeLineItem.presentation.presenter.name}}</span>
 						<a data-no-drag ng-click="removeCard($index)">
 								<span class="glyphicon glyphicon-remove"></span>
 						</a>

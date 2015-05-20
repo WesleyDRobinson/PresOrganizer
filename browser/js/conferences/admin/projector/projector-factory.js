@@ -1,8 +1,4 @@
 app.factory('ProjectorModeFactory', function() {
-	function timeline() {
-		return [timelineItem1, pauseItem, timelineItem2 ];
-	}
-
 	function timelineFlat(timeline) {
 		var flattenedTimeline = [];
 
@@ -21,7 +17,6 @@ app.factory('ProjectorModeFactory', function() {
 
 
 	return {
-		timeline: timeline,
 		timelineFlat: timelineFlat
 	};
 });

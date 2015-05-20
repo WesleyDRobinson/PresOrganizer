@@ -5,9 +5,6 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
     var PAUSED = false;
     var socket = io();
 
-    // $scope.currentTimeline = ProjectorModeFactory.timeline();
-    // $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.currentTimeline);
-    //$scope.currentTimeline = ProjectorModeFactory.timeline();
     $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.timeLine);
 
     // might not be used currently
