@@ -1,4 +1,4 @@
-app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, ConferenceFactory, fetchConference, $rootScope){
+app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, ConferenceFactory, fetchConference, $rootScope, $timeout){
 
 	$scope.showConferences = false;
     $scope.timeLine = [];
@@ -34,8 +34,22 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
     };
 
     $scope.saveTimeLine = function(){
+        console.log("save");
         ConferenceFactory.saveTimeLine($scope.conferenceId, $scope.timeLine);
         $rootScope.$broadcast('refresh-projector-preview');
+        $scope.showTimelineSaved();
+    };
+
+    $scope.saved = false;
+    $scope.showTimelineSaved = function() {
+        console.log("disk");
+        $scope.saved = true;
+        var savedTimeout = $timeout(function() {
+            console.log("setTimeout");
+            $scope.saved = false;
+            $timeout.cancel(savedTimeout);
+            savedTimeout = null;
+        }, 1000);
     };
 
     $scope.removeCard = function(index){

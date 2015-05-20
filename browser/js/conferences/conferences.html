@@ -59,8 +59,8 @@
 
 		<!-- timeline column -->
 		<div class="col-md-4">
-			<h2>Timeline <button class="btn btn-primary pull-right" ng-click="saveTimeLine()"><i class="fa fa-floppy-o"></i></button></h2>
-			<form name="timeline-form">
+			<h2>Timeline <span class="pull-right" ng-show="saved"><i class="fa fa-floppy-o"></i></span></h2>
+			<form name="timeline-form" ng-mouseup="saveTimeLine()">
 			<ul as-sortable ng-model="timeLine">
 				<li ng-repeat="timeLineItem in timeLine" as-sortable-item>
 					<div as-sortable-item-handle>
