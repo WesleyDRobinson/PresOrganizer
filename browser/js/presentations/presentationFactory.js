@@ -28,5 +28,5 @@ app.factory('PresentationFactory', function ($q, $http, Session) {
                 return res;
             });
         }
-    }
+    };
 });

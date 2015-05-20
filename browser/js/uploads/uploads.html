@@ -1,22 +1,19 @@
 <section id="uploads" ng-controller="UploadsCtrl">
-        <div class="drop-box col-md-6 col-sm-8 col-xs-12"
-             ngf-drop-available="dropSupported"
-             ngf-drop
-             ngf-select
-             ng-model="files"
-             ngf-change="uploadThis($files)"
-             ngf-drag-over-class="dragover"
-             ngf-multiple="true"
-             ngf-allow-dir="true"
-             ngf-accept="'.pdf,image/*,.key,.ppt,.pptx'">
-            <span>Click anywhere in this box to upload or simply drag and drop files!</span>
-        </div>
-        <div ng-show="loadingAndConverting">
-
-            Images save quickly! Converting a .pdf, .key, .ppt/.pptx takes a bit longer. Be patient, please!
-        </div>
-    <div>
-        <pre>{{serverResponse}}</pre>
+    <div class="drop-box col-md-6 col-sm-8 col-xs-12"
+         ngf-drop-available="dropSupported"
+         ngf-drop
+         ngf-select
+         ng-model="files"
+         ngf-change="uploadThis($files)"
+         ngf-drag-over-class="dragover"
+         ngf-multiple="true"
+         ngf-allow-dir="true"
+         ngf-accept="'.pdf,image/*,.key,.ppt,.pptx'">
+        <span>Click anywhere in this box to upload or simply drag and drop files!</span>
+    </div>
+    <div ng-show="loadingAndConverting">
+        Images save quickly, but converting a .pdf, .key, .ppt/.pptx takes a bit longer.
+        Be patient, please!
     </div>
 
     <div ngf-no-file-drop>
@@ -25,5 +22,4 @@
             Please <a href="http://browsehappy.com/">upgrade your browser</a>
             to improve your online experiences!</p>
     </div>
-
 </section>

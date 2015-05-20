@@ -1,20 +1,16 @@
 app.controller('PresentationCtrl',function ($scope, $stateParams, Session, PresentationFactory, ConferenceFactory, presentations, conferences) {
-    $scope.showImages = false;
+    //$scope.showImages = false;
     $scope.conferenceOptions = conferences;   // resolve method
     $scope.currentPresentationId = null;
     $scope.presentations = presentations;
-    $scope.newMedia = [];
+    $scope.presentationMedia = [];
+    $scope.editing = false;
 
-    
-    $scope.displayPresentationMedia = function(id){  
+    $scope.displayPresentationMedia = function(id){
+        $scope.editing = true;
         console.log('presentations: ', $scope.presentations);
+
         $scope.presentationMedia = _.find($scope.presentations, {_id: id}).media;  // !!! creates a reference
-        if ($scope.presentationMedia.length === 0 ) {
-            $scope.presentationMedia.push({ 
-                mediaType: 'image',
-                url: 'Begin adding slides to your presentation! You can delete this message once you\'ve done that!' 
-            });
-        }
         $scope.currentPresentationId = id;
     };
 
@@ -26,10 +22,11 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
     $scope.savePresentation = function() {
         PresentationFactory.savePresentation($scope.currentPresentationId, $scope.presentationMedia);
     };
-    
-    $scope.toggleImages = function(){
-        $scope.showImages = $scope.showImages ? false : true;
-    };
+
+    // TODO -- Remove if not being used
+    //$scope.toggleImages = function(){
+    //    $scope.showImages = $scope.showImages ? false : true;
+    //};
 
     $scope.sortableOptions = {
         additionPlaceholderClass: 'presentation-a-s'
@@ -78,6 +75,10 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
     // functionality for removing a presentation goes here
     $scope.checkboxModel = {};   // tracks all the checkboxes
 
+    $scope.sure = function(){
+        $scope.deletePresentations();
+    };
+
     $scope.deletePresentations = function () {
         var idsToDelete = [], deleted_ids = [];
         angular.forEach($scope.checkboxModel, function(value, checkbox_id) {
@@ -91,7 +92,7 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
                     deleted_ids.push(response.data._id);
                 });
             $scope.presentations = _.remove($scope.presentations, function (item) {
-                return deleted_ids.indexOf(item._id) == -1;
+                return deleted_ids.indexOf(item._id) === -1;
             });
             $scope.checkboxModel = _.omit($scope.checkboxModel, deleted_ids);
         });
