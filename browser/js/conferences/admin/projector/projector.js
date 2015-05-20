@@ -1,11 +1,23 @@
 app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, ProjectorModeFactory) {
 	var INTERVAL = 2000;
-	var PROGRESSED_TIME = 0;
 	var TIMER;
     var PAUSED = false;
     var socket = io();
 
+    $scope.currentIndex = 0;
+    $scope.setCurrentSlideIndex = setCurrentSlideIndex;
+    $scope.isCurrentSlideIndex = isCurrentSlideIndex;
+    $scope.isNextSlideIndex = isNextSlideIndex;
+
     $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.timeLine);
+    
+    $scope.$on('refresh-projector-preview', function() {
+        console.log("1", $scope.currentTimelineFlat);
+        $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.timeLine);
+        console.log("2", $scope.currentTimelineFlat);
+        loadSlides();
+    });
+
 
     // might not be used currently
     function setCurrentSlideIndex (index) {
@@ -84,11 +96,6 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
             $scope.killTimer();
         }
     };
-
-    $scope.currentIndex = 0;
-    $scope.setCurrentSlideIndex = setCurrentSlideIndex;
-    $scope.isCurrentSlideIndex = isCurrentSlideIndex;
-    $scope.isNextSlideIndex = isNextSlideIndex;
 });
 
 
