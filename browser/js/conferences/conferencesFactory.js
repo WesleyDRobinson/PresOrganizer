@@ -12,6 +12,22 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService){
 					return res.data;
 				});
 		},
+		putConferenceById: function(conference){
+			//put a conference by id
+			console.log(conference);
+
+			var basicInfo = {};
+			basicInfo.name = conference.name;
+			basicInfo.date = conference.date;
+			basicInfo.venue = conference.venue;
+
+			console.log(basicInfo);
+
+			return $http.put('/api/conference/' + conference._id, basicInfo).then(function(res){
+					console.log(res.data);
+					return res.data;
+				});
+		},
 		getPresentations: function(conferenceId){
 			return $http.get('api/conference?_id=' + conferenceId)
 				.then(function (res) {
@@ -24,7 +40,7 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService){
 					});
 					
 					return $q.all(promises).then(function(presentationArr){
-						console.log(presentationArr);
+						//console.log(presentationArr);
 						return flatten(presentationArr);
 					});
 				});
