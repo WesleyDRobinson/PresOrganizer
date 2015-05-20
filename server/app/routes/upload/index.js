@@ -82,7 +82,7 @@ router.post('/', function (req, res, next) {
                         res.json(arrayLinks);
                     }));
 
-                })
+                });
             }
         });
     });

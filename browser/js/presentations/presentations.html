@@ -1,37 +1,79 @@
+<section id="presentations">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <button type="submit" class="btn" ng-click="sure()">Delete Selected Presentation</button>
+                <button ng-hide="creating" type="submit" class="btn" ng-click="showCreateForm()">Create New
+                    Presentation
+                </button>
+                <button ng-show="creating" type="submit" class="btn" ng-click="closeCreateForm()">Cancel</button>
+                <form id="create-presentation-form" ng-show="creating" name="createForm"
+                      ng-submit="createForm.$valid && createPresentation(selectedConference)">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="presentation-title">Title:</label>
+                                <input id="presentation-title" class="form-control"
+                                       type="text" ng-model="newPresentation.title"
+                                       required placeholder="Enter Presentation Title"/>
+                                <!-- 	<select ng-model="selectedLocale"
+                                        ng-options="x.v as x.v for x in [{v:1},{v:2},{v:3}]">
+                                    </select> -->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="conference-selection">Upcoming Conferences:</label>
+                                <select id="conference-selection" class="form-control"
+                                        ng-model="selectedConference"
+                                        ng-options="conf._id as conf.name for conf in conferenceOptions">
+                                </select>
+                                <button type="submit" class="btn btn-default" ng-disabled="createForm.$invalid">
+                                    Create!
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="list-unstyled">
+                    <li ng-repeat="presentation in presentations | orderBy: 'title'">
+                        <label for="select-conference-for-deletion"></label>
+                        <input id="select-conference-for-deletion" type="checkbox" ng-model='checkboxModel[presentation._id]'>
+                        <a ng-click="displayPresentationMedia(presentation._id)">
+                            {{presentation.title}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-push-6" ng-if="editing">
+                <button class="btn" ng-click="savePresentation()">Save Presentation</button>
 
-<button class="btn" ng-click="showTitleForm()">Create New Presentation</button>
-<form ng-show="creating" name="titleForm" ng-submit="titleForm.$valid && createPresentation(newPresentation)">
-	<input type='text' ng-model="newPresentation.title" required placeholder="Enter Presentation Title"/>
-	<button type="submit" class="btn" ng-disabled="titleForm.$invalid">Create!</button>
-	<button type="submit" class="btn" ng-click="creating = false">Cancel</button>
-</form>
-<div class="row">
-	<div class="col-md-12">
-			<ul class="list-unstyled">
-				<li ng-repeat="presentation in presentations">
-					<a ng-click="displayPresentationMedia(presentation._id)">
-						{{presentation.title}}
-					</a>
-				</li>
-			</ul>
-	</div>
+                <div class="row">
+                    <ul class="list-unstyled" as-sortable="sortableOptions" ng-model="presentationMedia">
+                        <li class="presentation-thumb presentation-a-s" ng-repeat="media in presentationMedia"
+                            as-sortable-item>
+                            <div as-sortable-item-handle>
+                                <a data-no-drag ng-click="removeCard($index)">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                    <span>{{$index+1}}</span>
+                                </a>
+                                <img src="{{ media.url }}" class="my-presentation-slide presentation-thumb">
+                            </div>
+                        </li>
 
-	<div class="col-md-12" ng-if="presentationMedia">
-		<button class="btn" ng-click="savePresentation()">Save Presentation</button>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 col-md-pull-6" ng-if="editing">
+                <upload-box></upload-box>
+            </div>
+        </div>
+    </div>
 
-		<div class="row">
-			<ul class="list-unstyled" as-sortable="sortableOptions" ng-model="presentationMedia">
-					<li class="presentation-thumb" ng-repeat="media in presentationMedia" as-sortable-item> 
-						<div class="handle-container" as-sortable-item-handle>
-							<a data-no-drag ng-click="removeCard($index)">
-									<span class="glyphicon glyphicon-remove"></span>
-									<span>{{$index+1}}</span>
-							</a>	
-							<img src="{{ media.url }}" class="presentation-img">
-										
-						</div>					
-					</li>
-			</ul>
-		</div>
-	</div>
-</div>
+</section>

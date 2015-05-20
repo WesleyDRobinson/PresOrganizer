@@ -1,6 +1,5 @@
 <section id="uploads" ng-controller="UploadsCtrl">
-
-    <div class="drop-box"
+    <div class="drop-box col-md-6 col-sm-8 col-xs-12"
          ngf-drop-available="dropSupported"
          ngf-drop
          ngf-select
@@ -10,10 +9,11 @@
          ngf-multiple="true"
          ngf-allow-dir="true"
          ngf-accept="'.pdf,image/*,.key,.ppt,.pptx'">
-        Click anywhere in this box to upload or simply drag and drop files
+        <span>Click anywhere in this box to upload or simply drag and drop files!</span>
     </div>
-    <div>
-        <pre>{{serverResponse}}</pre>
+    <div ng-show="loadingAndConverting">
+        Images save quickly, but converting a .pdf, .key, .ppt/.pptx takes a bit longer.
+        Be patient, please!
     </div>
 
     <div ngf-no-file-drop>
@@ -22,6 +22,4 @@
             Please <a href="http://browsehappy.com/">upgrade your browser</a>
             to improve your online experiences!</p>
     </div>
-    <button ng-click="getObject('albert.gif')">You know how to click a button?! Awesome! Claim your reward!</button>
-    <img src="{{imgUrl}}">
 </section>

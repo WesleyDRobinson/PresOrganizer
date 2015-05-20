@@ -4,7 +4,7 @@
 
 html, body, #primary-ui-view {
 	height: 100%;
-  background-color: #E6F7D5;
+    background-color: #fffae5;
 }
 
 hr {
@@ -24,31 +24,6 @@ hr {
     -o-transition: opacity 0.7s linear;
     -webkit-transition: opacity 0.7s linear;
     transition: opacity 0.7s linear;
-}
-
-.presentation-placeholder{
-  margin-top:10px;
-  display: inline-block;
-  float: left;
-
-}
-
-.presentation-thumb{
-
-    display: inline-block;
-    width: 124px;
-    height: 110px;
-    float: left;
-    margin-top: 10px;
-    margin-bottom:25px;
-    border-radius: 0px;
-
-}
-
-.presentation-img{
-  width: 122px;
-  height: 110px;
-  margin-right:6px;
 }
 
 #sortable-container {
@@ -74,3 +49,4 @@ hr {
 @import 'uploads/main';
 @import 'locales/main';
 @import 'account/main';
+@import 'presentations/main';
