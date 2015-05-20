@@ -1,4 +1,4 @@
-app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, ConferenceFactory, fetchConference){
+app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, ConferenceFactory, fetchConference, $rootScope){
 
 	$scope.showConferences = false;
     $scope.timeLine = [];
@@ -35,6 +35,7 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
 
     $scope.saveTimeLine = function(){
         ConferenceFactory.saveTimeLine($scope.conferenceId, $scope.timeLine);
+        $rootScope.$broadcast('refresh-projector-preview');
     };
 
     $scope.removeCard = function(index){
@@ -66,12 +67,19 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
         $state.go('locales');
     };  
 
+    // edit mode for the conf basic info
     $scope.editingInfo = false;
     $scope.editConfInfo = function() {
-        $scope.editingInfo = !$scope.editingInfo;
-        console.log($scope.editingInfo);
+        $scope.editingInfo = true;
+    };
+    $scope.updateConfInfo = function() {
+        $scope.editingInfo = false;
 
+        console.log("1", $scope.currentConf.date);
+        $scope.currentConf.date = new Date($scope.currentConf.date);
+        console.log("2", $scope.currentConf.date);
 
+        ConferenceFactory.putConferenceById($scope.currentConf);
     };
 });
 
