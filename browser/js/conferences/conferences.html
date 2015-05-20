@@ -123,17 +123,17 @@
 					<div class="col-md-6">
 						<h3>Current</h3>
 
-					    <img 	ng-repeat="slide in currentTimelineFlat" 
+					    <img 	ng-repeat="currentSlide in currentTimelineFlat" 
 					         	ng-show="isCurrentSlideIndex($index)" 
-					         	ng-src="{{slide.url}}">
+					         	ng-src="{{currentSlide.url}}">
 					</div>
 
 					<!-- Next slide -->
 					<div class="col-md-6">
 						<h3>Next</h3>
-						<img 	ng-repeat="slide in currentTimelineFlat" 
+						<img 	ng-repeat="nextSlide in currentTimelineFlat" 
 					         	ng-show="isNextSlideIndex($index)" 
-					         	ng-src="{{slide.url}}">
+					         	ng-src="{{nextSlide.url}}">
 					</div>
 				</div>
 			</div>

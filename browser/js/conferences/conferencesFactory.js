@@ -14,9 +14,16 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService){
 		},
 		putConferenceById: function(conference){
 			//put a conference by id
-			console.log(conference._id);
-			console.log(typeof conference._id);
-			return $http.put('/api/conference/' + conference._id, conference).then(function(res){
+			console.log(conference);
+
+			var basicInfo = {};
+			basicInfo.name = conference.name;
+			basicInfo.data = conference.date;
+			basicInfo.venue = conference.venue;
+
+			console.log(basicInfo);
+
+			return $http.put('/api/conference/' + conference._id, basicInfo).then(function(res){
 					console.log(res.data);
 					return res.data;
 				});
