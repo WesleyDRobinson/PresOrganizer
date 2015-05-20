@@ -4,7 +4,7 @@ navbar {
 
   night-of {
     font-size: 2.5em;
-    color: #B11750;
+    color: #701586;
     i {
       margin-top: 8px;
     }
@@ -14,14 +14,14 @@ navbar {
     cursor: pointer;
     transition: color 0.4s, background-color 0.4s;
     &.active {
-      color: #6BB818;
+      color: #346715;
     }
     &:hover {
-      color: #B11750;
+      color: #701586;
       background-color: #D8A5E5;
     }
     &:focus {
-      color: #6BB818;
+      color: #346715;
       background: transparent;
     }
   }
@@ -34,9 +34,9 @@ navbar {
   .logout {
     float: right;
     margin-top: 8px;
-    color: #B11750;
+    color: #701586;
     a {
-      color: #B11750;
+      color: #701586;
       cursor: pointer;
     }
   }
