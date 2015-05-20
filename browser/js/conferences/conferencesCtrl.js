@@ -34,16 +34,15 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
     };
 
     $scope.saveTimeLine = function(){
-        console.log("save");
-        ConferenceFactory.saveTimeLine($scope.conferenceId, $scope.timeLine);
+        ConferenceFactory.saveTimeLine($scope.conferenceId, $scope.timeLine).then(function(data) {
+            $rootScope.$broadcast('refresh-projector-preview');
+            $scope.showTimelineSaved();
+        });
         // async issue!
-        $rootScope.$broadcast('refresh-projector-preview');
-        $scope.showTimelineSaved();
     };
 
     $scope.saved = false;
     $scope.showTimelineSaved = function() {
-        console.log("disk");
         $scope.saved = true;
         var savedTimeout = $timeout(function() {
             console.log("setTimeout");
