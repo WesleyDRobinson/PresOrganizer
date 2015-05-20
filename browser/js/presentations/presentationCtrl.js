@@ -63,6 +63,7 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
         return PresentationFactory.createPresentation($scope.newPresentation)
                 .then(function (newPresentation) {
                     $scope.presentations.push(newPresentation);
+                    $scope.currentPresentationId = newPresentation._id;
                     refreshPresentationObj();
                     return ConferenceFactory.addConferencePresenter(conference_id, Session.user._id);    
                 })
