@@ -4,6 +4,7 @@ app.config(function ($stateProvider) {
         url: '/locales',
         templateUrl: 'js/conferences/locales.html',
         controller: 'localesCtrl',
+        params: {localeId: null},
         resolve: {
             fetchLocales: function (localesFactory) {
                 console.log('fetch running');
@@ -17,6 +18,9 @@ app.controller('localesCtrl', function ($scope, $state, $stateParams, localesFac
 
 	$scope.currentConf = { timeline: [] };
     $scope.locales = fetchLocales;
+    var localeId = $stateParams.localeId;
+    
+
 
     // when a locale is clicked
     $scope.loadConferences = function (locale_id) {
@@ -29,6 +33,10 @@ app.controller('localesCtrl', function ($scope, $state, $stateParams, localesFac
             }
         });
     };
+    if(localeId){
+        $scope.loadConferences(localeId);
+    }
+
 
     $scope.removeConference = function(conferenceId, $index){
         console.log('conferences', $scope.conferences);

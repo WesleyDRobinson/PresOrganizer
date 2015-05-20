@@ -24,6 +24,7 @@ app.controller('NewConferenceCtrl',function ($scope, $state, $rootScope, $stateP
             ConferenceFactory.newConference(conference).then(function(data){
                 console.log("we have sucessfully created",data);
             });
+            $state.go('locales',{localeId: $scope.localeId});
         }
     };
 });
