@@ -18,7 +18,7 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService){
 
 			var basicInfo = {};
 			basicInfo.name = conference.name;
-			basicInfo.data = conference.date;
+			basicInfo.date = conference.date;
 			basicInfo.venue = conference.venue;
 
 			console.log(basicInfo);
