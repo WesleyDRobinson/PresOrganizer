@@ -1,4 +1,4 @@
-app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, ConferenceFactory, fetchConference){
+app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, ConferenceFactory, fetchConference, $rootScope){
 
 	$scope.showConferences = false;
     $scope.timeLine = [];
@@ -35,6 +35,7 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
 
     $scope.saveTimeLine = function(){
         ConferenceFactory.saveTimeLine($scope.conferenceId, $scope.timeLine);
+        $rootScope.$broadcast('refresh-projector-preview');
     };
 
     $scope.removeCard = function(index){
