@@ -17,7 +17,6 @@
                 <a ui-sref-active="active" ui-sref="account">Manage {{user.name}}'s Account</a>
             </li>
         </ul>
-
         <!-- move this login to homepage along with singup -->
         <div ng-show="!user" ui-sref="login" class="btn login-button">Login</div>
         <a ng-show="user" class="btn logout" ng-click="logout()">Logout</a>
