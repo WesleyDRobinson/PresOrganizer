@@ -18,7 +18,6 @@ app.factory('PresentationFactory', function ($http, Session){
 			.then(function (res){
 				return res.data;
 			});
-
 		}
 	};
 });

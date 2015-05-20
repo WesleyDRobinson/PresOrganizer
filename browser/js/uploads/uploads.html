@@ -11,7 +11,10 @@
              ngf-accept="'.pdf,image/*,.key,.ppt,.pptx'">
             <span>Click anywhere in this box to upload or simply drag and drop files!</span>
         </div>
+        <div ng-show="loadingAndConverting">
 
+            Images save quickly! Converting a .pdf, .key, .ppt/.pptx takes a bit longer. Be patient, please!
+        </div>
     <div>
         <pre>{{serverResponse}}</pre>
     </div>

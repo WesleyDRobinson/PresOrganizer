@@ -2,6 +2,7 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, PresentationFa
     $scope.showImages = false;
     $scope.presentations = presentations;
     $scope.currentPresentationId;
+    $scope.newMedia = [];
     
     $scope.displayPresentationMedia = function(id){  
         console.log('displaying',id);

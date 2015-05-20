@@ -1,4 +1,30 @@
+<section id="uploads" ng-controller="UploadsCtrl">
+	<div class="drop-box col-md-6 col-sm-8 col-xs-12"
+		 ngf-drop-available="dropSupported"
+		 ngf-drop
+		 ngf-select
+		 ng-model="files"
+		 ngf-change="uploadThis($files)"
+		 ngf-drag-over-class="dragover"
+		 ngf-multiple="true"
+		 ngf-allow-dir="true"
+		 ngf-accept="'.pdf,image/*,.key,.ppt,.pptx'">
+		<span>Click anywhere in this box to upload or simply drag and drop files!</span>
+	</div>
 
+	<div>
+		<pre>{{serverResponse}}</pre>
+		{{newMedia}}
+	</div>
+
+	<div ngf-no-file-drop>
+		<p>Unfortunately, file Drag/Drop is not supported in this browser.
+			If you are using an <strong>outdated</strong> browser.
+			Please <a href="http://browsehappy.com/">upgrade your browser</a>
+			to improve your online experiences!</p>
+	</div>
+
+</section>
 <button class="btn" ng-click="showTitleForm()">Create New Presentation</button>
 <form ng-show="creating" name="titleForm" ng-submit="titleForm.$valid && createPresentation(newPresentation)">
 	<input type='text' ng-model="newPresentation.title" required placeholder="Enter Presentation Title"/>

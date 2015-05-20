@@ -6,13 +6,15 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('UploadsCtrl', function ($scope, Upload) {
+app.controller('UploadsCtrl', function ($scope, Upload, UploadsFactory) {
 
     $scope.acceptedFiles = [];
+    $scope.loadingAndConverting = false;
 
     $scope.uploadThis = function (acceptedFiles) {
 
         acceptedFiles.forEach(function (file) {
+            $scope.loadingAndConverting = true;
             // Send files to server
             Upload.upload({
                 url : 'api/upload',
@@ -23,12 +25,24 @@ app.controller('UploadsCtrl', function ($scope, Upload) {
             }).progress(function (evt) {
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             }).success(function (data, status, headers, config) {
-                console.log('data', data, 'status', status,'headers', headers, 'config', config);
-                $scope.serverResponse = data;
-                $scope.log = 'file ' + config.file.name + 'uploaded. Response: ' + JSON.stringify(data) + '\n' + $scope.log;
+                console.log('data', data, 'status', status, 'headers', headers, 'config', config);
+                $scope.newMedia.push(UploadsFactory.createMediaItemFromUrl(data));
+                $scope.loadingAndConverting = false;
             });
         });
 
     };
 
+});
+
+app.factory('UploadsFactory', function () {
+    return {
+        createMediaItemFromUrl: function (url) {
+            console.log('URL: ', url);
+            return {
+                mediaType: 'presentation-img',
+                url      : url
+            }
+        }
+    }
 });
