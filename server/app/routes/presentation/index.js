@@ -38,7 +38,6 @@ router.get('/user/me',function (req, res, next){
 
 	Presentation.find({presenter:req.user.id}).exec()
 	  .then(function (presentations) {
-	   
 	    res.send(presentations);
 	  });
 });

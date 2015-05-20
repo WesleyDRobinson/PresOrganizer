@@ -17,5 +17,5 @@ app.factory('localesFactory', function ($http, AuthService){
 				return res.data;
 			});
 		}
- 	}
+ 	};
 });

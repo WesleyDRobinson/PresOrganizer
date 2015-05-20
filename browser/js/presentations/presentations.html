@@ -1,6 +1,15 @@
 <button class="btn" ng-click="showTitleForm()">Create New Presentation</button>
-<form ng-show="creating" name="titleForm" ng-submit="titleForm.$valid && createPresentation(newPresentation)">
+<form ng-show="creating" 
+      name="titleForm" 
+      ng-submit="titleForm.$valid && createPresentation(newPresentation, selectedConference)">
 	<input type='text' ng-model="newPresentation.title" required placeholder="Enter Presentation Title"/>
+<!-- 	<select ng-model="selectedLocale" 
+        ng-options="x.v as x.v for x in [{v:1},{v:2},{v:3}]">
+	</select> -->
+	<h5>worldwide conferences</h5>
+	<select ng-model="selectedConference" 
+        ng-options="conf._id as conf.name for conf in conferenceOptions">
+	</select>
 	<button type="submit" class="btn" ng-disabled="titleForm.$invalid">Create!</button>
 	<button type="submit" class="btn" ng-click="creating = false">Cancel</button>
 </form>
@@ -9,7 +18,7 @@
 		<ul class="list-unstyled">
 			<li ng-repeat="presentation in presentations | orderBy: 'title'">
 			{{$index + 1}})
-			<input type="checkbox" name="deleteCheck" value='{{presentation._id}}'>
+			<input type="checkbox" name="deleteTrackingCheckbox" value='{{presentation._id}}'>
 				<a ng-click="displayPresentationMedia(presentation._id)">
 					{{presentation.title}}
 				</a>

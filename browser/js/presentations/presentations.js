@@ -7,7 +7,14 @@ app.config(function ($stateProvider) {
         resolve: {
             presentations: function(PresentationFactory){
                 return PresentationFactory.getPresentations();
+            },
+            conferences: function (ConferenceFactory) {
+                return ConferenceFactory.getAllConferences();
             }
+            //,
+            // locales = function (localesFactory) {
+            //     return localesFactory.dddd();
+            // }
         }
     });
 
