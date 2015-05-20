@@ -60,20 +60,25 @@
 		<!-- timeline column -->
 		<div class="col-sm-6 col-md-4">
 			<h2>Timeline <span class="pull-right" ng-show="saved"><i class="fa fa-floppy-o"></i></span></h2>
+
 			<form name="timeline-form" ng-mouseup="saveTimeLine()">
-			<ul as-sortable ng-model="timeLine">
-				<li ng-repeat="timeLineItem in timeLine" as-sortable-item>
-					<div as-sortable-item-handle>
-						<span ng-if="!timeLineItem.presentation">{{$index + 1}}. {{timeLineItem.title}}</span>
-						<span ng-if="timeLineItem.presentation">{{$index + 1}}. {{ timeLineItem.presentation.presenter.name }}: <i>{{ timeLineItem.presentation.title }}</i></span>
-						<a data-no-drag ng-click="removeCard($index)">
-								<span class="glyphicon glyphicon-remove"></span>
-						</a>
-					</div>
-				</li>
-			</ul>
-			</form>
-			
+				<ul as-sortable ng-model="timeLine">
+					<li ng-repeat="timeLineItem in timeLine" as-sortable-item>
+						<div as-sortable-item-handle>
+							<span ng-if="!timeLineItem.presentation">
+								{{$index + 1}}. {{timeLineItem.title}}
+							</span>
+							<span ng-if="timeLineItem.presentation">
+								{{$index + 1}}. {{ timeLineItem.presentation.presenter.name }}: 
+								<i>{{ timeLineItem.presentation.title }}</i>
+							</span>
+							<a data-no-drag ng-click="removeCard($index)">
+									<span class="glyphicon glyphicon-remove"></span>
+							</a>
+						</div>
+					</li>
+				</ul>
+			</form>	
 		</div>
 
 

@@ -36,6 +36,7 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
     $scope.saveTimeLine = function(){
         console.log("save");
         ConferenceFactory.saveTimeLine($scope.conferenceId, $scope.timeLine);
+        // async issue!
         $rootScope.$broadcast('refresh-projector-preview');
         $scope.showTimelineSaved();
     };
