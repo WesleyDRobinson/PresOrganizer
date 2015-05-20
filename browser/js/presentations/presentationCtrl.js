@@ -6,7 +6,8 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
     $scope.currentPresentationId = null;
     
     $scope.displayPresentationMedia = function(id){  
-        $scope.presentationMedia = _.find($scope.presentations, {_id: id}).media;
+        console.log('presentations: ', $scope.presentations);
+        $scope.presentationMedia = _.find($scope.presentations, {_id: id}).media;  // !!! creates a reference
         if ($scope.presentationMedia.length === 0 ) {
             $scope.presentationMedia.push({ 
                 mediaType: 'image',
@@ -16,12 +17,12 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
         $scope.currentPresentationId = id;
     };
 
-    // corresponding $scope.presentations.media array is also spliced when removeCard runs
-    $scope.removeCard = function(index){
+    // corresponding $scope.presentations.media array is also spliced when removeCard runs (see displayPresentationMedia)
+    $scope.removeCard = function (index) {
         $scope.presentationMedia.splice(index,1);    
     };
 
-    $scope.savePresentation = function(){
+    $scope.savePresentation = function() {
         PresentationFactory.savePresentation($scope.currentPresentationId, $scope.presentationMedia);
     };
     
@@ -59,4 +60,20 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
 
     // functionality for removing a presentation goes here
 
+    $scope.checkboxModel = {};   // tracks all the checkboxes
+
+    $scope.deletePresentations = function () {
+        console.log($scope.checkboxModel);
+        var deletionIds = [];
+        angular.forEach($scope.checkboxModel, function(value, checkbox_id) {
+            if (value === true) {         // i.e. checkbox is checked
+                this.push(checkbox_id);      // push in checkbox_id which is the presentation id
+            }
+        }, deletionIds);
+        console.log('ids of conferences to delete: ', deletionIds);
+        // fire off factory method to delete presentations (promises)
+        // must then refresh the checkbox model and clear it of all keys once deletion is complete
+
+        // should the function also check for the relevant conference and delete the user from the presenters array? 
+    };
 });
