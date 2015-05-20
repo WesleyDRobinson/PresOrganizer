@@ -16,6 +16,10 @@ app.factory('localesFactory', function ($http, AuthService){
 			return $http.get('api/conference?locale=' + locale_id).then(function (res) {
 				return res.data;
 			});
+		},
+		removeOrganizer: function(organizer_id, locale_id){
+			console.log(organizer_id, locale_id);
+
 		}
- 	}
+ 	};
 });

@@ -1,18 +1,26 @@
 
 <div class="row">
 	<div class="col-md-6">
-		<h2>My Locales</h2>
+		<h2>My Locales</h2> <button ng-if="!localeEdit"  ng-click="toggleEdit();" class="btn btn-sm edit-btn">Edit</button>
+		<button class="btn btn-sm edit-btn" ng-click="toggleEdit()" ng-if="localeEdit">Editing</button>
 		<div ng-repeat="locale in locales">
 			<h3>
 				<a ng-click="loadConferences(locale._id)">{{locale.name}}</a>
 				<button ui-sref="newConference({localeId:locale._id, localeName: locale.name})"class="btn btn-sm"><i class="fa fa-plus"></i></button>
+				
 			</h3>
 			
 			<div><strong>Description:</strong> {{locale.description}}</div>
 			<div><strong>Organizers:</strong>
 				<span ng-repeat="organizer in locale.organizers">
-					{{organizer.name}}<span ng-show="!$last">, </span>
+					{{organizer.name}}
+					<a ng-if="localeEdit && organizer.name!==myName" ng-click="removeOrganizer(organizer._id, locale._id)">
+						<span class="glyphicon glyphicon-remove"></span>
+					</a>	
+					<span ng-show="!$last">, </span>
+					
 				</span>
+				
 			</div>
 		</div>
 	</div>
@@ -28,10 +36,14 @@
 				<li class="clearfix" ng-repeat="conference in conferences | orderBy:'-date'">
 					<div class="col-xs-4">
 						<a ng-click="goToAdmin(conference._id, conference.name)">{{conference.name}}</a> 
-						<a ng-click="removeConference(conference._id, $index)">
+						<a ng-if="localeEdit" ng-click="removeConference(conference._id, $index)">
 									<span class="glyphicon glyphicon-remove"></span>
-							</a>	
+						</a>
+						
+
 					</div>
+
+					
 					<div class="col-xs-4">
 						<i>{{ conference.date | date:'MMM d, y h:mm' }}</i>
 					</div>
@@ -39,6 +51,8 @@
 						<i>@ {{ conference.venue }}</i>
 					</div>
 				</li>
+				<div class="col-xs-4 "ng-if="conferences.length===0">No conferences for this locale</div>
+
 			</div>
 		</ul>
 	</div>
