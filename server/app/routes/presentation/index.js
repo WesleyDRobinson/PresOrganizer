@@ -44,7 +44,7 @@ router.get('/user/me',function (req, res, next){
 });
 
 // delete a presentation
-router.delete('/:id',function(req,res,next) {
+router.delete('/:id',function (req, res, next) {
 	Presentation.findByIdAndRemove(req.params.id, function (err, presentation) {
 		if (err) return next(err);
 		res.send(presentation);

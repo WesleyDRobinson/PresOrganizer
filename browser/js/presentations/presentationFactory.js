@@ -1,4 +1,4 @@
-app.factory('PresentationFactory', function ($http, Session){
+app.factory('PresentationFactory', function ($q, $http, Session){
 	return {
 		createPresentation: function (presentationData) {
 			presentationData.presenter = Session.user._id; // add presenter id to presentation
@@ -19,11 +19,14 @@ app.factory('PresentationFactory', function ($http, Session){
 				return res.data;
 			});
 		},
-		deletePresentation: function (presentationId) {    // refactor into a promise...
-			return $http.delete('/api/presentation/' + presentationId)
-			.then( function (res) {
-				return res.data;
+		deletePresentations: function (presentation_ids) {    // refactor into a promise...
+			var promises = [];
+			presentation_ids.forEach(function (id) {
+				promises.push( $http.delete('/api/presentation/' + id) );
 			});
+			return $q.all(promises).then( function (res) {
+										return res;
+									});
 		}
 	};
 });

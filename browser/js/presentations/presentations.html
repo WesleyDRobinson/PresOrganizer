@@ -1,8 +1,8 @@
-<button class="btn" ng-click="showTitleForm()">Create New Presentation</button>
+<button class="btn" ng-click="showCreateForm()">Create New Presentation</button>
 <button class="btn" ng-click="deletePresentations()">Delete Selected Presentations</button>
 <form ng-show="creating" 
-      name="titleForm" 
-      ng-submit="titleForm.$valid && createPresentation(newPresentation, selectedConference)">
+      name="createForm" 
+      ng-submit="createForm.$valid && createPresentation(selectedConference)">
 	<input type='text' ng-model="newPresentation.title" required placeholder="Enter Presentation Title"/>
 <!-- 	<select ng-model="selectedLocale" 
         ng-options="x.v as x.v for x in [{v:1},{v:2},{v:3}]">
@@ -11,8 +11,8 @@
 	<select ng-model="selectedConference" 
         ng-options="conf._id as conf.name for conf in conferenceOptions">
 	</select>
-	<button type="submit" class="btn" ng-disabled="titleForm.$invalid">Create!</button>
-	<button type="submit" class="btn" ng-click="creating = false">Cancel</button>
+	<button type="submit" class="btn" ng-disabled="createForm.$invalid">Create!</button>
+	<button type="submit" class="btn" ng-click="closeCreateForm()">Cancel</button>
 </form>
 <div class="row">
 	<div class="col-md-12">

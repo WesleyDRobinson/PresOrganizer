@@ -35,9 +35,22 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
     };
 
     // functionality for creating a new presentation 
-    $scope.showTitleForm = function () {
+    $scope.showCreateForm = function () {
         $scope.creating = true;
     };
+
+    $scope.closeCreateForm = function () {
+        $scope.creating = false;
+        refreshPresentationObj();
+    };
+
+    function refreshPresentationObj () {   // refresh $scope.newPresentation object
+        $scope.newPresentation = {
+            title: '',
+            presenter: null,
+            media: []
+        };
+    }
 
     $scope.newPresentation = {
         title: '',
@@ -46,34 +59,50 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
     };
 
     // creating a presentation also adds the user as a presenter to a particular conference
-    $scope.createPresentation = function (presentationData, conference_id) {
+    // creating a presentation merely adds it to the db; it does not initally contain media
+    $scope.createPresentation = function (conference_id) {
         $scope.creating = false;    // to hide the input box
-        return PresentationFactory.createPresentation(presentationData)
+        return PresentationFactory.createPresentation($scope.newPresentation)
                 .then(function (newPresentation) {
                     $scope.presentations.push(newPresentation);
+                    refreshPresentationObj();
                     return ConferenceFactory.addConferencePresenter(conference_id, Session.user._id);    
                 })
                 .then(function (conference) {
                     console.log('added the user to this conference as a presenter: ', conference);
+                    // should something else happen here on the ui?
                 });
     };
 
     // functionality for removing a presentation goes here
-
     $scope.checkboxModel = {};   // tracks all the checkboxes
 
     $scope.deletePresentations = function () {
         console.log($scope.checkboxModel);
-        var deletionIds = [];
+        var idsToDelete = [], deleted_ids = [];
         angular.forEach($scope.checkboxModel, function(value, checkbox_id) {
             if (value === true) {         // i.e. checkbox is checked
                 this.push(checkbox_id);      // push in checkbox_id which is the presentation id
             }
-        }, deletionIds);
-        console.log('ids of conferences to delete: ', deletionIds);
+        }, idsToDelete);
+        console.log('ids of conferences to delete: ', idsToDelete);
+        PresentationFactory.deletePresentations(idsToDelete)
+        .then(function (deletedPromises) {
+                angular.forEach(deletedPromises, function (response) {
+                    deleted_ids.push(response.data._id);
+                });
+            console.log('deleted presentations: ', deleted_ids);
+            $scope.presentations = _.remove($scope.presentations, function (item) {
+                return deleted_ids.indexOf(item._id) == -1;
+            });
+            // affect the checkbox model - use lodash?
+            //$scope.checkboxModel = something;
+
+        });
         // fire off factory method to delete presentations (promises)
         // must then refresh the checkbox model and clear it of all keys once deletion is complete
 
         // should the function also check for the relevant conference and delete the user from the presenters array? 
+        // Wesley says - "no"
     };
 });
