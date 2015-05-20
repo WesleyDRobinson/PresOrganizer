@@ -123,7 +123,7 @@
 					<div class="col-md-6">
 						<h3>Current</h3>
 
-					    <img 	ng-repeat="currentSlide in currentTimelineFlat" 
+					    <img 	ng-repeat="currentSlide in currentTimelineFlat track by $index" 
 					         	ng-show="isCurrentSlideIndex($index)" 
 					         	ng-src="{{currentSlide.url}}">
 					</div>
@@ -131,7 +131,7 @@
 					<!-- Next slide -->
 					<div class="col-md-6">
 						<h3>Next</h3>
-						<img 	ng-repeat="nextSlide in currentTimelineFlat" 
+						<img 	ng-repeat="nextSlide in currentTimelineFlat track by $index" 
 					         	ng-show="isNextSlideIndex($index)" 
 					         	ng-src="{{nextSlide.url}}">
 					</div>
