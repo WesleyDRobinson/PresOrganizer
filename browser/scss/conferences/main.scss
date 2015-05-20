@@ -21,7 +21,9 @@
 	}
 
 	.as-sortable-item, .as-sortable-dragging, .as-sortable-drag {
-		border-radius: 0;
+		border-radius: 4px;
+		padding: 4px;
+
 	}
 }
 

@@ -64,7 +64,7 @@
 			<ul as-sortable ng-model="timeLine">
 				<li ng-repeat="timeLineItem in timeLine" as-sortable-item>
 					<div as-sortable-item-handle>
-						<span ng-if="!timeLineItem.presentation">{{timeLineItem.title}}</span>
+						<span ng-if="!timeLineItem.presentation">{{$index + 1}}. {{timeLineItem.title}}</span>
 						<span ng-if="timeLineItem.presentation">{{timeLineItem.presentation.title+" by "+timeLineItem.presentation.presenter.name}}</span>
 						<a data-no-drag ng-click="removeCard($index)">
 								<span class="glyphicon glyphicon-remove"></span>
@@ -75,6 +75,7 @@
 			</form>
 			
 		</div>
+
 
 		<!-- editing and preview column -->
 		<div class="col-md-4">
