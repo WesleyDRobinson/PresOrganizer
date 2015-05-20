@@ -13,7 +13,7 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('localesCtrl', function ($scope, $state, $stateParams, localesFactory, fetchLocales) {
+app.controller('localesCtrl', function ($scope, $state, $stateParams, localesFactory, fetchLocales, ConferenceFactory) {
 
 	$scope.currentConf = { timeline: [] };
     $scope.locales = fetchLocales;
@@ -25,8 +25,20 @@ app.controller('localesCtrl', function ($scope, $state, $stateParams, localesFac
                 $scope.conferences = [ { name: 'No conferences for this locale' } ];
             } else {
                 $scope.conferences = conferences;
+
             }
         });
+    };
+
+    $scope.removeConference = function(conferenceId, $index){
+        console.log('conferences', $scope.conferences);
+        console.log('index', $index);
+        ConferenceFactory.removeConference(conferenceId).then(function(data){
+            console.log(data);
+        });
+        $scope.conferences.splice($index, 1);
+
+
     };
 
     $scope.goToAdmin = function (conf_id, conf_name) {  // admin view but called "conferences"

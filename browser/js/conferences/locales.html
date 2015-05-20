@@ -28,6 +28,9 @@
 				<li class="clearfix" ng-repeat="conference in conferences | orderBy:'-date'">
 					<div class="col-xs-4">
 						<a ng-click="goToAdmin(conference._id, conference.name)">{{conference.name}}</a> 
+						<a ng-click="removeConference(conference._id, $index)">
+									<span class="glyphicon glyphicon-remove"></span>
+							</a>	
 					</div>
 					<div class="col-xs-4">
 						<i>{{ conference.date | date:'MMM d, y h:mm' }}</i>
