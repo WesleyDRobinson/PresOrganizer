@@ -1,18 +1,25 @@
-<a ng-click="goToLocales()"><i class="fa fa-chevron-left"></i> Return to My Locales</a>
+<div class="row">
+	<div class="col-md-12">
+		<button class="btn btn-link" ng-click="goToLocales()"><i class="fa fa-chevron-left"></i> Return to My Locales</button>
+	</div>
+</div>
 
 <div ng-if="conferencePresentations">
 	<div class="row" id="admin-dashboard">
 		<!-- view confInfo mode -->
 		<div ng-if="!editingInfo" class="col-md-12">
-			<h1 class="text-center">Managing {{currentConf.name}} <i ng-click="editConfInfo()" class="fa fa-pencil" id="conference-edit-icon"></i></h1>
-
-			<div class="row text-center">
-
-				<div class="col-md-6">
-					<i class="fa fa-calendar"></i> {{ currentConf.date | date:'MMM d, y'}}
+			<div class="row admin-header">
+			
+				<div class="col-md-7">
+					<h1 id="conference-name">{{currentConf.name}} <i ng-click="editConfInfo()" class="fa fa-pencil" id="conference-edit-icon"></i></h1>
 				</div>
-				<div class="col-md-6">
-					<i class="fa fa-map-marker"></i> {{ currentConf.venue }}
+
+				<div class="col-md-5">
+					<div>Details:</div>
+					<div class="row">
+						<div class="col-md-6"><i class="fa fa-calendar"></i> {{ currentConf.date | date:'MMM d, y'}}</div>
+						<div class="col-md-6"><i class="fa fa-map-marker"></i> {{ currentConf.venue }}</div>
+					</div>
 				</div>
 
 			</div>
@@ -22,24 +29,32 @@
 
 		<!-- edit mode -->
 		<div ng-if="editingInfo" class="col-md-12">
-			<h1 class="text-center">Managing <input ng-model="currentConf.name"> <i ng-click="updateConfInfo()" class="fa fa-floppy-o" id="conference-edit-icon"></i></h1>
+			<div class="row admin-header">
+				
+				<form onsubmit="updateConfInfo()" class="form-inline">
+					<div class="col-md-7">
+						<h1 id="conference-name">
+							<input class="form-control form-control-lg" ng-model="currentConf.name"> 
+							<button ng-click="updateConfInfo()" class="btn btn-link fa fa-floppy-o" id="conference-update-icon"></button>
+						</h1>
+					</div>
 
- 			<div class="row text-center">
-
-				<div class="col-md-6">
-					<i class="fa fa-calendar"></i> <input ng-model="currentConf.date" value="{{ currentConf.date | date:'MMM d, y h:mm'}}">
-				</div>
-				<div class="col-md-6">
-					<i class="fa fa-map-marker"></i> <input ng-model="currentConf.venue" type="text" value="{{ currentConf.venue }}">
-				</div>
-
+					<div class="col-md-5">
+						<div>Details:</div>
+						<div class="row">
+							<div class="col-md-6"><i class="fa fa-calendar"></i> 
+								<input class="form-control form-control-sm" ng-model="currentConf.date" value="{{ currentConf.date | date:'MMM d, y h:mm'}}">
+							</div>
+							<div class="col-md-6"><i class="fa fa-map-marker"></i> 
+								<input class="form-control form-control-sm" ng-model="currentConf.venue" type="text" value="{{ currentConf.venue }}">
+							</div>
+						</div>
+					</div>
+				</form>
 			</div>
 			<hr>
-		</div>
 
-		{{ currentConf.name }}
-		{{ currentConf.date }}
-		{{ currentConf.venue }}
+		</div>
 
 
 		<!-- timeline column -->

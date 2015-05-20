@@ -1,6 +1,28 @@
-#admin-dashboard ul {
-	list-style: none;
-	padding-left: 0;
+#admin-dashboard {
+	#conference-name {
+		font-size: 32px;
+		margin-top: 5px;
+	}
+	.form-control {
+		//width: 90%;
+	}
+	.form-control-lg {
+		font-size: 32px;
+		height: auto;
+		width: 95%
+	}
+	.form-control-sm {
+		width: 90%;
+	}
+	
+	ul {
+		list-style: none;
+		padding-left: 0;
+	}
+
+	.as-sortable-item, .as-sortable-dragging, .as-sortable-drag {
+		border-radius: 0;
+	}
 }
 
 #projector-preview img {
@@ -11,4 +33,8 @@
 
 #conference-edit-icon {
 	font-size: 14px;
+}
+#conference-update-icon {
+	font-size: 14px;
+	padding: 0;
 }
