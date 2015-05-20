@@ -15,7 +15,8 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
         console.log("1", $scope.currentTimelineFlat);
         $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.timeLine);
         console.log("2", $scope.currentTimelineFlat);
-        loadSlides();
+        $scope.isCurrentSlideIndex();
+        $scope.isNextSlideIndex();
     });
 
 

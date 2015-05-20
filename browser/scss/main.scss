@@ -7,6 +7,10 @@ html, body, #primary-ui-view {
   background-color: #E6F7D5;
 }
 
+hr {
+  border-top: 1px solid black;
+}
+
 @mixin clearfix {
   &:after {
     content: "";
