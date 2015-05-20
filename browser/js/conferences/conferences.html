@@ -31,11 +31,11 @@
 		<div ng-if="editingInfo" class="col-md-12">
 			<div class="row admin-header">
 				
-				<form onsubmit="updateConfInfo()" class="form-inline">
+				<form class="form-inline">
 					<div class="col-md-7">
 						<h1 id="conference-name">
 							<input class="form-control form-control-lg" ng-model="currentConf.name"> 
-							<button ng-click="updateConfInfo()" class="btn btn-link fa fa-floppy-o" id="conference-update-icon"></button>
+							<button type="submit" ng-click="updateConfInfo()" class="btn btn-link fa fa-floppy-o" id="conference-update-icon"></button>
 						</h1>
 					</div>
 
