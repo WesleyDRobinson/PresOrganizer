@@ -10,15 +10,15 @@
 		<div ng-if="!editingInfo" class="col-md-12">
 			<div class="row admin-header">
 			
-				<div class="col-md-7">
+				<div class="col-sm-7">
 					<h1 id="conference-name" ng-click="editConfInfo()">{{currentConf.name}} <i class="fa fa-pencil" id="conference-edit-icon"></i></h1>
 				</div>
 
-				<div class="col-md-5">
+				<div class="col-sm-5">
 					<div>Details:</div>
 					<div class="row">
-						<div class="col-md-6" ng-click="editConfInfo()"><i class="fa fa-calendar"></i> {{ currentConf.date | date:'MMM d, y'}}</div>
-						<div class="col-md-6" ng-click="editConfInfo()"><i class="fa fa-map-marker"></i> {{ currentConf.venue }}</div>
+						<div class="col-sm-6" ng-click="editConfInfo()"><i class="fa fa-calendar"></i> {{ currentConf.date | date:'MMM d, y'}}</div>
+						<div class="col-sm-6" ng-click="editConfInfo()"><i class="fa fa-map-marker"></i> {{ currentConf.venue }}</div>
 					</div>
 				</div>
 
@@ -32,20 +32,20 @@
 			<div class="row admin-header">
 				
 				<form class="form-inline">
-					<div class="col-md-7">
+					<div class="col-sm-7">
 						<h1 id="conference-name">
 							<input class="form-control form-control-lg" ng-model="currentConf.name"> 
 							<button type="submit" ng-click="updateConfInfo()" class="btn btn-link fa fa-floppy-o" id="conference-update-icon"></button>
 						</h1>
 					</div>
 
-					<div class="col-md-5">
+					<div class="col-sm-5">
 						<div>Details:</div>
 						<div class="row">
-							<div class="col-md-6"><i class="fa fa-calendar"></i> 
+							<div class="col-sm-6"><i class="fa fa-calendar"></i> 
 								<input class="form-control form-control-sm" ng-model="currentConf.date" type="date" value="{{ currentConf.date | date:'MMM d, y h:mm'}}">
 							</div>
-							<div class="col-md-6"><i class="fa fa-map-marker"></i> 
+							<div class="col-sm-6"><i class="fa fa-map-marker"></i> 
 								<input class="form-control form-control-sm" ng-model="currentConf.venue" type="text" value="{{ currentConf.venue }}">
 							</div>
 						</div>
@@ -58,7 +58,7 @@
 
 
 		<!-- timeline column -->
-		<div class="col-md-4">
+		<div class="col-sm-6 col-md-4">
 			<h2>Timeline <span class="pull-right" ng-show="saved"><i class="fa fa-floppy-o"></i></span></h2>
 			<form name="timeline-form" ng-mouseup="saveTimeLine()">
 			<ul as-sortable ng-model="timeLine">
@@ -78,29 +78,34 @@
 
 
 		<!-- editing and preview column -->
-		<div class="col-md-4">
-			<div id="control-items">
-				<h2>Items</h2>
-				<h3>Controls</h3>
-				<ul as-sortable="controlItemOptions" ng-model="controlItems">
-					<li style="display: inline" ng-repeat="controlItem in controlItems" as-sortable-item>
-						<span as-sortable-item-handle>
-							{{controlItem.title}}
-						</span>
-					</li>
-				</ul>
-			</div>
+		<div class="col-sm-6 col-md-4">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Items</h2>
+				</div>
 
-			<div id="presentation-items">
-				<h3>Presentations</h3>
-				<ul as-sortable="conferenceOptions" ng-model="conferencePresentations">
-					<li ng-repeat="presentation in conferencePresentations" as-sortable-item>
-						<div as-sortable-item-handle>
-							{{ presentation.presentation.presenter.name }}: 
-							<i>{{ presentation.presentation.title }}</i>
-						</div>
-					</li>
-				</ul>
+				<div class="col-xs-6 col-md-12" id="control-items">
+					<h3>Controls</h3>
+					<ul as-sortable="controlItemOptions" ng-model="controlItems">
+						<li style="display: inline" ng-repeat="controlItem in controlItems" as-sortable-item>
+							<span as-sortable-item-handle>
+								{{controlItem.title}}
+							</span>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-xs-6 col-md-12" id="presentation-items">
+					<h3>Presentations</h3>
+					<ul as-sortable="conferenceOptions" ng-model="conferencePresentations">
+						<li ng-repeat="presentation in conferencePresentations" as-sortable-item>
+							<div as-sortable-item-handle>
+								{{ presentation.presentation.presenter.name }}: 
+								<i>{{ presentation.presentation.title }}</i>
+							</div>
+						</li>
+					</ul>
+				</div>
 			</div>
 
 		</div> <!-- end editing and preview column -->
@@ -121,7 +126,7 @@
 				<div class="row">
 
 					<!-- Current slide -->
-					<div class="col-md-6">
+					<div class="col-xs-6">
 						<h3>Current</h3>
 
 					    <img 	ng-repeat="currentSlide in currentTimelineFlat track by $index" 
@@ -130,7 +135,7 @@
 					</div>
 
 					<!-- Next slide -->
-					<div class="col-md-6">
+					<div class="col-xs-6">
 						<h3>Next</h3>
 						<img 	ng-repeat="nextSlide in currentTimelineFlat track by $index" 
 					         	ng-show="isNextSlideIndex($index)" 
