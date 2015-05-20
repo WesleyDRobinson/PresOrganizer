@@ -65,7 +65,7 @@
 				<li ng-repeat="timeLineItem in timeLine" as-sortable-item>
 					<div as-sortable-item-handle>
 						<span ng-if="!timeLineItem.presentation">{{$index + 1}}. {{timeLineItem.title}}</span>
-						<span ng-if="timeLineItem.presentation">{{$index + 1}}. {{timeLineItem.presentation.title+" by "+timeLineItem.presentation.presenter.name}}</span>
+						<span ng-if="timeLineItem.presentation">{{$index + 1}}. {{ timeLineItem.presentation.presenter.name }}: <i>{{ timeLineItem.presentation.title }}</i></span>
 						<a data-no-drag ng-click="removeCard($index)">
 								<span class="glyphicon glyphicon-remove"></span>
 						</a>
@@ -80,7 +80,7 @@
 		<!-- editing and preview column -->
 		<div class="col-md-4">
 			<div id="control-items">
-				<h2>Timeline items</h2>
+				<h2>Items</h2>
 				<h3>Controls</h3>
 				<ul as-sortable="controlItemOptions" ng-model="controlItems">
 					<li style="display: inline" ng-repeat="controlItem in controlItems" as-sortable-item>
@@ -96,7 +96,8 @@
 				<ul as-sortable="conferenceOptions" ng-model="conferencePresentations">
 					<li ng-repeat="presentation in conferencePresentations" as-sortable-item>
 						<div as-sortable-item-handle>
-							{{presentation.presentation.title+" by "+presentation.presentation.presenter.name}}
+							{{ presentation.presentation.presenter.name }}: 
+							<i>{{ presentation.presentation.title }}</i>
 						</div>
 					</li>
 				</ul>
@@ -106,7 +107,7 @@
 
 		<div class="col-md-4">
 			<div id="projector-preview" ng-controller="ProjectorCtrl">
-				<h2>Projector mode 
+				<h2>Projector  
 					<div class="btn-group pull-right" role="group" aria-label="...">
 						<button ng-click="playToggle()" class="btn" ng-class="playing ? '' : 'btn-success'">
 							<i ng-class="playing ? 'fa fa-pause' : 'fa fa-play'"></i>

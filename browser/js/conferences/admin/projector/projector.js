@@ -6,7 +6,6 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
     var socket = io();
 
     $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.timeLine);
-    console.log($scope.currentTimelineFlat);
 
     // might not be used currently
     function setCurrentSlideIndex (index) {
@@ -18,12 +17,10 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
             socket.emit('play', {index: index, url: $scope.currentTimelineFlat[index].url, id: $stateParams.id});
         }
 
-        //console.log("current index:", index);
         return $scope.currentIndex === index;
     }
 
     function isNextSlideIndex (index) {
-        //console.log("next:", $scope.currentTimelineFlat[$scope.currentIndex + 1]);
         if ($scope.currentIndex + 1 >= $scope.currentTimelineFlat.length){
             return 0 === index;
         }
@@ -38,7 +35,6 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
         var next = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? $scope.currentIndex + 1 : 0;
 
         if ($scope.currentTimelineFlat[next] === "pause") {
-            //console.log('currently paused');
             PAUSED = true;
             $scope.killTimer();
         } else {
