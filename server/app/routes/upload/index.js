@@ -78,6 +78,7 @@ router.post('/', function (req, res, next) {
                             var link = 'https://s3.amazonaws.com/' + secrets.bucket + '/' + s3Key + '/' + filenameInS3;
                             arrayLinks.push(link);
                         });
+                        fs.unlink(filename);
                         res.json(arrayLinks);
                     }));
 

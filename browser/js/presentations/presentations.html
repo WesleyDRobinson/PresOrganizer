@@ -1,8 +1,38 @@
+
 <button class="btn" ng-click="showCreateForm()">Create New Presentation</button>
 <button class="btn" ng-click="deletePresentations()">Delete Selected Presentations</button>
 <form ng-show="creating" 
       name="createForm" 
       ng-submit="createForm.$valid && createPresentation(selectedConference)">
+
+<section id="uploads" ng-controller="UploadsCtrl">
+	<div class="drop-box col-md-6 col-sm-8 col-xs-12"
+		 ngf-drop-available="dropSupported"
+		 ngf-drop
+		 ngf-select
+		 ng-model="files"
+		 ngf-change="uploadThis($files)"
+		 ngf-drag-over-class="dragover"
+		 ngf-multiple="true"
+		 ngf-allow-dir="true"
+		 ngf-accept="'.pdf,image/*,.key,.ppt,.pptx'">
+		<span>Click anywhere in this box to upload or simply drag and drop files!</span>
+	</div>
+
+	<div>
+		<pre>{{serverResponse}}</pre>
+		{{newMedia}}
+	</div>
+
+	<div ngf-no-file-drop>
+		<p>Unfortunately, file Drag/Drop is not supported in this browser.
+			If you are using an <strong>outdated</strong> browser.
+			Please <a href="http://browsehappy.com/">upgrade your browser</a>
+			to improve your online experiences!</p>
+	</div>
+
+</section>
+
 	<input type='text' ng-model="newPresentation.title" required placeholder="Enter Presentation Title"/>
 <!-- 	<select ng-model="selectedLocale" 
         ng-options="x.v as x.v for x in [{v:1},{v:2},{v:3}]">
@@ -26,12 +56,13 @@
 			</li>
 		</ul>
 	</div>
+
 	<div class="col-md-12" ng-if="presentationMedia">
 		<button class="btn" ng-click="savePresentation()">Save Presentation</button>
 
 		<div class="row">
 			<ul class="list-unstyled" as-sortable="sortableOptions" ng-model="presentationMedia">
-				<li class="presentation-thumb presentation-a-s" ng-repeat="media in presentationMedia" as-sortable-item> 
+				<li class="presentation-thumb presentation-a-s" ng-repeat="media in presentationMedia" as-sortable-item>
 					<div as-sortable-item-handle>
 						<a data-no-drag ng-click="removeCard($index)">
 							<span class="glyphicon glyphicon-remove"></span>
@@ -40,6 +71,7 @@
 						<img src="{{ media.url }}" class="my-presentation-slide presentation-thumb">			
 					</div>					
 				</li>
+
 			</ul>
 		</div>
 	</div>

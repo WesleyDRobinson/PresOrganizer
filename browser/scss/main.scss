@@ -4,6 +4,7 @@
 
 html, body, #primary-ui-view {
 	height: 100%;
+    background-color: #fffae5;
 }
 
 @mixin clearfix {
@@ -21,28 +22,30 @@ html, body, #primary-ui-view {
     transition: opacity 0.7s linear;
 }
 
-.presentation-thumb{
-  width:124px;
-  height:100px;
+.presentation-placeholder{
+  margin-top:10px;
+  display: inline-block;
+  float: left;
 
 }
-// .as-sortable-item,
-// .as-sortable-placeholder {
-//     display: inline-block;
-//     width: 124px;
-//     height: 110px;
-//     float: left;
-//     margin-top: 10px;
-//     border-radius: 0px;
-// }
 
-/*.sortable-row:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-}*/
+.presentation-thumb{
+
+    display: inline-block;
+    width: 124px;
+    height: 110px;
+    float: left;
+    margin-top: 10px;
+    margin-bottom:25px;
+    border-radius: 0px;
+
+}
+
+.presentation-img{
+  width: 122px;
+  height: 110px;
+  margin-right:6px;
+}
 
 #sortable-container {
     display: inline-block;
@@ -56,6 +59,7 @@ html, body, #primary-ui-view {
   opacity:100;
 }
 
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
@@ -65,3 +69,4 @@ html, body, #primary-ui-view {
 @import 'projector-view/main';
 @import 'uploads/main';
 @import 'locales/main';
+@import 'account/main';

@@ -1,9 +1,10 @@
 app.controller('PresentationCtrl',function ($scope, $stateParams, Session, PresentationFactory, ConferenceFactory, presentations, conferences) {
     $scope.showImages = false;
-    $scope.presentations = presentations;  // resolve method
     $scope.conferenceOptions = conferences;   // resolve method
-  //  $scope.localesOptions = locales  // resolve method
     $scope.currentPresentationId = null;
+    $scope.presentations = presentations;
+    $scope.newMedia = [];
+
     
     $scope.displayPresentationMedia = function(id){  
         console.log('presentations: ', $scope.presentations);
@@ -29,7 +30,7 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
     $scope.toggleImages = function(){
         $scope.showImages = $scope.showImages ? false : true;
     };
-    
+
     $scope.sortableOptions = {
         additionPlaceholderClass: 'presentation-a-s'
     };

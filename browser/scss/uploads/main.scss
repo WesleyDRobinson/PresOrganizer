@@ -1,51 +1,25 @@
-.button {
-  -moz-appearance: button;
-  /* Firefox */
-  -webkit-appearance: button;
-  /* Safari and Chrome */
-  padding: 10px;
-  margin: 10px;
-  width: 70px;
-}
+#uploads {
+  .drop-box {
+    margin: 0 auto;
+    color: #701586;
+    background: #E6F7D5;
+    border: 5px double #701586;
+    min-height: 30vh;
+    width: 50%;
+    text-align: center;
+    border-radius: 10px;
+    cursor: copy;
+    box-shadow: -1px 1px 4px black;
+    span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 
-.drop-box {
-  background: #F8F8F8;
-  border: 5px double #DDD;
-  width: 500px;
-  height: 100px;
-  text-align: center;
-  margin: 10px;
-  border-radius: 10px;
-  padding: 20px;
-}
+  .dragover {
+    border: 4px dashed #701586;
+  }
 
-.dragover {
-  border: 5px dashed blue;
-}
-
-
-.uploader-drop-zone
-{
-  /* Static height drop zone that also contains the file list, with a border */
-  height: 300px;
-  border: dashed 1px lightgrey;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
-  text-align: center;
-
-  /* Make the drop zone scollable */
-  overflow-y: scroll;
-}
-
-.drop-zone-text
-{
-  /* Vertically & horizontally center the dynamically generated drop zone message
-  inside the drop zone & make it a bit presentable */
-  position: absolute;
-  vertical-align: middle;
-  line-height: 300px;
-  font-size: 200%;
-  width: 100%;
-  left: 0;
 }
