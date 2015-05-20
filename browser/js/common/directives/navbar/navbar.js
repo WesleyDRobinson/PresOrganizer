@@ -7,13 +7,6 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
         templateUrl: 'js/common/directives/navbar/navbar.html',
         link: function (scope) {
 
-           scope.items = [
-                { label: 'Home', state: 'home', auth:true },
-                { label: 'Organizer View', state: 'locales',  auth: true },
-                { label: 'My Presentations', state: 'presentations', auth: true },
-                { label: 'My Account', state: 'account', auth: true }
-            ];
-
             scope.user = null;
 
             scope.isLoggedIn = function () {
@@ -42,7 +35,7 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
             $rootScope.$on(AUTH_EVENTS.logoutSuccess, removeUser);
             $rootScope.$on(AUTH_EVENTS.sessionTimeout, removeUser);
 
-        },
+        }
        
 
 

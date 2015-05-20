@@ -1,6 +1,10 @@
-<section id="home">
-	
+<section id="home" ng-controller="HomeCtrl">
+    <div class="main-heading">
+        <h1>Welcome to Night Of: An Organizer</h1>
+    </div>
+    <div ng-hide="user" ui-sref="login" class="sign-log">Login</div>
+    <div ng-hide="user" ui-sref="sign-up" class="sign-log">Sign Up</div>
 
-    <fullstack-logo></fullstack-logo>
-    <rando-greeting></rando-greeting>
+    <h3 ng-show="user">Find your portal at the top of the page and get started!</h3>
+
 </section>

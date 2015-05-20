@@ -30,8 +30,6 @@ router.get('/', function (req, res, next) {
 router.get('/me', function (req, res, next) {
 
 	res.send(req.user);
-
-
 	
 });
 // delete a user

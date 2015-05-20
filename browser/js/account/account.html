@@ -1,4 +1,29 @@
-<h3>Hello {{accountInfo.name}}</h3>
-<div>{{accountInfo.email}}<br>
-<button ng-click="submitEmail()">Change Email</button><input ng-model="email"></input><br>
-<button ng-click="submitPassword()">Change Password</button><input ng-model="password" ></input></div><br>
+<section id="account">
+    <h3>Hello {{accountInfo.name.split(" ")[0]}}!</h3>
+    <p>Your current email address is {{accountInfo.email}}</p>
+
+    <div class="row user-form-update">
+        <div class="col-lg-3 col-md-3">
+            <div class="input-group">
+                <!--<div>Current Email: {{accountInfo.email}}</div>-->
+                <!--<label for="update-email"></label>-->
+                <input id="update-email" type="email" class="form-control" placeholder="new email" ng-model="email">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="submitEmail()">Update Email</button>
+                </span>
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+    <div class="row user-form-update">
+        <div class="col-lg-3 col-md-3">
+            <div class="input-group">
+                <!--<label for="update-password"></label>-->
+                <input id="update-password" type="password" class="form-control" placeholder="new password" ng-model="password">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="submitPassword()">Update Password</button>
+                </span>
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+
+</section>

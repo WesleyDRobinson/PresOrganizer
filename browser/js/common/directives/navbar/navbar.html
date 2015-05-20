@@ -1,17 +1,20 @@
 <nav class="navbar navbar-static-top">
-    <div class="container">
+    <div class="container-fluid">
         <div class="navbar-header">
-            <fullstack-logo></fullstack-logo>
+            <night-of></night-of>
         </div>
-        <ul class="nav navbar-nav">
-            <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
-                <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
+        <ul id="navbar-list" class="nav navbar-nav">
+            <li ng-show="user">
+                <a ui-sref-active="active" ui-sref="locales">Organizer Portal</a>
+            </li>
+            <li ng-show="user">
+                <a ui-sref-active="active" ui-sref="presentations">Presenter Portal</a>
+            </li>
+            <li ng-show="user">
+                <!-- If we can't get just first names, I'll write a filter -->
+                <a ui-sref-active="active" ui-sref="account">Manage {{user.name}}'s Account</a>
             </li>
         </ul>
-        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
-        <div ng-show="user" class="welcome">
-            <span>Welcome, {{ user.email }}!</span>
-            <a ng-click="logout()">Logout</a>
-        </div>
+        <a ui-sref="home" ng-show="user" class="btn logout" ng-click="logout()">Logout</a>
     </div>
 </nav>
