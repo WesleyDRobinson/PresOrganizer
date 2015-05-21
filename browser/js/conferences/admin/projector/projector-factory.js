@@ -5,12 +5,16 @@ app.factory('ProjectorModeFactory', function() {
 
 		for (var i = 0; i < timeline.length; i++) {
 			if (!timeline[i].presentation) {
+				timeline[i].itemStart = true;
 				flattenedTimeline.push(timeline[i].title);
 			}
 			else {
+				timeline[i].presentation.media[0].itemStart = true;
 				flattenedTimeline = flattenedTimeline.concat(timeline[i].presentation.media);
 			}
-		} 
+		}
+		console.log("timeline", timeline);
+		console.log("flattened", flattenedTimeline);
 
 		return flattenedTimeline;
 	}

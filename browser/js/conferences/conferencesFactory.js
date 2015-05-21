@@ -14,17 +14,13 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService){
 		},
 		putConferenceById: function(conference){
 			//put a conference by id
-			//console.log(conference);
-
 			var basicInfo = {};
 			basicInfo.name = conference.name;
 			basicInfo.date = conference.date;
 			basicInfo.venue = conference.venue;
 
-			//console.log(basicInfo);
 
 			return $http.put('/api/conference/' + conference._id, basicInfo).then(function(res){
-					//console.log(res.data);
 					return res.data;
 				});
 		},
@@ -40,7 +36,6 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService){
 					});
 					
 					return $q.all(promises).then(function(presentationArr){
-						//console.log(presentationArr);
 						return flatten(presentationArr);
 					});
 				});
@@ -52,7 +47,7 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService){
 			});
 		},
 		saveTimeLine: function(conferenceId, timeLine){
-
+			console.log(timeLine);
 			var newTimeLineObj = timeLine.map(function(timeLineItem){
 				var newTimeLineItem = {title: timeLineItem.title};
 				if(timeLineItem.presentation){
@@ -62,6 +57,8 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService){
 				return newTimeLineItem;
 
 			});
+
+			console.log(newTimeLineObj);
 
 			return $http.put('/api/conference/'+conferenceId, {timeline: newTimeLineObj})
 			.then(function(res){
