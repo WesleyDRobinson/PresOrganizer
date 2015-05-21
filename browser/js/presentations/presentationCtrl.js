@@ -98,7 +98,9 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
             });
             $scope.checkboxModel = _.omit($scope.checkboxModel, deleted_ids);
         });
-        //ConferenceFactory.removeFromAllConfs().then(); 
+        // ConferenceFactory.removeFromAllConfs(idsToDelete).then(function (response) {
+        //     console.log('response from removing presentations from conference timeline', response);
+        // }); 
         // this function should also remove presentation objects from conference timelines (using presentation _id)
 
         // should the function also check for the relevant conference and delete the user from the presenters array? 
