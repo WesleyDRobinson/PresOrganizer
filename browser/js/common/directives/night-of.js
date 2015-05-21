@@ -2,6 +2,6 @@
 app.directive('nightOf', function () {
     return {
         restrict: 'E',
-        template: '<i class="fa fa-connectdevelop"></i>'
+        template: '<i class="fa fa-users"></i>'
     };
 });
