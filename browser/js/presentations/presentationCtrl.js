@@ -1,4 +1,4 @@
-app.controller('PresentationCtrl',function ($scope, $stateParams, Session, PresentationFactory, ConferenceFactory, presentations, conferences) {
+app.controller('PresentationCtrl',function ($scope, $timeout, $stateParams, Session, PresentationFactory, ConferenceFactory, presentations, conferences) {
     //$scope.showImages = false;
     $scope.conferenceOptions = conferences;   // resolve method
     $scope.currentPresentation = null;
@@ -10,8 +10,10 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
     // created as well as  when a presentation is clicked from the list
     $scope.displayPresentationMedia = function(presentation){
         $scope.editing = true;
+
         $scope.currentPresentation = presentation;
         $scope.presentationMedia = _.find($scope.presentations, {_id: presentation._id}).media;  // !!! creates a reference
+
     };
 
     // corresponding $scope.presentations.media array is also spliced when removeCard runs (see displayPresentationMedia)
@@ -19,8 +21,25 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
         $scope.presentationMedia.splice(index,1);    
     };
 
+    $scope.showPresentationSaved = function() {
+
+        $scope.saved = true;
+        var savedTimeout = $timeout(function() {
+
+            $scope.saved = false;
+            $timeout.cancel(savedTimeout);
+            savedTimeout = null;
+        }, 1000);
+    };
     $scope.savePresentation = function() {
-        PresentationFactory.savePresentation($scope.currentPresentation._id, $scope.presentationMedia);
+
+        PresentationFactory.savePresentation($scope.currentPresentation._id, $scope.presentationMedia)
+            .then(function(){
+                console.log('going here');
+                $scope.showPresentationSaved();
+            });
+
+
     };
 
     // TODO -- Remove if not being used
@@ -28,8 +47,10 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
     //    $scope.showImages = $scope.showImages ? false : true;
     //};
 
+
+
     $scope.sortableOptions = {
-        additionPlaceholderClass: 'presentation-a-s'
+        additionPlaceholderClass: 'presentation-thumbnail'
     };
 
     // functionality for creating a new presentation 
