@@ -50,7 +50,7 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService) {
 					
 
 					return $q.all(promises).then(function (presentationArr) {
-						console.log(presentationArr);
+						//console.log(presentationArr);
 						return flatten(presentationArr);
 					});
 				});
@@ -71,7 +71,7 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService) {
 				return newTimeLineItem;
 			});
 
-			console.log(newTimeLineObj);
+			//console.log(newTimeLineObj);
 
 			return $http.put('/api/conference/'+conferenceId, {timeline: newTimeLineObj})
 			.then(function(res){
