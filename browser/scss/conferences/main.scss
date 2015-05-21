@@ -18,7 +18,10 @@
 	ul {
 		list-style: none;
 		padding-left: 0;
-		height: 1px;
+	}
+
+	#timeline-ul {
+		min-height: 40vh;
 	}
 
 	.as-sortable-item, .as-sortable-dragging, .as-sortable-drag {
@@ -30,6 +33,7 @@
 		margin-top: 5px;
 	}
 }
+
 
 #projector-preview img {
 	max-width: 100%;

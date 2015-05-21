@@ -77,7 +77,6 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService) {
 				return res.data;
 			});			
 		},
-
 		removeConference: function(conferenceId){
 			return $http.delete('api/conference/'+conferenceId).then(function(res){
 				return res.data;
@@ -89,7 +88,25 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService) {
 			return $http.post('/api/conference/', conference).then(function (res) {
 				return res.data;
 			});
-		}
+		},
+		// removeFromAllConfs: function (presentationIds) {
+		// 	// specifically searches & removes a presentation from all conference
+		// 	// timelines when that presentation has been deleted from the
+		// 	// collection
+  //           var promises = [];
+		// 	return $http.delete('/api/conferences/removePresentation/' + presentationId)
+		// 		.then(function (res) {
+		// 			return res.data;
+		// 		});
+
+  //           presentationIds.forEach(function (id) {
+  //               promises.push($http.delete('/api/conferences/removePresentation/' + id));
+  //           });
+  //           return $q.all(promises).then(function (res) {
+  //               return res;
+  //           });
+
+		// }
 	};
 });
 

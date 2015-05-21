@@ -62,7 +62,7 @@
 			<h2>Timeline <span class="pull-right" ng-show="saved"><i class="fa fa-floppy-o"></i></span></h2>
 
 			<form name="timeline-form" ng-mouseup="saveTimeLine()">
-				<ul as-sortable ng-model="timeLine">
+				<ul id="timeline-ul" as-sortable ng-model="timeLine">
 					<li ng-repeat="timeLineItem in timeLine" as-sortable-item>
 						<div as-sortable-item-handle>
 							<span ng-if="!timeLineItem.presentation">

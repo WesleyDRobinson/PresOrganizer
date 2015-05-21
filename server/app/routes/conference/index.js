@@ -73,11 +73,9 @@ router.get('/user/me',function (req,res,next){
 
 	Conference.find({presenters: req.user.id}).deepPopulate('timeline.presentation.presenter').exec(
 		function (err, conferences){
-		if(err) return next(err);
-		res.send(conferences);
-		
+			if(err) return next(err);
+			res.send(conferences);
 	});
-
 });
 ////////////////////////////////////////////////////////////////////
 // DELETE
