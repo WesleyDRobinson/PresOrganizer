@@ -7,7 +7,6 @@ var Conference = Promise.promisifyAll(mongoose.model('Conference'));
 // CREATE
 // Create a conference
 router.post('/',function (req, res, next) {
-	console.log("hi");
 	Conference.create(req.body, function (err, conference){
 		if (err) return next(err);
 
@@ -43,7 +42,6 @@ router.get('/', function (req, res, next) {
 // update by conference Id
 router.put('/:conferenceId', function (req, res, next){
 	var conferenceId = req.params.conferenceId;   // locale is an Id
-	console.log('we are updating conference', req.body);
 
 	Conference.findByIdAndUpdate( conferenceId, req.body, function (err, conference){
 		if(err) return next(err);
@@ -52,7 +50,7 @@ router.put('/:conferenceId', function (req, res, next){
 	});
 });
 
-// user is added to a conference as a presenter this route fires when 
+// user is added to a conference as a presenter. this route fires when 
 // a new presentation is created in order to associate the user as a 
 // presenter of a particular conference
 router.put('/:conferenceId/addpresenter', function (req, res, next){
@@ -90,10 +88,21 @@ router.get('/user/me',function (req,res,next){
 
 // });
 
-router.delete('/:id',function(req, res, next) {
+router.delete('/:id',function (req, res, next) {
 	Conference.findByIdAndRemove(req.params.id, function (err, conference) {
 		if (err) return next(err);
 		res.send(conference);
+	});
+});
+
+// removing a presentation from all conference timelines
+router.delete('/removePresentation/:id', function (req, res, next) {
+	Conference.update({}, 
+		{ $pull: { presentations: { _id: req.params.id } } }, 
+		{ multi: true }, 
+		function (err, updated) {
+			if (err) return next(err);
+			res.send(updated);
 	});
 });
 
