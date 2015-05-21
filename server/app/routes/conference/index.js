@@ -98,7 +98,7 @@ router.delete('/:id',function (req, res, next) {
 // removing a presentation from all conference timelines
 router.delete('/removePresentation/:id', function (req, res, next) {
 	Conference.update({}, 
-		{ $pull: { presentations: { _id: req.params.id } } }, 
+		{ $pull: { timeline: { presentation: { _id: req.params.id } } } }, 
 		{ multi: true }, 
 		function (err, updated) {
 			if (err) return next(err);
