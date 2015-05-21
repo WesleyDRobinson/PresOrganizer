@@ -1,17 +1,17 @@
 app.controller('PresentationCtrl',function ($scope, $stateParams, Session, PresentationFactory, ConferenceFactory, presentations, conferences) {
     //$scope.showImages = false;
     $scope.conferenceOptions = conferences;   // resolve method
-    $scope.currentPresentationId = null;
+    $scope.currentPresentation = null;
     $scope.presentations = presentations;
     $scope.presentationMedia = [];
     $scope.editing = false;
 
-    $scope.displayPresentationMedia = function(id){
+    // displayPresentationMedia runs when the presentation is first 
+    // created as well as  when a presentation is clicked from the list
+    $scope.displayPresentationMedia = function(presentation){
         $scope.editing = true;
-        console.log('presentations: ', $scope.presentations);
-
-        $scope.presentationMedia = _.find($scope.presentations, {_id: id}).media;  // !!! creates a reference
-        $scope.currentPresentationId = id;
+        $scope.currentPresentation = presentation;
+        $scope.presentationMedia = _.find($scope.presentations, {_id: presentation._id}).media;  // !!! creates a reference
     };
 
     // corresponding $scope.presentations.media array is also spliced when removeCard runs (see displayPresentationMedia)
@@ -20,7 +20,7 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
     };
 
     $scope.savePresentation = function() {
-        PresentationFactory.savePresentation($scope.currentPresentationId, $scope.presentationMedia);
+        PresentationFactory.savePresentation($scope.currentPresentation._id, $scope.presentationMedia);
     };
 
     // TODO -- Remove if not being used
@@ -63,7 +63,7 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
         return PresentationFactory.createPresentation($scope.newPresentation)
                 .then(function (newPresentation) {
                     $scope.presentations.push(newPresentation);
-                    $scope.currentPresentationId = newPresentation._id;
+                    $scope.displayPresentationMedia(newPresentation);
                     refreshPresentationObj();
                     return ConferenceFactory.addConferencePresenter(conference_id, Session.user._id);    
                 })
@@ -82,6 +82,7 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
 
     $scope.deletePresentations = function () {
         var idsToDelete = [], deleted_ids = [];
+        $scope.presentationMedia = [];
         angular.forEach($scope.checkboxModel, function(value, checkbox_id) {
             if (value === true) {         // i.e. checkbox is checked
                 this.push(checkbox_id);      // push in checkbox_id which is the presentation id

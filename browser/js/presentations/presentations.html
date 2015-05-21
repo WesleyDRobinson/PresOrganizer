@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                <button type="submit" class="btn" ng-click="sure()">Delete Selected Presentation</button>
+                <button type="submit" class="btn" ng-click="sure()">Delete Selected Presentations</button>
                 <button ng-hide="creating" type="submit" class="btn" ng-click="showCreateForm()">Create New
                     Presentation
                 </button>
@@ -43,7 +43,7 @@
                     <li ng-repeat="presentation in presentations | orderBy: 'title'">
                         <label for="select-conference-for-deletion"></label>
                         <input id="select-conference-for-deletion" type="checkbox" ng-model='checkboxModel[presentation._id]'>
-                        <a ng-click="displayPresentationMedia(presentation._id)">
+                        <a ng-click="displayPresentationMedia(presentation)">
                             {{presentation.title}}
                         </a>
                     </li>
@@ -71,6 +71,7 @@
                 </div>
             </div>
             <div class="col-md-6 col-md-pull-6" ng-if="editing">
+            	<h3>{{currentPresentation.title}}</h3>
                 <upload-box></upload-box>
             </div>
         </div>
