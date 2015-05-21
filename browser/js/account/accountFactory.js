@@ -1,7 +1,6 @@
 app.factory('AccountFactory', function($http,AuthService){
 	return {
 		getAccountInformation: function(){
-
 			return $http.get('/api/user/me').then(function(res){
 					return res.data;
 				});
