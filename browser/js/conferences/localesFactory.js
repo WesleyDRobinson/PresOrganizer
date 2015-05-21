@@ -4,11 +4,11 @@ app.factory('localesFactory', function ($http, AuthService){
 		getLocales: function () {
 			return AuthService.getLoggedInUser()
 				.then(function (user) {
-					console.log('user is:', user);
+
 					return $http.get('api/locale?organizers=' + user._id);
 				})
 				.then(function (res) {
-					console.log('locales: ', res.data);
+
 					return res.data;
 				});
 			},
@@ -25,7 +25,7 @@ app.factory('localesFactory', function ($http, AuthService){
 			});
 
             organizerArr =  _.uniq(organizerArr);
-            console.log('after uniq',organizerArr);
+
             if(organizerId)
                 organizerArr.push(organizerId);
 			return $http.put('api/locale/'+localeId,{organizers: organizerArr}).then(function(res){
