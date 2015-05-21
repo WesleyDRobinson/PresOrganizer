@@ -4,7 +4,7 @@ app.config(function ($stateProvider) {
         url: '/locales',
         templateUrl: 'js/conferences/locales.html',
         controller: 'localesCtrl',
-        params: {localeId: null},
+        params: {localeId: null, localeEdit: null},
         resolve: {
             fetchLocales: function (localesFactory) {
                 return localesFactory.getLocales();
@@ -21,7 +21,7 @@ app.controller('localesCtrl', function ($scope, $state, $stateParams, Session, l
     $scope.myName = Session.user.name;
 
 
-    $scope.localeEdit = false;
+    $scope.localeEdit = $stateParams.localeEdit || false;
     $scope.toggleEdit = function(){
         $scope.localeEdit = !$scope.localeEdit;
     };

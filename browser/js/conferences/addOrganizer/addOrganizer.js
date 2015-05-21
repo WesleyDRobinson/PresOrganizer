@@ -12,7 +12,7 @@ app.directive('addOrganizer', function(){
 
                 //not a perfect solution, but complicated to do this with 2 way data binding
                 // need
-                $state.go('locales', {}, { reload: true });
+                $state.go('locales', {localeEdit: true}, { reload: true });
             }
 
         }
