@@ -102,7 +102,7 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
         //console.log($scope.itemNumberId);
     };
     $scope.isCurrentItem = function(id) {
-        console.log("id",id);
+        //console.log("id",id);
         return id === $scope.itemNumberId;
     };
 });

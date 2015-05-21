@@ -42,13 +42,10 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
     }
 
 	function nextSlide () {
-        //console.log("index", $scope.currentIndex);
-        //console.log("obj", $scope.currentTimelineFlat[$scope.currentIndex]);
-
+        // update the item number 
         if($scope.currentTimelineFlat[$scope.currentIndex].itemNumber) {
-            //console.log("itemNumber", $scope.currentTimelineFlat[$scope.currentIndex].itemNumber);
             $scope.updateItemNumber($scope.currentTimelineFlat[$scope.currentIndex].itemNumber);
-
+            console.log($scope.currentTimelineFlat[$scope.currentIndex].itemNumber);
         }
 
         $scope.currentIndex = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? ++$scope.currentIndex : 0;
@@ -56,8 +53,11 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
         var next = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? $scope.currentIndex + 1 : 0;
 
         if ($scope.currentTimelineFlat[$scope.currentIndex + 1].title && $scope.currentTimelineFlat[$scope.currentIndex + 1].title === "pause") {
+            
+            // pause
             PAUSED = true;
             $scope.killTimer();
+
         } else {
             loadSlides();
         }
@@ -79,6 +79,9 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
             TIMER = null;
             $scope.playing = false;
             $scope.playButtonText = "Play";
+            
+            //update itemnumber for UI position indicator
+            $scope.updateItemNumber($scope.currentTimelineFlat[$scope.currentIndex].itemNumber + 1);
         }
     };
 
