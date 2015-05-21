@@ -98,10 +98,11 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
 
     // Called from child scope: ProjectorCtrl
     $scope.updateItemNumber = function(itemNumber) {
-        $scope.itemNumberId = "item-number-"+itemNumber;
-        console.log($scope.itemNumberId);
+        $scope.itemNumberId = itemNumber;
+        //console.log($scope.itemNumberId);
     };
     $scope.isCurrentItem = function(id) {
+        console.log("id",id);
         return id === $scope.itemNumberId;
     };
 });
