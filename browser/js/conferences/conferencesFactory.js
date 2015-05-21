@@ -94,10 +94,6 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService) {
 		// 	// timelines when that presentation has been deleted from the
 		// 	// collection
   //           var promises = [];
-		// 	return $http.delete('/api/conferences/removePresentation/' + presentationId)
-		// 		.then(function (res) {
-		// 			return res.data;
-		// 		});
 
   //           presentationIds.forEach(function (id) {
   //               promises.push($http.delete('/api/conferences/removePresentation/' + id));
@@ -105,7 +101,6 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService) {
   //           return $q.all(promises).then(function (res) {
   //               return res;
   //           });
-
 		// }
 	};
 });
