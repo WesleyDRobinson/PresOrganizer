@@ -1,5 +1,5 @@
 <section id="account">
-    <h3>Hello {{accountInfo.name.split(" ")[0]}}!</h3>
+    <h1>Hello {{accountInfo.name.split(" ")[0]}}!</h1>
     <p>Your current email address is {{accountInfo.email}}</p>
 
     <div class="row user-form-update">
@@ -7,7 +7,7 @@
             <div class="input-group">
                 <!--<div>Current Email: {{accountInfo.email}}</div>-->
                 <!--<label for="update-email"></label>-->
-                <input id="update-email" type="email" class="form-control" placeholder="new email" ng-model="email">
+                <input id="update-email" type="email" class="form-control" placeholder="new.email@place.com" ng-model="email">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button" ng-click="submitEmail()">Update Email</button>
                 </span>
@@ -18,7 +18,7 @@
         <div class="col-lg-6 col-md-6">
             <div class="input-group">
                 <!--<label for="update-password"></label>-->
-                <input id="update-password" type="password" class="form-control" placeholder="new password" ng-model="password">
+                <input id="update-password" type="password" class="form-control" placeholder="new-Password" ng-model="password">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button" ng-click="submitPassword()">Update Password</button>
                 </span>
