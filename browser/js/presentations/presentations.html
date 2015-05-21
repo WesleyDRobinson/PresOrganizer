@@ -1,6 +1,7 @@
 <section id="presentations">
     <div class="container-fluid">
         <div class="row">
+            <h1>My Presentations</h1>
             <div class="col-md-6">
                 <button type="submit" class="btn" ng-click="sure()">Delete Selected Presentations</button>
                 <button ng-hide="creating" type="submit" class="btn" ng-click="showCreateForm()">Create New
@@ -24,7 +25,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="conference-selection">Upcoming Conferences:</label>
-                                <select id="conference-selection" class="form-control"
+                                <select id="conference-selection" class="form-control" required
                                         ng-model="selectedConference"
                                         ng-options="conf._id as conf.name for conf in conferenceOptions">
                                 </select>

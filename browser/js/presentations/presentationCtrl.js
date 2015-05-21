@@ -98,6 +98,8 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
             });
             $scope.checkboxModel = _.omit($scope.checkboxModel, deleted_ids);
         });
+        // this function should also remove presentation objects from conference timelines (using presentation _id)
+
         // should the function also check for the relevant conference and delete the user from the presenters array? 
         // Wesley says - "no"
     };

@@ -23,7 +23,7 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService) {
 			return $http.put('/api/conference/' + id +'/addpresenter', { presenters: user_id }).then(function (res) {
 				return res.data;
 			}).catch(function (err) {
-				console.log('error: user has not been added to a valid conference.', err)
+				console.log('error: user has not been added to a valid conference.', err);
             });  // should never error out but no problem if it does
 		},
 		// should this be on the presentations factory instead?

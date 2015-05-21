@@ -18,7 +18,9 @@ router.post('/',function (req, res, next) {
 // find by queries
 router.get('/', function (req, res, next) {
 
-	Conference.find(req.query).deepPopulate('timeline.presentation.presenter').exec(
+	Conference.find(req.query)
+	.deepPopulate('timeline.presentation.presenter')
+	.exec(
 		function (err, conferences) {
 		if(err) return next(err);
 		res.send(conferences);
