@@ -88,7 +88,7 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService) {
 			return $http.post('/api/conference/', conference).then(function (res) {
 				return res.data;
 			});
-		},
+		}
 		// removeFromAllConfs: function (presentationIds) {
 		// 	// specifically searches & removes a presentation from all conference
 		// 	// timelines when that presentation has been deleted from the
