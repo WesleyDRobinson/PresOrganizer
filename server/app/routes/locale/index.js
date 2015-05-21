@@ -13,7 +13,7 @@ router.post('/', function (req, res, next) {
         .then(null, next);
 });
 
-//get all Locales
+//get all Locales and their organizers (names only)
 router.get('/', function (req, res, next) {
     Locale.find(req.query).populate('organizers', 'name')
     .exec()

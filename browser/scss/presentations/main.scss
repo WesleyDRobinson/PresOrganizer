@@ -1,0 +1,30 @@
+#presentations {
+  cursor: default;
+
+  .presentation-placeholder{
+    margin-top:10px;
+    display: inline-block;
+    float: left;
+  }
+
+  .presentation-thumb{
+
+    display: inline-block;
+    width: 124px;
+    height: 110px;
+    float: left;
+    margin-top: 10px;
+    margin-bottom:25px;
+    border-radius: 0px;
+
+  }
+
+  .presentation-img{
+    width: 122px;
+    height: 110px;
+    margin-right:6px;
+  }
+  .create-presentation-form {
+    transition:all linear 0.5s;
+  }
+}

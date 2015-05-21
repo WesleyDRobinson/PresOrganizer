@@ -12,10 +12,11 @@ app.factory('localesFactory', function ($http, AuthService){
 					return res.data;
 				});
 			},
+		// should this move to the conference factory?
 		getConferences: function (locale_id) {
 			return $http.get('api/conference?locale=' + locale_id).then(function (res) {
 				return res.data;
 			});
 		}
- 	}
+ 	};
 });
