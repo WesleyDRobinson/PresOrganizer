@@ -30,7 +30,6 @@ router.put('/:id', function (req, res, next) {
         if (err) {
             return next(err);
         }
-        res.send(locale);
     });
 
 });

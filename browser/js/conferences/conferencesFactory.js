@@ -79,8 +79,15 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService) {
 				return res.data;
 			});			
 		},
-		newConference: function(conference) {
-			console.log(conference);
+
+		removeConference: function(conferenceId){
+			return $http.delete('api/conference/'+conferenceId).then(function(res){
+				return res.data;
+			});
+
+		},
+		newConference: function(conference){
+
 			return $http.post('/api/conference/', conference).then(function (res) {
 				return res.data;
 			});
