@@ -14,7 +14,9 @@ router.post('/',function (req,res,next){
 
 //get Presentations by query
 router.get('/', function (req, res, next) {
-  Presentation.find(req.query).exec()
+  Presentation.find(req.query)
+  .populate('presenter', 'name')
+  .exec()
   .then(function (presentations) {
    
     res.send(presentations);

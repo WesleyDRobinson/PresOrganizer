@@ -22,7 +22,9 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService) {
 			// adds a presenter to a conference 'presenters' array
 			return $http.put('/api/conference/' + id +'/addpresenter', { presenters: user_id }).then(function (res) {
 				return res.data;
-			});
+			}).catch(function (err) {
+				console.log('error: user has not been added to a valid conference.', err);
+            });  // should never error out but no problem if it does
 		},
 		// should this be on the presentations factory instead?
 		putConferenceById: function(conference){
@@ -46,11 +48,8 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService) {
 						.then(function (res) {
 							return res.data;
 						});
-					});
-					
-
+					});					
 					return $q.all(promises).then(function (presentationArr) {
-						//console.log(presentationArr);
 						return flatten(presentationArr);
 					});
 				});
