@@ -29,17 +29,13 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService) {
 		// should this be on the presentations factory instead?
 		putConferenceById: function(conference){
 			//put a conference by id
-			//console.log(conference);
-
 			var basicInfo = {};
 			basicInfo.name = conference.name;
 			basicInfo.date = conference.date;
 			basicInfo.venue = conference.venue;
 
-			//console.log(basicInfo);
 
 			return $http.put('/api/conference/' + conference._id, basicInfo).then(function(res){
-					//console.log(res.data);
 					return res.data;
 				});
 		},
@@ -74,13 +70,22 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService) {
 				return newTimeLineItem;
 			});
 
+			console.log(newTimeLineObj);
+
 			return $http.put('/api/conference/'+conferenceId, {timeline: newTimeLineObj})
 			.then(function(res){
 				return res.data;
 			});			
 		},
-		newConference: function(conference) {
-			console.log(conference);
+
+		removeConference: function(conferenceId){
+			return $http.delete('api/conference/'+conferenceId).then(function(res){
+				return res.data;
+			});
+
+		},
+		newConference: function(conference){
+
 			return $http.post('/api/conference/', conference).then(function (res) {
 				return res.data;
 			});

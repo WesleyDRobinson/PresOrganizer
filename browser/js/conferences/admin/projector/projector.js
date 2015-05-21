@@ -1,13 +1,13 @@
 app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, ProjectorModeFactory) {
-	var INTERVAL = 2000;
+	var INTERVAL = 500;
 	var TIMER;
     var PAUSED = false;
     var socket = io();
 
     $scope.currentIndex = 0;
-    $scope.setCurrentSlideIndex = setCurrentSlideIndex;
     $scope.isCurrentSlideIndex = isCurrentSlideIndex;
     $scope.isNextSlideIndex = isNextSlideIndex;
+    $scope.setCurrentSlideIndex = setCurrentSlideIndex;
 
     $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.timeLine);
     
@@ -19,8 +19,6 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
         $scope.isNextSlideIndex();
     });
 
-
-    // might not be used currently
     function setCurrentSlideIndex (index) {
         $scope.currentIndex = index;
     }
@@ -37,7 +35,7 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
         if ($scope.currentIndex + 1 >= $scope.currentTimelineFlat.length){
             return 0 === index;
         }
-        else if ($scope.currentTimelineFlat[$scope.currentIndex + 1] === "pause") {
+        else if ($scope.currentTimelineFlat[$scope.currentIndex + 1].title && $scope.currentTimelineFlat[$scope.currentIndex + 1].title === "pause") {
             return $scope.currentIndex + 2 === index;  
         }
         else return $scope.currentIndex + 1 === index;  
@@ -45,9 +43,16 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
 
 	function nextSlide () {
         $scope.currentIndex = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? ++$scope.currentIndex : 0;
+        //console.log($scope.currentIndex);
+
+        if($scope.currentTimelineFlat[$scope.currentIndex].itemNumber) {
+            console.log($scope.currentTimelineFlat[$scope.currentIndex].itemNumber);
+        }
+        console.log($scope.currentTimelineFlat[$scope.currentIndex]);
+
         var next = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? $scope.currentIndex + 1 : 0;
 
-        if ($scope.currentTimelineFlat[next] === "pause") {
+        if ($scope.currentTimelineFlat[$scope.currentIndex + 1].title && $scope.currentTimelineFlat[$scope.currentIndex + 1].title === "pause") {
             PAUSED = true;
             $scope.killTimer();
         } else {
