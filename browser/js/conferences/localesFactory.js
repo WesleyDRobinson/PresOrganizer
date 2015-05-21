@@ -12,8 +12,10 @@ app.factory('localesFactory', function ($http, AuthService){
 					return res.data;
 				});
 			},
-		getConferences: function (localeId) {
-			return $http.get('api/conference?locale=' + localeId).then(function (res) {
+
+		// should this move to the conference factory?
+		getConferences: function (locale_id) {
+			return $http.get('api/conference?locale=' + locale_id).then(function (res) {
 				return res.data;
 			});
 		},
@@ -35,11 +37,5 @@ app.factory('localesFactory', function ($http, AuthService){
 
 		},
 
-		addOrganizer: function(localeId, organizerid){
-
-			// return $http.put('api/locale/'+localeId,{organizers: organizerArr}).then(function(res){
-			// 	return res.data;
-			// });
-		}
  	};
 });

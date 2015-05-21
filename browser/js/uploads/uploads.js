@@ -6,13 +6,15 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('UploadsCtrl', function ($scope, Upload) {
+app.controller('UploadsCtrl', function ($scope, Upload, UploadsFactory) {
 
     $scope.acceptedFiles = [];
+    $scope.loadingAndConverting = false;
 
     $scope.uploadThis = function (acceptedFiles) {
 
         acceptedFiles.forEach(function (file) {
+            $scope.loadingAndConverting = true;
             // Send files to server
             Upload.upload({
                 url : 'api/upload',
@@ -20,23 +22,38 @@ app.controller('UploadsCtrl', function ($scope, Upload) {
                 //fields can be any key:value we would like to send along with it.
                 // Could be helpful?
                 //fields: {type: "YER TYPE HERE"}
-            }).progress(function (evt) {
-                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             }).success(function (data, status, headers, config) {
-                console.log('data', data, 'status', status,'headers', headers, 'config', config);
-                $scope.serverResponse = data;
-                $scope.log = 'file ' + config.file.name + 'uploaded. Response: ' + JSON.stringify(data) + '\n' + $scope.log;
+                console.log('data', data, 'status', status, 'headers', headers, 'config', config);
+                if (typeof data === 'string'){
+                    $scope.presentationMedia.push(UploadsFactory.createMediaItemFromUrl(data));
+                } else if (typeof data === 'object') {
+                    data.forEach(function(url) {
+                        $scope.presentationMedia.push(UploadsFactory.createMediaItemFromUrl(url));
+                    });
+                } else {
+                    alert("Something went pretty wrong here." +
+                        "Please wait a few minutes and try again." +
+                        "Hopefully time solves the problem!")
+                }
+                $scope.loadingAndConverting = false;
             });
         });
 
     };
 
-    $scope.getObject = function (name) {
-        console.log("Fetching object!");
-        var s3 = new AWS.S3();
-        var params = {Bucket: 'pk-usa', Key: name};
-        $scope.imgUrl = s3.getSignedUrl('getObject', params);
+});
+// Converted PDF comes back looking like this:
+//[{"mediaType":"presentation-img","url":["https://s3.amazonaws.com/pk-usa/image1432159668616/egghead-io-directive-definition-object-cheat-sheet-1.png","https://s3.amazonaws.com/pk-usa/image1432159668616/egghead-io-directive-definition-object-cheat-sheet-2.png","https://s3.amazonaws.com/pk-usa/image1432159668616/egghead-io-directive-definition-object-cheat-sheet-3.png","https://s3.amazonaws.com/pk-usa/image1432159668616/egghead-io-directive-definition-object-cheat-sheet-4.png"]}]
+//
+
+app.factory('UploadsFactory', function () {
+    return {
+        createMediaItemFromUrl: function (url) {
+            console.log('URL: ', url);
+            return {
+                mediaType: 'presentation-img',
+                url      : url
+            };
+        }
     };
-
-
 });
