@@ -89,11 +89,11 @@
 					<h2>Items</h2>
 				</div>
 
-				<div class="col-xs-6 col-md-12" id="control-items">
+				<div  id="control-items">
 					<h3>Controls</h3>
 					<ul as-sortable="controlItemOptions" ng-model="controlItems">
-						<li style="display: inline" ng-repeat="controlItem in controlItems" as-sortable-item>
-							<span as-sortable-item-handle>
+						<li ng-repeat="controlItem in controlItems" as-sortable-item as-sortable-item-handle>
+							<span >
 								{{controlItem.title}}
 							</span>
 						</li>

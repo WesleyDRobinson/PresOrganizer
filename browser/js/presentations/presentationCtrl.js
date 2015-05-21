@@ -46,7 +46,7 @@ app.controller('PresentationCtrl',function ($scope, $timeout, $stateParams, Sess
 
 
     $scope.sortableOptions = {
-        additionPlaceholderClass: 'presentation-a-s'
+        additionPlaceholderClass: 'presentation-thumbnail'
     };
 
     // functionality for creating a new presentation 
