@@ -42,13 +42,16 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
     }
 
 	function nextSlide () {
-        $scope.currentIndex = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? ++$scope.currentIndex : 0;
-        //console.log($scope.currentIndex);
+        //console.log("index", $scope.currentIndex);
+        //console.log("obj", $scope.currentTimelineFlat[$scope.currentIndex]);
 
         if($scope.currentTimelineFlat[$scope.currentIndex].itemNumber) {
-            console.log($scope.currentTimelineFlat[$scope.currentIndex].itemNumber);
+            //console.log("itemNumber", $scope.currentTimelineFlat[$scope.currentIndex].itemNumber);
+            $scope.updateItemNumber($scope.currentTimelineFlat[$scope.currentIndex].itemNumber);
+
         }
-        console.log($scope.currentTimelineFlat[$scope.currentIndex]);
+
+        $scope.currentIndex = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? ++$scope.currentIndex : 0;
 
         var next = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? $scope.currentIndex + 1 : 0;
 

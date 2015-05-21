@@ -63,7 +63,7 @@
 
 			<form name="timeline-form" ng-mouseup="saveTimeLine()">
 				<ul as-sortable ng-model="timeLine">
-					<li ng-repeat="timeLineItem in timeLine" as-sortable-item>
+					<li id="item-number-{{ $index + 1 }}" ng-repeat="timeLineItem in timeLine" as-sortable-item>
 						<div as-sortable-item-handle>
 							<span ng-if="!timeLineItem.presentation">
 								{{$index + 1}}. {{timeLineItem.title}}
