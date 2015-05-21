@@ -1,20 +1,32 @@
 <nav class="navbar navbar-static-top">
     <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
+            <button ng-show="user" id="hamburger" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="fa fa-bars fa-2x"></i>
+            </button>
             <night-of></night-of>
         </div>
-        <ul id="navbar-list" class="nav navbar-nav">
-            <li ng-show="user">
-                <a ui-sref-active="active" ui-sref="locales">Organizer Portal</a>
-            </li>
-            <li ng-show="user">
-                <a ui-sref-active="active" ui-sref="presentations">Presenter Portal</a>
-            </li>
-            <li ng-show="user">
-                <!-- If we can't get just first names, I'll write a filter -->
-                <a ui-sref-active="active" ui-sref="account">Manage {{user.name}}'s Account</a>
-            </li>
-        </ul>
-        <a ui-sref="home" ng-show="user" class="btn logout" ng-click="logout()">Logout</a>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a ui-sref-active="active" ui-sref="locales">Organizer
+                    Area</a>
+                </li>
+                <li><a ui-sref-active="active" ui-sref="presentations">Presenter
+                    Area</a></li>
+                <li><a ui-sref-active="active" ui-sref="account">{{user.name.split(" ")[0]}}'s
+                    Account Area</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ui-sref="home" class="btn logout"
+                       ng-click="logout()">Logout</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
+    <!-- /.container-fluid -->
 </nav>
