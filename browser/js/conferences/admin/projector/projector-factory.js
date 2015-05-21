@@ -1,5 +1,6 @@
 app.factory('ProjectorModeFactory', function() {
 	function timelineFlat(timeline) {
+		console.log(timeline);
 		var flattenedTimeline = [];
 		var itemNumber = 1;
 

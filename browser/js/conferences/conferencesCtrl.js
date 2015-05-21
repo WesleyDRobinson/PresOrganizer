@@ -61,8 +61,8 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
         $scope.timeLine.splice(index,1);
     };
 
-    $scope.retrievePresentations = function(id){
-        $scope.timeLine = $scope.currentConf.timeline;
+    $scope.retrievePresentations = function(){
+        //$scope.timeLine = $scope.currentConf.timeline;
         $scope.conferenceId = $scope.currentConf._id;
     	ConferenceFactory.getPresentations($scope.currentConf._id).then(function (presentations) {	
             //initailize variable for presentations that can be added to the timeline
@@ -74,7 +74,7 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
     };
     
     // runs when state loads (is there a better way...?)
-    $scope.retrievePresentations($stateParams.id);
+    $scope.retrievePresentations();
 
     // this takes you back to the locales view
     $scope.goToLocales = function () {
@@ -124,11 +124,12 @@ function removeExistingTimeLineItems(presentations, timeLine){
         });
 }
 
-function flatten(arr) {
-  var arr2 = _.flatten(arr, true);
+// not used
+// function flatten(arr) {
+//   var arr2 = _.flatten(arr, true);
 
-  return arr2.filter(function(item){
-    return item !== undefined;
+//   return arr2.filter(function(item){
+//     return item !== undefined;
             
-        });
-}
+//         });
+// }
