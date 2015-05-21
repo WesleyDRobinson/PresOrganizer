@@ -34,7 +34,7 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
     };
 
     $scope.saveTimeLine = function(){
-        console.log($scope.timeLine);
+        //console.log($scope.timeLine);
         ConferenceFactory.saveTimeLine($scope.conferenceId, $scope.timeLine).then(function(data) {
             $rootScope.$broadcast('refresh-projector-preview');
             $scope.showTimelineSaved();
