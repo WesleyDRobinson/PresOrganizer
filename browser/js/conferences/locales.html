@@ -27,7 +27,7 @@
 	</div>
 
 	<div class="col-md-6" ng-if="conferences && !addOrganizer">
-		<h2>Conferences for locale</h2>
+		<h2>Conferences for {{currentLocaleName}}</h2>
 		<button ng-if="localeEdit" ui-sref="newConference({localeId:currentLocaleId, localeName: currentLocaleName})"class="btn btn-sm"><i class="fa fa-plus"></i></button>
 		<ul class="list-unstyled">
 			<div class="row">

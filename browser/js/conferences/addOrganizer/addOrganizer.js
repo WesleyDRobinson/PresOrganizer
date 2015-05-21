@@ -4,7 +4,8 @@ app.directive('addOrganizer', function(){
         restrict: 'E',
         controller: function($scope, UserFactory, localesFactory, $state){
             UserFactory.getAllUsers().then(function(users){
-                $scope.users = users;
+
+                $scope.users = _.sortBy(users, 'email');
             });
 
             $scope.addOrganizer= function(userId){
