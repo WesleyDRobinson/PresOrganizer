@@ -70,7 +70,7 @@ app.factory('ConferenceFactory', function ($q, $http, AuthService) {
 				return newTimeLineItem;
 			});
 
-			console.log(newTimeLineObj);
+			//console.log(newTimeLineObj);
 
 			return $http.put('/api/conference/'+conferenceId, {timeline: newTimeLineObj})
 			.then(function(res){

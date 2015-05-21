@@ -19,8 +19,8 @@ app.factory('ProjectorModeFactory', function() {
 			itemNumber++;
 		}
 		
-		console.log("timeline", timeline);
-		console.log("flattened", flattenedTimeline);
+		//console.log("timeline", timeline);
+		//console.log("flattened", flattenedTimeline);
 
 		return flattenedTimeline;
 	}
