@@ -95,6 +95,16 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
 
         ConferenceFactory.putConferenceById($scope.currentConf);
     };
+
+    // Called from child scope: ProjectorCtrl
+    $scope.updateItemNumber = function(itemNumber) {
+        $scope.itemNumberId = itemNumber;
+        //console.log($scope.itemNumberId);
+    };
+    $scope.isCurrentItem = function(id) {
+        //console.log("id",id);
+        return id === $scope.itemNumberId;
+    };
 });
 
 function removeExistingTimeLineItems(presentations, timeLine){
