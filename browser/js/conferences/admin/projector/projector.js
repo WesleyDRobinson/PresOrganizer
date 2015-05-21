@@ -42,19 +42,23 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
     }
 
 	function nextSlide () {
-        $scope.currentIndex = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? ++$scope.currentIndex : 0;
-        //console.log($scope.currentIndex);
-
+        // update the item number 
         if($scope.currentTimelineFlat[$scope.currentIndex].itemNumber) {
+            $scope.updateItemNumber($scope.currentTimelineFlat[$scope.currentIndex].itemNumber);
             console.log($scope.currentTimelineFlat[$scope.currentIndex].itemNumber);
         }
-        console.log($scope.currentTimelineFlat[$scope.currentIndex]);
+
+        $scope.currentIndex = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? ++$scope.currentIndex : 0;
 
         var next = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? $scope.currentIndex + 1 : 0;
 
         if ($scope.currentTimelineFlat[$scope.currentIndex + 1].title && $scope.currentTimelineFlat[$scope.currentIndex + 1].title === "pause") {
+            
+
+            // pause
             PAUSED = true;
             $scope.killTimer();
+
         } else {
             loadSlides();
         }
@@ -76,6 +80,11 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
             TIMER = null;
             $scope.playing = false;
             $scope.playButtonText = "Play";
+
+            // if (PAUSED) {
+            //     //update itemnumber for UI position indicator
+            //     $scope.updateItemNumber($scope.currentTimelineFlat[$scope.currentIndex].itemNumber + 1);
+            // }
         }
     };
 
