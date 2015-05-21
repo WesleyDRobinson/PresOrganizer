@@ -1,14 +1,12 @@
 
 <div class="row">
 	<div class="col-md-6">
-		<h2>My Locales</h2> <button ng-if="!localeEdit"  ng-click="toggleEdit();" class="btn btn-sm edit-btn">Edit</button>
+		<h1>My Locales</h1> <button ng-if="!localeEdit"  ng-click="toggleEdit();" class="btn btn-sm edit-btn">Edit</button>
 		<button class="btn btn-sm edit-btn" ng-click="toggleEdit()" ng-if="localeEdit">Editing</button>
 		<div ng-repeat="locale in locales">
-			<h3>
+			<h2>
 				<a ng-click="loadConferences(locale)">{{locale.name}}</a>
-				
-				
-			</h3>
+			</h2>
 			
 			<div><strong>Description:</strong> {{locale.description}}</div>
 			<div><strong>Organizers:</strong>
@@ -27,7 +25,7 @@
 	</div>
 
 	<div class="col-md-6" ng-if="conferences && !addOrganizer">
-		<h2>Conferences for {{currentLocaleName}}</h2>
+		<h1>Conferences for {{currentLocaleName}}</h1>
 		<button ng-if="localeEdit" ui-sref="newConference({localeId:currentLocaleId, localeName: currentLocaleName})"class="btn btn-sm"><i class="fa fa-plus"></i></button>
 		<ul class="list-unstyled">
 			<div class="row">
