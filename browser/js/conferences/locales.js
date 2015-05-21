@@ -7,7 +7,6 @@ app.config(function ($stateProvider) {
         params: {localeId: null},
         resolve: {
             fetchLocales: function (localesFactory) {
-                console.log('fetch running');
                 return localesFactory.getLocales();
             }
         }
@@ -28,47 +27,56 @@ app.controller('localesCtrl', function ($scope, $state, $stateParams, Session, l
     };
     // when a locale is clicked
     $scope.loadConferences = function (locale) {
+        $scope.addOrganizer = false;
         $scope.conferencesLoaded =true;
         $scope.currentLocaleId = locale._id;
         $scope.currentLocaleName = locale.name;
-        console.log('current',locale._id,"name",locale.name);
 
         localesFactory.getConferences(locale._id).then(function (conferences) {
                 $scope.conferences = conferences;
-                console.log('loaded conferences', $scope.conferences);
+
 
         });
     };
     if(localeId){
-        $scope.loadConferences(localeId);
+        //get locale by ID if a localeID has been passed to state as param
+        var locale = _.find($scope.locales, function(locale){
+            return locale._id == localeId;
+        })
+
+        //load up the conference
+        $scope.loadConferences(locale);
     }
 
-
+    $scope.newOrganizer = function(locale, index){
+        $scope.addOrganizer =true;
+        $scope.newOrganizerLocale = locale.name;
+        $scope.newOrganizerLocaleId = locale._id;
+        $scope.localeOrganizerArr = locale.organizers;
+    };
     $scope.removeConference = function(conferenceId, $index){
 
-        ConferenceFactory.removeConference(conferenceId).then(function(data){
-            console.log(data);
-        });
+        ConferenceFactory.removeConference(conferenceId);
         $scope.conferences.splice($index, 1);
 
-
-
     };
+
+
 
     $scope.removeOrganizer = function(organizerId, localeId){
         var locale = _.find($scope.locales, {_id: localeId}  );
         var organizers = locale.organizers;
         _.remove(organizers, function(organizer){
-            console.log(organizer._id);
+
             return organizerId === organizer._id;
         });
        
 
-        localesFactory.removeOrganizer(localeId, organizers);
+        localesFactory.updateOrganizer(localeId, organizers);
     };
 
     $scope.goToAdmin = function (conf_id, conf_name) {  // admin view but called "conferences"
-        console.log('go to admin view');
+
         $state.go('conferences', { id: conf_id, name: conf_name } );
     };
 });

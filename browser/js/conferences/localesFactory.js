@@ -17,19 +17,26 @@ app.factory('localesFactory', function ($http, AuthService){
 				return res.data;
 			});
 		},
-		removeOrganizer: function(localeId, organizerArr){
-			console.log(organizerArr);
+		updateOrganizer: function(localeId, organizerArr, organizerId){
+
+
 			organizerArr = organizerArr.map(function(organizer){
 				return organizer._id;
 			});
+
+            organizerArr =  _.uniq(organizerArr);
+            console.log('after uniq',organizerArr);
+            if(organizerId)
+                organizerArr.push(organizerId);
 			return $http.put('api/locale/'+localeId,{organizers: organizerArr}).then(function(res){
 				return res.data;
 			});
 
 
 		},
+
 		addOrganizer: function(localeId, organizerid){
-			
+
 			// return $http.put('api/locale/'+localeId,{organizers: organizerArr}).then(function(res){
 			// 	return res.data;
 			// });

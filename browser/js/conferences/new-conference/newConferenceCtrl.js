@@ -22,9 +22,10 @@ app.controller('NewConferenceCtrl',function ($scope, $state, $rootScope, $stateP
     $scope.createConference = function(conference, isValid) {
         if(isValid) {
             ConferenceFactory.newConference(conference).then(function(data){
-                $state.go('locales');
+
+                $state.go('locales',{localeId: $scope.localeId});
             });
-            $state.go('locales',{localeId: $scope.localeId});
+
         }
     };
 });

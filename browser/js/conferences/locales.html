@@ -16,17 +16,17 @@
 					{{organizer.name}}
 					<a ng-if="localeEdit && organizer.name!==myName" ng-click="removeOrganizer(organizer._id, locale._id)">
 						<span class="glyphicon glyphicon-remove"></span>
-					</a>	
+					</a>
 					<span ng-show="!$last">, </span>
 					
 				</span>
-				<button ng-if="localeEdit" ng-click="newOrganizer({localeId:locale._id})" class="btn btn-sm"><i class="fa fa-plus"></i></button>
+				<button ng-if="localeEdit" ng-click="newOrganizer(locale)" class="btn btn-sm"><i class="fa fa-plus"></i></button>
 				
 			</div>
 		</div>
 	</div>
 
-	<div class="col-md-6" ng-if="conferences">
+	<div class="col-md-6" ng-if="conferences && !addOrganizer">
 		<h2>Conferences for locale</h2>
 		<button ng-if="localeEdit" ui-sref="newConference({localeId:currentLocaleId, localeName: currentLocaleName})"class="btn btn-sm"><i class="fa fa-plus"></i></button>
 		<ul class="list-unstyled">
@@ -58,7 +58,14 @@
 			</div>
 		</ul>
 	</div>
+	<div class="col-md-6" ng-if="addOrganizer && localeEdit">
+		<add-organizer></add-organizer>
+
+
+
+	</div>
 </div>
+
 
 <!-- 
 
