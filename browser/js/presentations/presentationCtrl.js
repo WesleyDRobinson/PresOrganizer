@@ -82,8 +82,8 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
 
     $scope.deletePresentations = function () {
         var idsToDelete = [], deleted_ids = [];
-        $scope.presentationMedia = [];
-        angular.forEach($scope.checkboxModel, function(value, checkbox_id) {
+        $scope.presentationMedia = [];            // clear the displayed media
+        angular.forEach($scope.checkboxModel, function (value, checkbox_id) {
             if (value === true) {         // i.e. checkbox is checked
                 this.push(checkbox_id);      // push in checkbox_id which is the presentation id
             }
@@ -98,6 +98,7 @@ app.controller('PresentationCtrl',function ($scope, $stateParams, Session, Prese
             });
             $scope.checkboxModel = _.omit($scope.checkboxModel, deleted_ids);
         });
+        //ConferenceFactory.removeFromAllConfs().then(); 
         // this function should also remove presentation objects from conference timelines (using presentation _id)
 
         // should the function also check for the relevant conference and delete the user from the presenters array? 
