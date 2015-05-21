@@ -35,7 +35,7 @@ app.controller('PresentationCtrl',function ($scope, $timeout, $stateParams, Sess
 
         PresentationFactory.savePresentation($scope.currentPresentation._id, $scope.presentationMedia)
             .then(function(){
-                console.log('going here');
+
                 $scope.showPresentationSaved();
             });
 
