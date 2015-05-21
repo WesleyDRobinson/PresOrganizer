@@ -1,28 +1,40 @@
 navbar {
   display: block;
-  background: #e9b6f6;
-
+  background: #221C25;
+  border-bottom: -1px;
   night-of {
     font-size: 2.5em;
-    color: #701586;
+    color: #96a1c0;
     i {
       margin-top: 8px;
     }
   }
+  #hamburger {
+    padding: 0;
+    margin: 10px 15px 0 0;
+  }
+  .fa-bars {
+    color: #96a1c0;
+  }
   .nav > li > a {
-    color: white;
+    color: #96a1c0;
     cursor: pointer;
+    margin: auto 0;
     transition: color 0.4s, background-color 0.4s;
     &.active {
-      color: #346715;
+      color: #54725b;
     }
     &:hover {
-      color: #701586;
-      background-color: #D8A5E5;
+      color: #0c190c;
+      background-color: #5a4b61;
+      border-bottom: 1px solid #5a4b61;
     }
     &:focus {
-      color: #346715;
+      color: #54725b;
       background: transparent;
+    }
+    &:first-child {
+      //margin-left: 2%;
     }
   }
 
@@ -34,9 +46,9 @@ navbar {
   .logout {
     float: right;
     margin-top: 8px;
-    color: #701586;
+    color: #96a1c0;
     a {
-      color: #701586;
+      color: #96a1c0;
       cursor: pointer;
     }
   }

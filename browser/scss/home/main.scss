@@ -1,27 +1,29 @@
 #home {
   text-align: center;
-  h1 {
-    color: #701586;
-  }
 
-  button {
-    background-color: #BBF082;
+  .main-heading {
+
+  }
+  h1 {
+
     color: #701586;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    //border: 10px double #858ea3;
+    //border-radius: 10px;
+    //height: 25vh;
+    //background: #221C25;
+
   }
 
   .sign-log{
+    text-wrap: none;
     display: inline-block;
-    color: #701586;
-    font-size: 1.4em;
+    color: #858ea3;
+    font-size: 1.3em;
     cursor: default;
-    background-color: #e9b6f6;
-    border: groove #701586 1px;
+    background-color: #221C25;
     border-radius: 4px;
-    margin: 2% auto;
-    width: 15%;
-    padding: 2% 0;
+    margin: 2% 2%;
+    min-width: 15%;
+    padding: 2% 2%;
   }
 }
