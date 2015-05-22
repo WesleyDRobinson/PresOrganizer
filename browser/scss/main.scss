@@ -7,6 +7,20 @@ a:hover {
   cursor: default;
 }
 
+
+.img-thumbnail {
+  display: inline-block;
+  border: 0;
+  width: 120px;
+  height: 110px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  padding:0px;
+  -webkit-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
 html, body, #primary-ui-view {
 	height: 100%;
     background-color: #E6E9EF;

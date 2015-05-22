@@ -1,17 +1,20 @@
 #presentations {
   cursor: default;
 
-  .presentation-placeholder{
-    margin-top:10px;
-    display: inline-block;
-    float: left;
-  }
+
+  //.as-sortable-placeholder{
+  //  margin-top:10px;
+  //  background-color:red;
+  //  display: inline-block;
+  //  float: left;
+  //}
 
   .presentation-thumb{
 
     display: inline-block;
-    width: 124px;
+    width: 120px;
     height: 110px;
+
     float: left;
     margin-top: 10px;
     margin-bottom:25px;
@@ -19,12 +22,36 @@
 
   }
 
+
+
+  .as-sortable-placeholder{
+
+    margin-top:20px;
+    width: 124px;
+    height: 110px;
+    float: left;
+    display: inline-block;
+  }
+
+
+  .presentation-a-s{
+    margin-top:10px;
+
+    display: inline-block;
+    float: left;
+  }
   .presentation-img{
     width: 122px;
     height: 110px;
     margin-right:6px;
+    border-radius: 0px;
   }
   .create-presentation-form {
     transition:all linear 0.5s;
   }
+}
+.presentation-floppy{
+    font-size:20px;
+    padding-left:20px;
+
 }
