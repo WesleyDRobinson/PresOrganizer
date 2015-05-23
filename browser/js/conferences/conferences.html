@@ -15,7 +15,7 @@
 				</div>
 
 				<div class="col-sm-5">
-					<div>Details:</div>
+					<div><strong>Details:</strong></div>
 					<div class="row">
 						<div class="col-sm-6" ng-click="editConfInfo()"><i class="fa fa-calendar"></i> {{ currentConf.date | date:'MMM d, y'}}</div>
 						<div class="col-sm-6" ng-click="editConfInfo()"><i class="fa fa-map-marker"></i> {{ currentConf.venue }}</div>
@@ -39,7 +39,7 @@
 					</div>
 
 					<div class="col-sm-5">
-						<div>Details:</div>
+						<div><strong>Details:</strong></div>
 						<div class="row">
 							<div class="col-sm-6"><i class="fa fa-calendar"></i> 
 								<input class="form-control form-control-sm" ng-model="currentConf.date" type="date" value="{{ currentConf.date | date:'MMM d, y h:mm'}}">
