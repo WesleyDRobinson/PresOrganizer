@@ -3,9 +3,6 @@
 		font-size: 32px;
 		margin-top: 5px;
 	}
-	.form-control {
-		//width: 90%;
-	}
 	.form-control-lg {
 		font-size: 32px;
 		height: auto;
@@ -21,7 +18,17 @@
 	}
 
 	#timeline-ul {
-		min-height: 40vh;
+		border-style: inset;
+		min-height: 22vh;
+		background-color: white;
+		padding: 10px;
+	}
+	#default-message {
+		//color: #d1e3fd;
+	}
+
+	.delete-item {
+		color: #333;
 	}
 
 	.as-sortable-item, .as-sortable-dragging, .as-sortable-drag {
@@ -36,8 +43,26 @@
 		color: red;
 		border-color: red;
 	}
-}
 
+	.admin-panel {
+		background-clip: padding-box;
+    	border: 10px solid transparent;
+		background-color: #B8B8B8;
+		padding-bottom: 10px;
+		min-height: 40vh;
+		.admin-panel-h3 {
+			font-size: 14px;
+			margin-bottom: 5px;
+			margin-top: 0;
+			font-weight: bold;
+		}
+	}
+	.admin-panel-header {
+		background-color: #333;
+		color: #d1e3fd;
+		margin-bottom: 10px;
+	}
+}
 
 #projector-preview img {
 	max-width: 100%;

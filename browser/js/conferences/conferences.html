@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12">
-		<button class="btn btn-link" ng-click="goToLocales()"><i class="fa fa-chevron-left"></i> Return to My Locales</button>
+		<button class="btn btn-link no-left-padding" ng-click="goToLocales()"><i class="fa fa-chevron-left"></i> Return to My Locales</button>
 	</div>
 </div>
 
@@ -24,7 +24,6 @@
 
 			</div>
 			<hr>
-
 		</div>
 
 		<!-- edit mode -->
@@ -53,44 +52,20 @@
 				</form>
 			</div>
 			<hr>
-
-		</div>
-
-
-		<!-- timeline column -->
-		<div class="col-sm-6 col-md-4">
-			<h2>Timeline <span class="pull-right" ng-show="saved"><i class="fa fa-floppy-o"></i></span></h2>
-
-			<form name="timeline-form" ng-mouseup="saveTimeLine()">
-				<ul id="timeline-ul" as-sortable ng-model="timeLine">
-					<li ng-class="isCurrentItem($index + 1) ? 'current-item' : ''" ng-repeat="timeLineItem in timeLine" as-sortable-item>
-						<div as-sortable-item-handle>
-							<span ng-if="!timeLineItem.presentation">
-								{{$index + 1}}. {{timeLineItem.title}}
-							</span>
-							<span ng-if="timeLineItem.presentation">
-								{{$index + 1}}. {{ timeLineItem.presentation.presenter.name }}: 
-								<i>{{ timeLineItem.presentation.title }}</i>
-							</span>
-							<a data-no-drag ng-click="removeCard($index)">
-								<span class="glyphicon glyphicon-remove"></span>
-							</a>
-						</div>
-					</li>
-				</ul>
-			</form>	
 		</div>
 
 
 		<!-- editing and preview column -->
-		<div class="col-sm-6 col-md-4">
-			<div class="row">
-				<div class="col-md-12">
+		<div id="admin-panel-1" class="col-md-4 admin-panel">
+			<div class="row admin-panel-header">
+				<div class="col-md-12 ">
 					<h2>Items</h2>
 				</div>
+			</div>
 
-				<div  id="control-items">
-					<h3>Controls</h3>
+			<div class="row">
+				<div class="col-md-12" id="control-items">
+					<h3 class="admin-panel-h3">Controls</h3>
 					<ul as-sortable="controlItemOptions" ng-model="controlItems">
 						<li ng-repeat="controlItem in controlItems" as-sortable-item as-sortable-item-handle>
 							<span >
@@ -100,8 +75,8 @@
 					</ul>
 				</div>
 
-				<div class="col-xs-6 col-md-12" id="presentation-items">
-					<h3>Presentations</h3>
+				<div class="col-md-12" id="presentation-items">
+					<h3 class="admin-panel-h3">Presentations</h3>
 					<ul as-sortable="conferenceOptions" ng-model="conferencePresentations">
 						<li ng-repeat="presentation in conferencePresentations" as-sortable-item>
 							<div as-sortable-item-handle>
@@ -112,39 +87,81 @@
 					</ul>
 				</div>
 			</div>
-
 		</div> <!-- end editing and preview column -->
 
-		<div class="col-md-4">
-			<div id="projector-preview" ng-controller="ProjectorCtrl">
-				<h2>Projector  
-					<div class="btn-group pull-right" role="group" aria-label="...">
-						<button ng-click="playToggle()" class="btn" ng-class="playing ? '' : 'btn-success'">
-							<i ng-class="playing ? 'fa fa-pause' : 'fa fa-play'"></i>
-						</button>
-						<a class="btn btn-default" target="_blank" ui-sref="projector({id: currentConf._id })">
-							<i class="fa fa-video-camera"></i>
-						</a>
-					</div>
-				</h2>
+		<!-- timeline column -->
+		<div id="admin-panel-2" class="col-md-4 admin-panel">
+			<div class="row admin-panel-header">
+				<div class="col-md-12">
+					<h2>Timeline <span class="pull-right" ng-show="saved"><i class="fa fa-floppy-o"></i></span></h2>
+				</div>
+			</div>
 
+			<form name="timeline-form" ng-mouseup="saveTimeLine()">
+				<ul id="timeline-ul" as-sortable ng-model="timeLine">
+					
+					<!-- default mesaage -->
+					<div id="default-message" ng-if="!timeLine.length">
+						Start building your timeline <br> by dragging in <strong>Controls</strong> and <strong>Presentations</strong>.						
+					</div>
+
+					<li ng-class="isCurrentItem($index + 1) ? 'current-item' : ''" ng-repeat="timeLineItem in timeLine" as-sortable-item>
+						<div as-sortable-item-handle>
+							<span ng-if="!timeLineItem.presentation">
+								{{$index + 1}}. {{timeLineItem.title}}
+							</span>
+							<span ng-if="timeLineItem.presentation">
+								{{$index + 1}}. {{ timeLineItem.presentation.presenter.name }}: 
+								<i>{{ timeLineItem.presentation.title }}</i>
+							</span>
+							<a class="data-no-drag pull-right delete-item" ng-click="removeCard($index)">
+								<span></span><i class="fa fa-trash-o"></i></span>
+							</a>
+						</div>
+					</li>
+				</ul>
+			</form>	
+		</div>
+
+		<!-- projector column -->
+		<div id="admin-panel-3" class="col-md-4 admin-panel">
+			<div id="projector-preview" ng-controller="ProjectorCtrl">
+				<div class="row admin-panel-header">
+					<div class="col-md-12">
+						<h2>Projector  
+							<div class="btn-group pull-right" role="group" aria-label="...">
+								<button ng-click="playToggle()" class="btn" ng-class="playing ? '' : 'btn-success'">
+									<i ng-class="playing ? 'fa fa-pause' : 'fa fa-play'"></i>
+								</button>
+								<a class="btn btn-default" target="_blank" ui-sref="projector({id: currentConf._id })">
+									<i class="fa fa-video-camera"></i>
+								</a>
+							</div>
+						</h2>
+					</div>
+				</div>
+				
 				<div class="row">
 
 					<!-- Current slide -->
 					<div class="col-xs-6">
-						<h3>Current</h3>
+						<h3 class="admin-panel-h3">Current</h3>
 
-					    <img 	ng-repeat="currentSlide in currentTimelineFlat track by $index" 
+						<div class="preview-screen">
+						    <img 	ng-repeat="currentSlide in currentTimelineFlat track by $index" 
 					         	ng-show="isCurrentSlideIndex($index)" 
 					         	ng-src="{{currentSlide.url}}">
+					    </div>
 					</div>
 
 					<!-- Next slide -->
 					<div class="col-xs-6">
-						<h3>Next</h3>
-						<img 	ng-repeat="nextSlide in currentTimelineFlat track by $index" 
+						<h3 class="admin-panel-h3">Next</h3>
+						<div class="preview-screen">
+							<img 	ng-repeat="nextSlide in currentTimelineFlat track by $index" 
 					         	ng-show="isNextSlideIndex($index)" 
 					         	ng-src="{{nextSlide.url}}">
+					    </div>
 					</div>
 				</div>
 			</div>

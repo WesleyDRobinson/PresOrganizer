@@ -35,7 +35,7 @@ h2, h3, p, div {
 }
 
 hr {
-  //border-top: 1px solid black;
+  border-top: 1px solid black;
 }
 
 @mixin clearfix {
@@ -63,6 +63,10 @@ hr {
 
 .fade-in{
   opacity:100;
+}
+
+.no-left-padding {
+  padding-left: 0;
 }
 
 
