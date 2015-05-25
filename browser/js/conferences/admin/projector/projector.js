@@ -4,21 +4,6 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
     var PAUSED = false;
     var socket = io();
 
-    $scope.currentIndex = 0;
-    $scope.isCurrentSlideIndex = isCurrentSlideIndex;
-    $scope.isNextSlideIndex = isNextSlideIndex;
-    $scope.setCurrentSlideIndex = setCurrentSlideIndex;
-
-    $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.timeLine);
-    
-    $scope.$on('refresh-projector-preview', function() {
-        //console.log("1", $scope.currentTimelineFlat);
-        $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.timeLine);
-        //console.log("2", $scope.currentTimelineFlat);
-        $scope.isCurrentSlideIndex();
-        $scope.isNextSlideIndex();
-    });
-
     function setCurrentSlideIndex (index) {
         $scope.currentIndex = index;
     }
@@ -36,13 +21,13 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
             return 0 === index;
         }
         else if ($scope.currentTimelineFlat[$scope.currentIndex + 1].title && $scope.currentTimelineFlat[$scope.currentIndex + 1].title === "pause") {
-            return $scope.currentIndex + 2 === index;  
+            return $scope.currentIndex + 2 === index;
         }
-        else return $scope.currentIndex + 1 === index;  
+        else return $scope.currentIndex + 1 === index;
     }
 
 	function nextSlide () {
-        // update the item number 
+        // update the item number
         if($scope.currentTimelineFlat[$scope.currentIndex].itemNumber) {
             $scope.updateItemNumber($scope.currentTimelineFlat[$scope.currentIndex].itemNumber);
             console.log($scope.currentTimelineFlat[$scope.currentIndex].itemNumber);
@@ -53,7 +38,7 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
         var next = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? $scope.currentIndex + 1 : 0;
 
         if ($scope.currentTimelineFlat[$scope.currentIndex + 1].title && $scope.currentTimelineFlat[$scope.currentIndex + 1].title === "pause") {
-            
+
 
             // pause
             PAUSED = true;
@@ -71,9 +56,23 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
         $scope.playButtonText = "Pause";
     }
 
+    $scope.currentIndex = 0;
+    $scope.isCurrentSlideIndex = isCurrentSlideIndex;
+    $scope.isNextSlideIndex = isNextSlideIndex;
+    $scope.setCurrentSlideIndex = setCurrentSlideIndex;
+    $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.timeLine);
     $scope.loadSlides = loadSlides;
-    
-    $scope.killTimer = function () {   // now working for some reason
+
+    $scope.$on('refresh-projector-preview', function() {
+        //console.log("1", $scope.currentTimelineFlat);
+        $scope.currentTimelineFlat = ProjectorModeFactory.timelineFlat($scope.timeLine);
+        //console.log("2", $scope.currentTimelineFlat);
+        $scope.isCurrentSlideIndex();
+        $scope.isNextSlideIndex();
+    });
+
+    $scope.killTimer = function () {
+    // now working for some reason
         if (TIMER) { 
             //console.log('kill');
             $timeout.cancel(TIMER);
@@ -88,7 +87,8 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
         }
     };
 
-    $scope.restart = function () {   // must hide when presentation is playing
+    $scope.restart = function () {
+    // must hide when presentation is playing
     	//console.log('restart');
         if (PAUSED) {
             $scope.currentIndex += 2;    // must consider edge case (phase 2)
