@@ -1,52 +1,57 @@
-<div class="fluid-container">
-        <h1>Add New Conference For {{localeName}}</h1>
-        <form id="conference-form" name="conferenceForm"
-              ng-submit="conferenceForm.$valid && createConference(conference, conferenceForm.$valid)" novalidate>
-            <div class="row">
-            <div class="col-sm-4">
-                <div class="form-group"
-                     ng-class="{ 'has-error' : conferenceForm.$invalid && !conferenceForm.$pristine }">
+<div class="row">
+  <div class="col-md-12">
+    <h1>Add New Conference For {{localeName}}</h1>
+  </div>
 
-                    <label class="control-label" for="add-conf-title">
-                        Conference Title*
-                    </label>
-                    <input
-                            type="text"
-                            ng-model="conference.name"
-                            class="form-control"
-                            id="add-conf-title"
-                            name="add-conf-title"
-                            placeholder="Conference Name"
-                            required
-                            ng-required="true">
-                </div>
-            </div>
+  <div class="col-md-12">
+    <form id="conference-form" name="conferenceForm"
+          ng-submit="conferenceForm.$valid && createConference(conference, conferenceForm.$valid)" novalidate>
+        
+        <div class="row">
+          <div class="col-sm-4">
+              <div class="form-group"
+                   ng-class="{ 'has-error' : conferenceForm.$invalid && !conferenceForm.$pristine }">
 
-            <div class="col-sm-4">
-                <div class="form-group">
+                  <label class="control-label" for="add-conf-title">
+                      Conference Title*
+                  </label>
+                  <input
+                          type="text"
+                          ng-model="conference.name"
+                          class="form-control"
+                          id="add-conf-title"
+                          name="add-conf-title"
+                          placeholder="Conference Name"
+                          required
+                          ng-required="true">
+              </div>
+          </div>
 
-                    <label for="add-conf-venue">Venue Name</label>
-                    <input type="text"
-                           ng-model="conference.venue"
-                           class="form-control"
-                           id="add-conf-venue"
-                           placeholder="Venue Name">
-                </div>
-            </div>
+          <div class="col-sm-4">
+              <div class="form-group">
 
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label for="add-conf-date">Date</label>
-                    <input type="date"
-                           ng-model="conference.date"
-                           class="form-control"
-                           id="add-conf-date"
-                           placeholder="Date">
-                </div>
-            </div>
+                  <label for="add-conf-venue">Venue Name</label>
+                  <input type="text"
+                         ng-model="conference.venue"
+                         class="form-control"
+                         id="add-conf-venue"
+                         placeholder="Venue Name">
+              </div>
+          </div>
 
-            <button type="submit" class="btn" ng-disabled="conferenceForm.$invalid">Submit</button>
-        </form>
-    </div>
-</div>
+          <div class="col-sm-4">
+              <div class="form-group">
+                  <label for="add-conf-date">Date</label>
+                  <input type="date"
+                         ng-model="conference.date"
+                         class="form-control"
+                         id="add-conf-date"
+                         placeholder="Date">
+              </div>
+          </div>
+        </div>
+        
+        <button type="submit" class="btn" ng-disabled="conferenceForm.$invalid">Submit</button>
+    </form>
+  </div>
 </div>
