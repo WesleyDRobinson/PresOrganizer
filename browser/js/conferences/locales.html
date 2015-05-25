@@ -67,27 +67,39 @@
 				<div class="col-xs-4"><h3 class="conference-column-header">Conference name</h3></div>
 				<div class="col-xs-4"><h3 class="conference-column-header">Date</h3></div>
 				<div class="col-xs-4"><h3 class="conference-column-header">Venue</h3></div>
-
-				<li class="clearfix" ng-repeat="conference in conferences | orderBy:'-date'">
-					<div class="col-xs-4">
-						<a ng-click="goToAdmin(conference._id, conference.name)">{{conference.name}}</a> 
-						<a ng-click="removeConference(conference._id, $index)" class="pull-right delete-item">
-							<span><i class="fa fa-trash-o"></i></span>
-						</a>
-						
-
-					</div>
-
+			</div>
+			
+			<li class="clearfix row" ng-repeat="conference in conferences | orderBy:'-date'">
+				<div class="col-xs-4">
+					<a ng-click="goToAdmin(conference._id, conference.name)">{{conference.name}}</a> 
+					<a ng-click="removeConference(conference._id, $index)" class="pull-right delete-item">
+						<span><i class="fa fa-trash-o"></i></span>
+					</a>
 					
-					<div class="col-xs-4">
-						<i>{{ conference.date | date:'MMM d, y' }}</i>
-					</div>
-					<div class="col-xs-4">
-						<i>@ {{ conference.venue }}</i>
-					</div>
-				</li>
-				<div class="col-xs-4 "ng-if="conferences.length===0">No conferences for this locale</div>
 
+				</div>
+
+				
+				<div class="col-xs-4">
+					<i>{{ conference.date | date:'MMM d, y' }}</i>
+				</div>
+				<div class="col-xs-4">
+					<i>@ {{ conference.venue }}</i>
+				</div>
+			</li>
+			
+			<div class="row">
+				<div class="col-xs-12" ng-if="conferences.length===0">
+					<div class="panel panel-warning">
+						<div class="panel-heading"><i class="fa fa-info-circle"></i> No conferences for this locale.</div>
+						<div class="panel-body">
+							Get started by adding a conference.
+							<div class="text-center">
+								<button ui-sref="newConference({localeId:currentLocaleId, localeName: currentLocaleName})" class="btn btn-default"><i class="fa fa-plus"></i> Add conference</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</ul>
 	</div>
