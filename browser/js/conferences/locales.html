@@ -4,8 +4,8 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h1>My Locales
-					<button ng-if="!localeEdit"  ng-click="toggleEdit();" class="btn btn-sm edit-btn">Edit</button>
-					<button class="btn btn-sm edit-btn" ng-click="toggleEdit()" ng-if="localeEdit">Editing</button>
+					<!-- <button ng-if="!localeEdit"  ng-click="toggleEdit();" class="btn btn-sm edit-btn">Edit</button>
+					<button class="btn btn-sm edit-btn" ng-click="toggleEdit()" ng-if="localeEdit">Editing</button> -->
 				</h1>
 			</div>
 			
@@ -36,13 +36,13 @@
 						<div><strong>Organizers:</strong>
 							<span ng-repeat="organizer in locale.organizers">
 								{{organizer.name}}
-								<a ng-if="localeEdit && organizer.name!==myName" ng-click="removeOrganizer(organizer._id, locale._id)">
+								<a ng-if="organizer.name!==myName" ng-click="removeOrganizer(organizer._id, locale._id)">
 									<span><i class="fa fa-trash-o"></i></span>
 								</a>
 								<span ng-show="!$last">, </span>
 								
 							</span>
-							<button ng-if="localeEdit" ng-click="newOrganizer(locale)" class="btn btn-sm btn-link"><i class="fa fa-plus"></i></button>
+							<button ng-click="newOrganizer(locale)" class="btn btn-sm btn-link"><i class="fa fa-plus"></i></button>
 						</div>
 					</div>					
 				</div>
