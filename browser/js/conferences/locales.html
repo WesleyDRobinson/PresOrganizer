@@ -62,11 +62,11 @@
 		</div>
 	</div>
 
-	<div class="col-md-6" ng-if="conferences && !addOrganizer && !addConference">
+	<div id="conferences-list" class="col-md-6" ng-if="conferences && !addOrganizer && !addConference">
 		<h1>Conferences for {{currentLocaleName}}</h1>
 		<!-- <button ng-if="localeEdit" ui-sref="newConference({localeId:currentLocaleId, localeName: currentLocaleName})"class="btn btn-sm"><i class="fa fa-plus"></i></button> -->
 		<ul class="list-unstyled">
-			<div class="row">
+			<div class="row conferences-list-header">
 				<div class="col-xs-4"><h3 class="conference-column-header">Conference name</h3></div>
 				<div class="col-xs-4"><h3 class="conference-column-header">Date</h3></div>
 				<div class="col-xs-4"><h3 class="conference-column-header">Venue</h3></div>
