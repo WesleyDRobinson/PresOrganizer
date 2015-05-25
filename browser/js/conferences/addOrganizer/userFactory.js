@@ -3,7 +3,7 @@ app.factory('UserFactory',function($http){
         getAllUsers: function(){
             return $http.get('/api/user').then(function(res){
                 return res.data;
-            })
+            });
         }
-    }
+    };
 });

@@ -31,9 +31,10 @@ app.controller('UploadsCtrl', function ($scope, Upload, UploadsFactory) {
                         $scope.presentationMedia.push(UploadsFactory.createMediaItemFromUrl(url));
                     });
                 } else {
+                    var alert;
                     alert("Something went pretty wrong here." +
                         "Please wait a few minutes and try again." +
-                        "Hopefully time solves the problem!")
+                        "Hopefully time solves the problem!");
                 }
                 $scope.loadingAndConverting = false;
             });
