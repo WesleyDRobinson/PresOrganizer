@@ -18,10 +18,13 @@
 	}
 
 	#timeline-ul {
-		border-style: inset;
+		border-style: solid;
+	    border-width:1px;
 		min-height: 22vh;
+	    border-radius: 4px;
 		background-color: white;
 		padding: 10px;
+	    border-color:darkgrey;
 	}
 	#default-message {
 		//color: #d1e3fd;
