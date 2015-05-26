@@ -17,7 +17,7 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
         dragStart: function(event){
         },
         itemMoved: function (event) {
-            $scope.controlItems = [{title:'pause'},{title:'loopStart'},{title:'loopEnd'}];
+            $scope.controlItems = [{title:'Pause'},{title:'Loop Start'},{title:'Loop End'}];
         },
         orderChanged: function (event) {  
         },
