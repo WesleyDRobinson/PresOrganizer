@@ -3,11 +3,12 @@ var fs = require('fs');
 var AWS = require('aws-sdk');
 var sbuff = require('simple-bufferstream');
 var path = require('path');
+var keys =require('./keys.js');
 
-var secret_s3_key = require(path.join(__dirname, '../../../env')).S3.SECRET_KEY;
-var access_s3_key = require(path.join(__dirname, '../../../env')).S3.ACCESS_KEY;
-var bucket_s3 = require(path.join(__dirname, '../../../env')).S3.BUCKET;
-var cloud_key = require(path.join(__dirname, '../../../env')).CLOUD_CONVERT;
+var secret_s3_key = keys.secret_key;
+var access_s3_key = keys.access_key;
+var bucket_s3 = keys.bucket;
+var cloud_key = keys.cloudKey;
 var cloudconvert = new (require('cloudconvert'))(cloud_key);
 
 module.exports = router;

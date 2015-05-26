@@ -1,5 +1,5 @@
 app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, ProjectorModeFactory) {
-	var INTERVAL = 500;
+	var INTERVAL = 2000;
 	var TIMER;
     var PAUSED = false;
     var socket = io();
