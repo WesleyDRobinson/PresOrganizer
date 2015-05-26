@@ -35,7 +35,7 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
         if ($scope.currentIndex + 1 >= $scope.currentTimelineFlat.length){
             return 0 === index;
         }
-        else if ($scope.currentTimelineFlat[$scope.currentIndex + 1].title && $scope.currentTimelineFlat[$scope.currentIndex + 1].title === "pause") {
+        else if ($scope.currentTimelineFlat[$scope.currentIndex + 1].title && $scope.currentTimelineFlat[$scope.currentIndex + 1].title === "Pause") {
             return $scope.currentIndex + 2 === index;  
         }
         else return $scope.currentIndex + 1 === index;  
@@ -52,7 +52,7 @@ app.controller('ProjectorCtrl', function ($scope, $timeout,$stateParams, Project
 
         var next = ($scope.currentIndex < $scope.currentTimelineFlat.length - 1) ? $scope.currentIndex + 1 : 0;
 
-        if ($scope.currentTimelineFlat[$scope.currentIndex + 1].title && $scope.currentTimelineFlat[$scope.currentIndex + 1].title === "pause") {
+        if ($scope.currentTimelineFlat[$scope.currentIndex + 1].title && $scope.currentTimelineFlat[$scope.currentIndex + 1].title === "Pause") {
             
 
             // pause
