@@ -2,7 +2,7 @@ app.controller('ConferencesCtrl',function ($q, $scope, $state, $stateParams, Con
 
 	$scope.showConferences = false;
     $scope.timeLine = [];
-    $scope.controlItems = [{title:'pause'},{title:'loopStart'},{title:'loopEnd'}];
+    $scope.controlItems = [{title:'Pause'},{title:'Loop Start'},{title:'Loop End'}];
 
     // fetchConference is a resolve method that returns an array of one element
     // this resolves before the state loads
