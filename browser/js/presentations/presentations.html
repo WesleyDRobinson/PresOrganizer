@@ -32,9 +32,9 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div ng-show="creating"  class="row">
                     <div class="col-md-12 content-panel">
-                        <div ng-show="creating" class="row create-presentation-form">
+                        <div class="row create-presentation-form">
                             <div class="row content-panel-header">
                                 <h3>Create Presentation</h3>
                             </div>
@@ -66,13 +66,14 @@
                             </form>
                         </div>
 
-                        <div class="row uploads-panel">
+                       
+                    </div>
+                </div>
+                 <div class="row uploads-panel">
                             <div ng-if="editing">
                                 <upload-box></upload-box>
                             </div>
                         </div>
-                    </div>
-                </div>
 
 
             </div>
