@@ -28,7 +28,8 @@ app.controller('localesCtrl', function ($scope, $state, $stateParams, Session, l
     // when a locale is clicked
     $scope.loadConferences = function (locale) {
         $scope.addOrganizer = false;
-        $scope.conferencesLoaded =true;
+        $scope.addConference = false;
+        $scope.conferencesLoaded = true;
         $scope.currentLocaleId = locale._id;
         $scope.currentLocaleName = locale.name;
 
@@ -49,7 +50,8 @@ app.controller('localesCtrl', function ($scope, $state, $stateParams, Session, l
     }
 
     $scope.newOrganizer = function(locale, index){
-        $scope.addOrganizer =true;
+        $scope.addOrganizer = true;
+        $scope.addConference = false;
         $scope.newOrganizerLocale = locale.name;
         $scope.newOrganizerLocaleId = locale._id;
         $scope.localeOrganizerArr = locale.organizers;
@@ -61,6 +63,29 @@ app.controller('localesCtrl', function ($scope, $state, $stateParams, Session, l
 
     };
 
+    $scope.addConference = false;
+    $scope.loadNewConferenceForm = function(locale) {
+        $scope.addConference = true;
+        $scope.conferenceToAdd = {};
+
+        $scope.currentLocaleId = locale._id;
+        $scope.currentLocaleName = locale.name;
+    };
+
+    $scope.createConference = function(conference, isValid) {
+        console.log(conference);
+        console.log(isValid);
+
+        conference.locale = $scope.currentLocaleId;
+
+        if(isValid) {
+            ConferenceFactory.newConference(conference).then(function(data){
+                $scope.addConference = false;
+                $state.go('locales',{localeId: $scope.currentLocaleId});
+            });
+
+        }
+    };
 
 
     $scope.removeOrganizer = function(organizerId, localeId){

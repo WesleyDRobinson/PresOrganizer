@@ -1,66 +1,178 @@
 
-<div class="row">
+<div id="locales-dashboard" class="row">
 	<div class="col-md-6">
-		<h1>My Locales</h1> <button ng-if="!localeEdit"  ng-click="toggleEdit();" class="btn btn-sm edit-btn">Edit</button>
-		<button class="btn btn-sm edit-btn" ng-click="toggleEdit()" ng-if="localeEdit">Editing</button>
-		<div ng-repeat="locale in locales">
-			<h2>
-				<a ng-click="loadConferences(locale)">{{locale.name}}</a>
-			</h2>
+		<div class="row">
+			<div class="col-md-12">
+				<h1>My Locales
+					<!-- <button ng-if="!localeEdit"  ng-click="toggleEdit();" class="btn btn-sm edit-btn">Edit</button>
+					<button class="btn btn-sm edit-btn" ng-click="toggleEdit()" ng-if="localeEdit">Editing</button> -->
+				</h1>
+			</div>
 			
-			<div><strong>Description:</strong> {{locale.description}}</div>
-			<div><strong>Organizers:</strong>
-				<span ng-repeat="organizer in locale.organizers">
-					{{organizer.name}}
-					<a ng-if="localeEdit && organizer.name!==myName" ng-click="removeOrganizer(organizer._id, locale._id)">
-						<span class="glyphicon glyphicon-remove"></span>
-					</a>
-					<span ng-show="!$last">, </span>
-					
-				</span>
-				<button ng-if="localeEdit" ng-click="newOrganizer(locale)" class="btn btn-sm"><i class="fa fa-plus"></i></button>
+			
+			<div ng-repeat="locale in locales" class="col-md-12 locales-panel">
+				<div class="row locales-panel-header">
+					<div class="col-md-12">
+						<h2>
+							<a ng-click="loadConferences(locale)">{{locale.name}}</a>
+							<!-- <button ng-click="loadConferences(locale)" class="btn btn-link pull-right">View conferences</button> -->
+<!-- 							<span class="dropdown">
+								<button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown">
+									<i class="fa fa-cog"></i>
+								</button>
+
+								<ul class="dropdown-menu" role="menu">
+								    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit locale description</a></li>
+								    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit organizer list</a></li>
+								</ul>
+							</span> -->
+						</h2>
+					</div>
+				</div>
 				
+				<div class="row">
+					<div class="col-md-12">
+						<div><strong>Description:</strong> {{locale.description}}</div>
+						<div><strong>Organizers:</strong>
+							<span ng-repeat="organizer in locale.organizers">
+								{{organizer.name}}
+								<a ng-if="organizer.name!==myName" ng-click="removeOrganizer(organizer._id, locale._id)">
+									<span><i class="fa fa-trash-o"></i></span>
+								</a>
+								<span ng-show="!$last">, </span>
+								
+							</span>
+							<button ng-click="newOrganizer(locale)" class="btn btn-sm btn-link"><i class="fa fa-plus"></i></button>
+						</div>
+					</div>					
+				</div>
+				
+				<div class="row button-row">
+					<div class="col-md-6 text-center">
+						<button ng-click="loadConferences(locale)" class="btn btn-default"><i class="fa fa-list-ol"></i> View conferences</button>
+					</div>
+					<div class="col-md-6 text-center">
+						<!-- ui- sref="newConference({localeId: locale._id, localeName: locale.name})" -->
+						<button ng-click="loadNewConferenceForm(locale)" class="btn btn-default">
+							<i class="fa fa-plus"></i> Add conference
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="col-md-6" ng-if="conferences && !addOrganizer">
+	<div id="conferences-list" class="col-md-6" ng-if="conferences && !addOrganizer && !addConference">
 		<h1>Conferences for {{currentLocaleName}}</h1>
-		<button ng-if="localeEdit" ui-sref="newConference({localeId:currentLocaleId, localeName: currentLocaleName})"class="btn btn-sm"><i class="fa fa-plus"></i></button>
+		<!-- <button ng-if="localeEdit" ui-sref="newConference({localeId:currentLocaleId, localeName: currentLocaleName})"class="btn btn-sm"><i class="fa fa-plus"></i></button> -->
 		<ul class="list-unstyled">
-			<div class="row">
+			<div class="row conferences-list-header">
 				<div class="col-xs-4"><h3 class="conference-column-header">Conference name</h3></div>
 				<div class="col-xs-4"><h3 class="conference-column-header">Date</h3></div>
 				<div class="col-xs-4"><h3 class="conference-column-header">Venue</h3></div>
-
-				<li class="clearfix" ng-repeat="conference in conferences | orderBy:'-date'">
-					<div class="col-xs-4">
-						<a ng-click="goToAdmin(conference._id, conference.name)">{{conference.name}}</a> 
-						<a ng-if="localeEdit" ng-click="removeConference(conference._id, $index)">
-									<span class="glyphicon glyphicon-remove"></span>
-						</a>
-						
-
-					</div>
-
+			</div>
+			
+			<li class="clearfix row" ng-repeat="conference in conferences | orderBy:'-date'">
+				<div class="col-xs-4">
+					<a ng-click="goToAdmin(conference._id, conference.name)">{{conference.name}}</a> 
+					<a ng-click="removeConference(conference._id, $index)" class="pull-right delete-item">
+						<span><i class="fa fa-trash-o"></i></span>
+					</a>
 					
-					<div class="col-xs-4">
-						<i>{{ conference.date | date:'MMM d, y' }}</i>
-					</div>
-					<div class="col-xs-4">
-						<i>@ {{ conference.venue }}</i>
-					</div>
-				</li>
-				<div class="col-xs-4 "ng-if="conferences.length===0">No conferences for this locale</div>
 
+				</div>
+
+				
+				<div class="col-xs-4">
+					<i>{{ conference.date | date:'MMM d, y' }}</i>
+				</div>
+				<div class="col-xs-4">
+					<i>@ {{ conference.venue }}</i>
+				</div>
+			</li>
+			
+			<div class="row">
+				<div class="col-xs-12" ng-if="conferences.length===0">
+					<div class="panel panel-warning">
+						<div class="panel-heading"><i class="fa fa-info-circle"></i> No conferences for this locale.</div>
+						<div class="panel-body">
+							Get started by adding a conference.
+							<div class="text-center">
+								<button ui-sref="newConference({localeId:currentLocaleId, localeName: currentLocaleName})" class="btn btn-default"><i class="fa fa-plus"></i> Add conference</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</ul>
 	</div>
-	<div class="col-md-6" ng-if="addOrganizer && localeEdit">
+
+	<!-- Add organizer -->
+	<div class="col-md-6" ng-if="addOrganizer && !addConference">
 		<add-organizer></add-organizer>
+	</div>
 
+	<!-- Add conference -->
+	<div class="col-md-6" ng-if="addConference">
+		<div class="row">
+		
+			<div class="col-md-12">
+				<h1>Add new conference for {{ currentLocaleName }}</h1>
+			</div>
 
+			<div class="col-md-12">
+				<form id="conference-form" name="conferenceForm"
+				      ng-submit="conferenceForm.$valid && createConference(conferenceToAdd, conferenceForm.$valid)" novalidate>
+				    <div class="row">
+				      <div class="col-sm-6">
+				          <div class="form-group"
+				               ng-class="{ 'has-error' : conferenceForm.$invalid && !conferenceForm.$pristine }">
 
+				              <label class="control-label" for="add-conf-title">
+				                  Conference Title*
+				              </label>
+				              <input
+				                      type="text"
+				                      ng-model="conferenceToAdd.name"
+				                      class="form-control"
+				                      id="add-conf-title"
+				                      name="add-conf-title"
+				                      placeholder="Conference Name"
+				                      required
+				                      ng-required="true">
+				          </div>
+				      </div>
+
+				      <div class="col-sm-6">
+				          <div class="form-group">
+
+				              <label for="add-conf-venue">Venue Name</label>
+				              <input type="text"
+				                     ng-model="conferenceToAdd.venue"
+				                     class="form-control"
+				                     id="add-conf-venue"
+				                     placeholder="Venue Name">
+				          </div>
+				      </div>
+
+				      <div class="col-sm-6">
+				          <div class="form-group">
+				              <label for="add-conf-date">Date</label>
+				              <input type="date"
+				                     ng-model="conferenceToAdd.date"
+				                     class="form-control"
+				                     id="add-conf-date"
+				                     placeholder="Date">
+				          </div>
+				      </div>
+				    </div>
+				    
+				    <button type="submit" class="btn" ng-disabled="conferenceForm.$invalid">
+				    	Submit
+				    </button>
+				</form>
+			</div>
+		</div>
 	</div>
 </div>
 
