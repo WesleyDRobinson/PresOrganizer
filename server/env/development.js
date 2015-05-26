@@ -1,4 +1,10 @@
 module.exports = {
+  "S3": {
+    "SECRET_KEY": process.env.SECRET_KEY,
+    "ACCESS_KEY": process.env.ACCESS_KEY,
+    "BUCKET": process.env.BUCKET
+  },
+  "CLOUD_CONVERT": process.env.CLOUD_CONVERT,
   "DATABASE_URI": "mongodb://localhost:27017/pk-db",
   "SESSION_SECRET": "Optimus Prime is my real dad",
   "TWITTER": {

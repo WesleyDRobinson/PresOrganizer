@@ -7,6 +7,12 @@
  */
 
 module.exports = {
+    "S3": {
+        "SECRET_KEY": process.env.SECRET_KEY,
+        "ACCESS_KEY": process.env.ACCESS_KEY,
+        "BUCKET": process.env.BUCKET
+    },
+    "CLOUD_CONVERT": process.env.CLOUD_CONVERT,
     "DATABASE_URI": process.env.MONGOLAB_URI,
     "SESSION_SECRET": process.env.SESSION_SECRET,
     "TWITTER": {
