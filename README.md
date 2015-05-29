@@ -1,14 +1,17 @@
-# jennifer
+Knowing there are frustrating, low points of development, we wanted to choose a project name that might lift our spirits in those times. "jennifer" beat out "Happy fun time!"
 
 Waffle: https://waffle.io/WesleyDRobinson/jennifer
+
 Google Doc: https://docs.google.com/document/d/1PZJ6z7sSfxc4G4mH3gfkViIJ0hYaE7uNDAGFI3_yPqA/edit?usp=sharing
 
-A platform to make PechaKucha Nights easier and more rewarding for organizers, presenters, and attendees.
+A tool for uploading and managing presentation media. This version is specifically aimed at PechaKucha events where presenters agree to presentation constraints of 20 static slides fired at 20 second intervals.
 
-More specifically, this is accomplished by the following:
-giving presenters a place to upload images in a variety of formats and arrange their presentations;
-giving organizers an easy way to create event timelines, edit them on-the-fly, and have strong control over audio and video output.
+We accomplished by the following:
+giving presenters an intuitive UI to upload files and rearrange presentations;
+giving organizers simple but powerful control of event timelines, edit them on-the-fly, and have live control over media output.
 
-Expected Completion Date: 22 May 2015.
+Some code we are proud of follows.
 
-Dig into the code to see our progress!
+Wesley: Pretty easy to point to the upload route, what I thought would be a 2 day task turned into a week of slogging through the AWS and Cloud Convert docs.
+
+https://github.com/WesleyDRobinson/jennifer/blob/develop/server/app/routes/upload/index.js
