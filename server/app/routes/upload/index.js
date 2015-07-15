@@ -1,38 +1,39 @@
 var router = require('express').Router();
 var fs = require('fs');
-var AWS = require('aws-sdk');
 var sbuff = require('simple-bufferstream');
 var path = require('path');
+var crypto = require('crypto');
+var AWS = require('aws-sdk');
+var s3 = new AWS.S3();
 
-//For development -- keys.js is ignored
-var keys = require('./keys.js');
-var secret_s3_key = keys.secret_key;
-var access_s3_key = keys.access_key;
-var bucket_s3 = keys.bucket;
-var cloud_key = keys.cloudKey;
-
-//For production
-//var secret_s3_key = require(path.join(__dirname, '../../../env')).S3.SECRET_KEY;
-//var access_s3_key = require(path.join(__dirname, '../../../env')).S3.ACCESS_KEY;
-//var bucket_s3 = require(path.join(__dirname, '../../../env')).S3.BUCKET;
-//var cloud_key = require(path.join(__dirname, '../../../env')).CLOUD_CONVERT;
+var keys;
+if (process.env.NODE_ENV === 'production') {
+    keys = require(path.join(__dirname, '../../../env'));
+} else {
+    keys = require('./keys.js');
+}
+var secret_s3_key = keys.S3.SECRET_KEY;
+var access_s3_key = keys.S3.ACCESS_KEY;
+var bucket_s3 = keys.S3.BUCKET;
+var cloud_key = keys.CLOUD_CONVERT;
 var cloudconvert = new (require('cloudconvert'))(cloud_key);
 
 module.exports = router;
 
+// Create AWS object
+AWS.config.update({
+    "accessKeyId"    : access_s3_key,
+    "secretAccessKey": secret_s3_key
+});
+AWS.config.region = 'us-east-1';
+
 router.post('/', function (req, res, next) {
-    // Create AWS object
-    AWS.config.update({
-        "accessKeyId"    : access_s3_key,
-        "secretAccessKey": secret_s3_key
-    });
-    AWS.config.region = 'us-east-1';
 
     // Busboy Library parses the uploaded files
     req.busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
 
         //Creating a unique key for S3 storage;
-        var s3Key = 'image' + Date.now();
+        var s3Key = crypto.createHash(filename + Date.now());
 
         //Captures the uploaded files as a buffer;
         var body = new Buffer(0);
@@ -51,7 +52,6 @@ router.post('/', function (req, res, next) {
                     ContentType: mimetype,
                     Key        : s3Key
                 };
-                var s3 = new AWS.S3();
 
                 s3.upload(params, function (err, data) {
                     if (err) next(err);
@@ -89,20 +89,20 @@ router.post('/', function (req, res, next) {
                         "inputformat" : extension.slice(1),
                         "outputformat": "png"
                     }).on('error', function (err) {
-                        console.error('Failed: ' + err);
+                        next(err);
                     }).on('finished', function (data) {
 
                         //File conversion complete
                         // Cloud Convert does not return the public link for each image,
                         // so they are constructed here and sent to the client as an array.
-                        var arrayLinks = [];
-                        data.output.files.forEach(function (filenameInS3) {
-                            var link = 'https://s3.amazonaws.com/' + bucket_s3 + '/' + s3Key + '/' + filenameInS3;
-                            arrayLinks.push(link);
+                        var arrayLinks = data.output.files.map(function (filenameInS3) {
+                            return 'https://s3.amazonaws.com/' + bucket_s3 + '/' + s3Key + '/' + filenameInS3;
                         });
 
                         //... 3. and delete the temp file once it has been successfully uploaded.
-                        fs.unlink(filename);
+                        fs.unlink(filename, function (err) {
+                            next(err)
+                        });
                         res.json(arrayLinks);
                     }));
                 });
@@ -111,5 +111,4 @@ router.post('/', function (req, res, next) {
     });
 
     req.pipe(req.busboy);
-
 });
