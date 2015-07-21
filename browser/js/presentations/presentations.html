@@ -2,18 +2,24 @@
     <div class="container-fluid">
         <div class="row">
             <h1>My Presentations</h1>
+
             <div class="col-md-5 ">
                 <div class="row">
                     <div class="col-md-12 content-panel-padding content-panel ">
                         <div class="row content-panel-header">
                             <h3>Options</h3>
                         </div>
-                        <div >
-                            <button type="submit" class="btn presentation-edit-btn" ng-click="sure()">Delete Selected Presentations</button>
-                            <button ng-hide="creating" type="submit" class="btn presentation-edit-btn" ng-click="showCreateForm()">Create New
+                        <div>
+                            <button type="submit" class="btn presentation-edit-btn" ng-click="sure()">Delete Selected
+                                Presentations
+                            </button>
+                            <button ng-hide="creating" type="submit" class="btn presentation-edit-btn"
+                                    ng-click="showCreateForm()">Create New
                                 Presentation
                             </button>
-                            <button ng-show="creating" type="submit" class="btn presentation-edit-btn" ng-click="closeCreateForm()">Cancel</button>
+                            <button ng-show="creating" type="submit" class="btn presentation-edit-btn"
+                                    ng-click="closeCreateForm()">Cancel
+                            </button>
                         </div>
 
                         <div class="row">
@@ -21,7 +27,8 @@
                                 <ul class="list-unstyled presentation-edit-list">
                                     <li ng-repeat="presentation in presentations | orderBy: 'title'">
                                         <label for="select-conference-for-deletion"></label>
-                                        <input id="select-conference-for-deletion" type="checkbox" ng-model='checkboxModel[presentation._id]'>
+                                        <input id="select-conference-for-deletion" type="checkbox"
+                                               ng-model='checkboxModel[presentation._id]'>
                                         <a ng-click="displayPresentationMedia(presentation)">
                                             {{presentation.title}}
                                         </a>
@@ -32,13 +39,13 @@
                     </div>
                 </div>
 
-                <div ng-show="creating"  class="row">
+                <div ng-show="creating" class="row">
                     <div class="col-md-12 content-panel">
                         <div class="row create-presentation-form">
                             <div class="row content-panel-header">
                                 <h3>Create Presentation</h3>
                             </div>
-                            <form id="create-presentation-form"  name="createForm"
+                            <form id="create-presentation-form" name="createForm"
                                   ng-submit="createForm.$valid && createPresentation(selectedConference)">
 
                                 <div class="col-md-12">
@@ -66,20 +73,20 @@
                             </form>
                         </div>
 
-                       
+
                     </div>
                 </div>
-                 <div class="row uploads-panel">
-                            <div ng-if="editing">
-                                <upload-box></upload-box>
-                            </div>
-                        </div>
+                <div class="row uploads-panel">
+                    <div ng-if="editing">
+                        <upload-box></upload-box>
+                    </div>
+                </div>
 
 
             </div>
 
 
-            <div class="col-md-1"> <br></div>
+            <div class="col-md-1"><br></div>
 
             <div class="col-md-6 presentation-content-panel content-panel" ng-if="editing">
                 <div class="row content-panel-header">
@@ -87,8 +94,9 @@
                 </div>
 
 
-                    <button class="btn save-presentation-btn" ng-click="savePresentation()">Save Presentation</button>
-                    <span ng-show="saved"><i class="fa fa-floppy-o presentation-floppy"></i></span>
+                <button class="btn save-presentation-btn" ng-click="savePresentation()">Save Presentation</button>
+                <span ng-show="saved"><i class="fa fa-floppy-o presentation-floppy"></i></span>
+
                 <div class="presentation-edit-panel">
                     <div class="row">
                         <ul class="list-unstyled" as-sortable="sortableOptions" ng-model="presentationMedia">
@@ -99,7 +107,8 @@
                                         <span class="fa fa-trash-o"></span>
                                         <span>{{$index+1}}</span>
                                     </a>
-                                    <img src="{{ media.url }}" class="my-presentation-slide presentation-thumb img-thumbnail">
+                                    <img src="{{ media.url }}"
+                                         class="my-presentation-slide presentation-thumb img-thumbnail">
                                 </div>
                             </li>
 
@@ -109,7 +118,7 @@
             </div>
 
 
-    </div>
+        </div>
 
 
     </div>

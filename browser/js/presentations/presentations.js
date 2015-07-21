@@ -5,16 +5,12 @@ app.config(function ($stateProvider) {
         templateUrl: 'js/presentations/presentations.html',
         controller: 'PresentationCtrl',
         resolve: {
-            presentations: function(PresentationFactory){
+            presentations: function (PresentationFactory) {
                 return PresentationFactory.getPresentations();
             },
             conferences: function (ConferenceFactory) {
                 return ConferenceFactory.getAllConferences();
             }
-            //,
-            // locales = function (localesFactory) {
-            //     return localesFactory.dddd();
-            // }
         }
     });
 });

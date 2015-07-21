@@ -1,26 +1,19 @@
-app.factory('AccountFactory', function($http,AuthService){
-	return {
-		getAccountInformation: function(){
+app.factory('AccountFactory', function ($http, AuthService) {
+    return {
+        getAccountInformation: function () {
 
-			return $http.get('/api/user/me').then(function(res){
-					return res.data;
-				});
-			
-		},
-		changeEmail: function(email){
-			return $http.put('/api/user/me',{email: email});
+            return $http.get('/api/user/me').then(function (res) {
+                return res.data;
+            });
 
-		},
-		changePassword:  function(password){
-			return $http.put('/api/user/changePassword', {password:password});
+        },
+        changeEmail: function (email) {
+            return $http.put('/api/user/me', {email: email});
 
-		}
-		// saveAccount: function(presentationId, mediaArray){
-		// 	return $http.put('/api/presentation/'+presentationId, {media: mediaArray})
-		// 	.then(function(res){
-		// 		return res.data;
-		// 	});
+        },
+        changePassword: function (password) {
+            return $http.put('/api/user/changePassword', {password: password});
 
-		// }
-	};
+        }
+    };
 });

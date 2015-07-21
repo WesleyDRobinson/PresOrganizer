@@ -1,5 +1,3 @@
-
-
 var dbURI = 'mongodb://localhost:27017/testingDB';
 var clearDB = require('mocha-mongoose')(dbURI);
 
@@ -105,7 +103,7 @@ describe('User model', function () {
             var saltSpy;
 
             var createUser = function () {
-                return User.create({ email: 'obama@gmail.com', password: 'potus' });
+                return User.create({email: 'obama@gmail.com', password: 'potus'});
             };
 
             beforeEach(function () {
@@ -127,11 +125,11 @@ describe('User model', function () {
             });
 
             it('should set user.salt to the generated salt', function (done) {
-               createUser().then(function (user) {
-                   var generatedSalt = saltSpy.getCall(0).returnValue;
-                   expect(user.salt).to.be.equal(generatedSalt);
-                   done();
-               });
+                createUser().then(function (user) {
+                    var generatedSalt = saltSpy.getCall(0).returnValue;
+                    expect(user.salt).to.be.equal(generatedSalt);
+                    done();
+                });
             });
 
             it('should set user.password to the encrypted password', function () {

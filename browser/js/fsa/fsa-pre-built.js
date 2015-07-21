@@ -90,7 +90,7 @@
             return $http.post('/login', credentials)
                 .then(onSuccessfulLogin)
                 .catch(function (response) {
-                    return $q.reject({ message: 'Invalid login credentials.' });
+                    return $q.reject({message: 'Invalid login credentials.'});
                 });
         };
 

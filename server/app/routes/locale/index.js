@@ -1,8 +1,6 @@
 var router = require('express').Router();
 var mongoose = require('mongoose');
 var Locale = mongoose.model('Locale');
-//var bluebird = require('bluebird');
-
 
 //Create a Locale
 router.post('/', function (req, res, next) {
@@ -16,12 +14,11 @@ router.post('/', function (req, res, next) {
 //get all Locales and their organizers (names only)
 router.get('/', function (req, res, next) {
     Locale.find(req.query).populate('organizers', 'name')
-    .exec()
-    .then(function (locales) {
-        res.send(locales);
-    });
+        .exec()
+        .then(function (locales) {
+            res.send(locales);
+        });
 });
-
 
 //update Locale
 router.put('/:id', function (req, res, next) {
@@ -34,7 +31,6 @@ router.put('/:id', function (req, res, next) {
 
 });
 
-
 // delete a locale
 router.delete('/:id', function (req, res, next) {
     Locale.findByIdAndRemove(req.params.id, function (err, locale) {
@@ -42,6 +38,5 @@ router.delete('/:id', function (req, res, next) {
         res.send(locale);
     });
 });
-
 
 module.exports = router;

@@ -28,31 +28,31 @@ describe('Conference model', function () {
         User.create({
             name: 'Wesley'
         })
-        .then( function (user) {
-            testUser = user;
+            .then(function (user) {
+                testUser = user;
 
-            return Presentation.create({
-                media    : [{ mediaType: 'video', url: 'www.google.com' }],
-                presenter: user._id,
-                title: 'My Trip to India'
+                return Presentation.create({
+                    media: [{mediaType: 'video', url: 'www.google.com'}],
+                    presenter: user._id,
+                    title: 'My Trip to India'
+                })
             })
-        })
-        .then( function (presentation) {
-            testPresentation = presentation;
-         
-            return Conference.create({
+            .then(function (presentation) {
+                testPresentation = presentation;
+
+                return Conference.create({
                     name: "BrooklynJune15",
                     date: new Date("June 23, 2015"),
                     venue: "Brooklyn Bowl",
-                    presenters: [ testUser._id ],
-                    timeline: [{title: 'TLI presentation', presentation:testPresentation._id}]
-            });
-        })
+                    presenters: [testUser._id],
+                    timeline: [{title: 'TLI presentation', presentation: testPresentation._id}]
+                });
+            })
 
-        .then( function (conference) {
-            testConference = conference;
-            done();
-        });
+            .then(function (conference) {
+                testConference = conference;
+                done();
+            });
         // .catch(function (err) {
         //     done(err);
         // });    

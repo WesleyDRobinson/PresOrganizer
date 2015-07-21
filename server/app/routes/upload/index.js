@@ -22,7 +22,7 @@ module.exports = router;
 
 // Create AWS object
 AWS.config.update({
-    "accessKeyId"    : access_s3_key,
+    "accessKeyId": access_s3_key,
     "secretAccessKey": secret_s3_key
 });
 AWS.config.region = 'us-east-1';
@@ -44,13 +44,13 @@ router.post('/', function (req, res, next) {
         //Starts the processing of the file
         file.on('end', function () {
             // Declare S3 parameters, create a new S3 Object, upload the file as a buffer
-            var uploadBufferToS3 = function uploadBufferToS3 (buffer) {
+            var uploadBufferToS3 = function uploadBufferToS3(buffer) {
                 var params = {
-                    ACL        : 'public-read',
-                    Bucket     : bucket_s3,
-                    Body       : buffer,
+                    ACL: 'public-read',
+                    Bucket: bucket_s3,
+                    Body: buffer,
                     ContentType: mimetype,
-                    Key        : s3Key
+                    Key: s3Key
                 };
 
                 s3.upload(params, function (err, data) {
@@ -75,18 +75,18 @@ router.post('/', function (req, res, next) {
                     //... 2. upload the temp file here...
                     // Cloud Convert provides works well with S3
                     fs.createReadStream(filename).pipe(cloudconvert.convert({
-                        "input"       : "upload",
-                        "output"      : {
+                        "input": "upload",
+                        "output": {
                             "s3": {
-                                "accesskeyid"    : access_s3_key,
+                                "accesskeyid": access_s3_key,
                                 "secretaccesskey": secret_s3_key,
-                                "bucket"         : bucket_s3,
-                                "region"         : "us-east-1",
-                                "key"            : s3Key,
-                                "acl"            : "public-read"
+                                "bucket": bucket_s3,
+                                "region": "us-east-1",
+                                "key": s3Key,
+                                "acl": "public-read"
                             }
                         },
-                        "inputformat" : extension.slice(1),
+                        "inputformat": extension.slice(1),
                         "outputformat": "png"
                     }).on('error', function (err) {
                         next(err);
