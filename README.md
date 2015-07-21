@@ -4,6 +4,8 @@ __Wesley's code hightlight:__ The file upload, conversions, saving to Amazon S3 
 
 https://github.com/WesleyDRobinson/PresOrganizer/blob/develop/server/app/routes/upload/index.js
 
+<hr>
+
 This version is specifically aimed at PechaKucha events where presenters agree to presentation constraints of 20 static slides fired at 20 second intervals.
 
 We accomplished by the following:
