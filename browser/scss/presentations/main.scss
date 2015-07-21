@@ -1,26 +1,26 @@
 #presentations {
   cursor: default;
-  font-size:16px;
+  font-size: 16px;
 
-  .create-presentation-form{
-    border-color:black;
-    border-size:10px;
+  .create-presentation-form {
+    border-color: black;
+    border-size: 10px;
   }
   .content-panel {
-      background-clip: padding-box;
-      margin-top:20px;
-      background-color: #B8B8B8;
-      margin-left:0px;
-      button {
-        color: #333;
-        background-color: #fff;
-        margin-top: 13px;
-      }
-      li {
-        margin-top: 13px;
-      }
-
+    background-clip: padding-box;
+    margin-top: 20px;
+    background-color: #B8B8B8;
+    margin-left: 0px;
+    button {
+      color: #333;
+      background-color: #fff;
+      margin-top: 13px;
     }
+    li {
+      margin-top: 13px;
+    }
+
+  }
   .content-panel-header {
     background-color: #333;
     color: #d1e3fd;
@@ -31,12 +31,12 @@
     }
   }
 
-  .content-panel-padding{
+  .content-panel-padding {
     padding-bottom: 10px;
   }
-  .uploads-panel{
+  .uploads-panel {
 
-    background-color:#E6E9EF;
+    background-color: #E6E9EF;
   }
   //.as-sortable-placeholder{
   //  margin-top:10px;
@@ -45,10 +45,10 @@
   //  float: left;
   //}
 
-  .presentation-edit-btn{
-    font-size:16px;
+  .presentation-edit-btn {
+    font-size: 16px;
   }
-  .presentation-thumb{
+  .presentation-thumb {
 
     display: inline-block;
     width: 120px;
@@ -56,73 +56,76 @@
 
     float: left;
     margin-top: 10px;
-    margin-bottom:25px;
+    margin-bottom: 25px;
     border-radius: 0px;
 
   }
 
-  .save-presentation-btn{
+  .save-presentation-btn {
     margin-left: 24px;
   }
 
-  .as-sortable-placeholder{
+  .as-sortable-placeholder {
 
-    margin-top:20px;
+    margin-top: 20px;
     width: 124px;
     height: 110px;
     float: left;
     display: inline-block;
   }
 
-  .presentation-content-panel{
+  .presentation-content-panel {
     box-sizing: border-box;
-    border-left:40px;
-    padding-bottom:20px;
-    margin-left:-14px;
+    border-left: 40px;
+    padding-bottom: 20px;
+    margin-left: -14px;
   }
 
-  .presentation-edit-panel{
-    padding-left:38px;
+  .presentation-edit-panel {
+    padding-left: 38px;
 
   }
-  .presentation-a-s{
-    margin-top:10px;
+  .presentation-a-s {
+    margin-top: 10px;
 
     display: inline-block;
     float: left;
   }
-  .presentation-img{
+  .presentation-img {
     width: 122px;
     height: 110px;
-    margin-right:6px;
+    margin-right: 6px;
     border-radius: 0px;
   }
   .create-presentation-form {
-    margin-left:0px;
-    margin-right:0px;
-    padding-bottom:20px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-bottom: 20px;
   }
 }
-.presentation-floppy{
-    font-size:20px;
-    padding-left:20px;
+
+.presentation-floppy {
+  font-size: 20px;
+  padding-left: 20px;
 
 }
-.presentation-edit-options{
+
+.presentation-edit-options {
   margin-right: -15px;
   margin-left: -15px;
 }
-.presentation-edit-list{
 
-  font-size:18px;
+.presentation-edit-list {
+
+  font-size: 18px;
 }
 
-.uploads-panel{
+.uploads-panel {
 
 }
 
-.blank-space-panel{
-  background-color:white;
-  height:20px;
-  width:100%;
+.blank-space-panel {
+  background-color: white;
+  height: 20px;
+  width: 100%;
 }

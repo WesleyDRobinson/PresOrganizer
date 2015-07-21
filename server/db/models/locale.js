@@ -10,15 +10,3 @@ var schema = new mongoose.Schema({
 });
 
 mongoose.model('Locale', schema);
-
-// schema.method('removeOrganizer', function(organizerId, callback){
-
-// });
-
-// schema.method('addLeader', function(organizerId, callback){
-
-// });
-
-// schema.method('removeLeader', function(organizerId, callback){
-
-// });

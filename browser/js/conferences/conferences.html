@@ -1,112 +1,125 @@
 <div class="row">
-	<div class="col-md-12">
-		<button class="btn btn-link no-left-padding" ng-click="goToLocales()"><i class="fa fa-chevron-left"></i> Return to My Locales</button>
-	</div>
+    <div class="col-md-12">
+        <button class="btn btn-link no-left-padding" ng-click="goToLocales()"><i class="fa fa-chevron-left"></i> Return
+            to My Locales
+        </button>
+    </div>
 </div>
 
 <div ng-if="conferencePresentations">
-	<div class="row" id="admin-dashboard">
-		<!-- view confInfo mode -->
-		<div ng-if="!editingInfo" class="col-md-12">
-			<div class="row admin-header">
-			
-				<div class="col-sm-7">
-					<h1 id="conference-name" ng-click="editConfInfo()">{{currentConf.name}} <i class="fa fa-pencil" id="conference-edit-icon"></i></h1>
-				</div>
+    <div class="row" id="admin-dashboard">
+        <!-- view confInfo mode -->
+        <div ng-if="!editingInfo" class="col-md-12">
+            <div class="row admin-header">
 
-				<div class="col-sm-5">
-					<div><strong>Details:</strong></div>
-					<div class="row">
-						<div class="col-sm-6" ng-click="editConfInfo()"><i class="fa fa-calendar"></i> {{ currentConf.date | date:'MMM d, y'}}</div>
-						<div class="col-sm-6" ng-click="editConfInfo()"><i class="fa fa-map-marker"></i> {{ currentConf.venue }}</div>
-					</div>
-				</div>
+                <div class="col-sm-7">
+                    <h1 id="conference-name" ng-click="editConfInfo()">{{currentConf.name}} <i class="fa fa-pencil"
+                                                                                               id="conference-edit-icon"></i>
+                    </h1>
+                </div>
 
-			</div>
-			<hr>
-		</div>
+                <div class="col-sm-5">
+                    <div><strong>Details:</strong></div>
+                    <div class="row">
+                        <div class="col-sm-6" ng-click="editConfInfo()"><i class="fa fa-calendar"></i> {{
+                            currentConf.date | date:'MMM d, y'}}
+                        </div>
+                        <div class="col-sm-6" ng-click="editConfInfo()"><i class="fa fa-map-marker"></i> {{
+                            currentConf.venue }}
+                        </div>
+                    </div>
+                </div>
 
-		<!-- edit mode -->
-		<div ng-if="editingInfo" class="col-md-12">
-			<div class="row admin-header">
-				
-				<form class="form-inline">
-					<div class="col-sm-7">
-						<h1 id="conference-name">
-							<input class="form-control form-control-lg" ng-model="currentConf.name"> 
-							<button type="submit" ng-click="updateConfInfo()" class="btn btn-link fa fa-floppy-o" id="conference-update-icon"></button>
-						</h1>
-					</div>
+            </div>
+            <hr>
+        </div>
 
-					<div class="col-sm-5">
-						<div><strong>Details:</strong></div>
-						<div class="row">
-							<div class="col-sm-6"><i class="fa fa-calendar"></i> 
-								<input class="form-control form-control-sm" ng-model="currentConf.date" type="date" value="{{ currentConf.date | date:'MMM d, y h:mm'}}">
-							</div>
-							<div class="col-sm-6"><i class="fa fa-map-marker"></i> 
-								<input class="form-control form-control-sm" ng-model="currentConf.venue" type="text" value="{{ currentConf.venue }}">
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-			<hr>
-		</div>
+        <!-- edit mode -->
+        <div ng-if="editingInfo" class="col-md-12">
+            <div class="row admin-header">
+
+                <form class="form-inline">
+                    <div class="col-sm-7">
+                        <h1 id="conference-name">
+                            <input class="form-control form-control-lg" ng-model="currentConf.name">
+                            <button type="submit" ng-click="updateConfInfo()" class="btn btn-link fa fa-floppy-o"
+                                    id="conference-update-icon"></button>
+                        </h1>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <div><strong>Details:</strong></div>
+                        <div class="row">
+                            <div class="col-sm-6"><i class="fa fa-calendar"></i>
+                                <input class="form-control form-control-sm" ng-model="currentConf.date" type="date"
+                                       value="{{ currentConf.date | date:'MMM d, y h:mm'}}">
+                            </div>
+                            <div class="col-sm-6"><i class="fa fa-map-marker"></i>
+                                <input class="form-control form-control-sm" ng-model="currentConf.venue" type="text"
+                                       value="{{ currentConf.venue }}">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <hr>
+        </div>
 
 
-		<!-- editing and preview column -->
-		<div id="admin-panel-1" class="col-md-4 admin-panel">
-			<div class="row admin-panel-header">
-				<div class="col-md-12 ">
-					<h2>Items</h2>
-				</div>
-			</div>
+        <!-- editing and preview column -->
+        <div id="admin-panel-1" class="col-md-4 admin-panel">
+            <div class="row admin-panel-header">
+                <div class="col-md-12 ">
+                    <h2>Items</h2>
+                </div>
+            </div>
 
-			<div class="row">
-				<div class="col-md-12" id="control-items">
-					<h3 class="admin-panel-h3">Controls</h3>
-					<ul as-sortable="controlItemOptions" ng-model="controlItems">
-						<li ng-repeat="controlItem in controlItems" as-sortable-item as-sortable-item-handle>
-							<span >
+            <div class="row">
+                <div class="col-md-12" id="control-items">
+                    <h3 class="admin-panel-h3">Controls</h3>
+                    <ul as-sortable="controlItemOptions" ng-model="controlItems">
+                        <li ng-repeat="controlItem in controlItems" as-sortable-item as-sortable-item-handle>
+							<span>
 								{{controlItem.title}}
 							</span>
-						</li>
-					</ul>
-				</div>
+                        </li>
+                    </ul>
+                </div>
 
-				<div class="col-md-12" id="presentation-items">
-					<h3 class="admin-panel-h3">Presentations</h3>
-					<ul as-sortable="conferenceOptions" ng-model="conferencePresentations">
-						<li ng-repeat="presentation in conferencePresentations" as-sortable-item>
-							<div as-sortable-item-handle>
-								{{ presentation.presentation.presenter.name }}: 
-								<i>{{ presentation.presentation.title }}</i>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div> <!-- end editing and preview column -->
+                <div class="col-md-12" id="presentation-items">
+                    <h3 class="admin-panel-h3">Presentations</h3>
+                    <ul as-sortable="conferenceOptions" ng-model="conferencePresentations">
+                        <li ng-repeat="presentation in conferencePresentations" as-sortable-item>
+                            <div as-sortable-item-handle>
+                                {{ presentation.presentation.presenter.name }}:
+                                <i>{{ presentation.presentation.title }}</i>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- end editing and preview column -->
 
-		<!-- timeline column -->
-		<div id="admin-panel-2" class="col-md-4 admin-panel">
-			<div class="row admin-panel-header">
-				<div class="col-md-12">
-					<h2>Timeline <span class="pull-right" ng-show="saved"><i class="fa fa-floppy-o"></i></span></h2>
-				</div>
-			</div>
+        <!-- timeline column -->
+        <div id="admin-panel-2" class="col-md-4 admin-panel">
+            <div class="row admin-panel-header">
+                <div class="col-md-12">
+                    <h2>Timeline <span class="pull-right" ng-show="saved"><i class="fa fa-floppy-o"></i></span></h2>
+                </div>
+            </div>
 
-			<form name="timeline-form" ng-mouseup="saveTimeLine()">
-				<ul id="timeline-ul" as-sortable ng-model="timeLine">
-					
-					<!-- default mesaage -->
-					<div id="default-message" ng-if="!timeLine.length">
-						Start building your timeline <br> by dragging in <strong>Controls</strong> and <strong>Presentations</strong>.						
-					</div>
+            <form name="timeline-form" ng-mouseup="saveTimeLine()">
+                <ul id="timeline-ul" as-sortable ng-model="timeLine">
 
-					<li ng-class="isCurrentItem($index + 1) ? 'current-item' : ''" ng-repeat="timeLineItem in timeLine" as-sortable-item>
-						<div as-sortable-item-handle>
+                    <!-- default mesaage -->
+                    <div id="default-message" ng-if="!timeLine.length">
+                        Start building your timeline <br> by dragging in <strong>Controls</strong> and <strong>Presentations</strong>.
+                    </div>
+
+                    <li ng-class="isCurrentItem($index + 1) ? 'current-item' : ''" ng-repeat="timeLineItem in timeLine"
+                        as-sortable-item>
+                        <div as-sortable-item-handle>
 							<span ng-if="!timeLineItem.presentation">
 								{{$index + 1}}. {{timeLineItem.title}}
 							</span>
@@ -114,59 +127,61 @@
 								{{$index + 1}}. {{ timeLineItem.presentation.presenter.name }}: 
 								<i>{{ timeLineItem.presentation.title }}</i>
 							</span>
-							<a class="data-no-drag pull-right delete-item" ng-click="removeCard($index)">
+                            <a class="data-no-drag pull-right delete-item" ng-click="removeCard($index)">
 								<span>
 									<i class="fa fa-trash-o"></i>
 								</span>
-							</a>
-						</div>
-					</li>
-				</ul>
-			</form>	
-		</div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
 
-		<!-- projector column -->
-		<div id="admin-panel-3" class="col-md-4 admin-panel">
-			<div id="projector-preview" ng-controller="ProjectorCtrl">
-				<div class="row admin-panel-header">
-					<div class="col-md-12">
-						<h2>Projector  
-							<div class="btn-group pull-right" role="group" aria-label="...">
-								<button ng-click="playToggle()" class="btn" ng-class="playing ? '' : 'btn-success'">
-									<i ng-class="playing ? 'fa fa-pause' : 'fa fa-play'"></i>
-								</button>
-								<a class="btn btn-default" target="_blank" ui-sref="projector({id: currentConf._id })">
-									<i class="fa fa-video-camera"></i>
-								</a>
-							</div>
-						</h2>
-					</div>
-				</div>
-				
-				<div class="row">
+        <!-- projector column -->
+        <div id="admin-panel-3" class="col-md-4 admin-panel">
+            <div id="projector-preview" ng-controller="ProjectorCtrl">
+                <div class="row admin-panel-header">
+                    <div class="col-md-12">
+                        <h2>Projector
+                            <div class="btn-group pull-right" role="group" aria-label="...">
+                                <button ng-click="playToggle()" class="btn" ng-class="playing ? '' : 'btn-success'">
+                                    <i ng-class="playing ? 'fa fa-pause' : 'fa fa-play'"></i>
+                                </button>
+                                <a class="btn btn-default" target="_blank" ui-sref="projector({id: currentConf._id })">
+                                    <i class="fa fa-video-camera"></i>
+                                </a>
+                            </div>
+                        </h2>
+                    </div>
+                </div>
 
-					<!-- Current slide -->
-					<div class="col-xs-6">
-						<h3 class="admin-panel-h3">Current</h3>
+                <div class="row">
 
-						<div class="preview-screen">
-						    <img 	ng-repeat="currentSlide in currentTimelineFlat track by $index" 
-					         	ng-show="isCurrentSlideIndex($index)" 
-					         	ng-src="{{currentSlide.url}}">
-					    </div>
-					</div>
+                    <!-- Current slide -->
+                    <div class="col-xs-6">
+                        <h3 class="admin-panel-h3">Current</h3>
 
-					<!-- Next slide -->
-					<div class="col-xs-6">
-						<h3 class="admin-panel-h3">Next</h3>
-						<div class="preview-screen">
-							<img 	ng-repeat="nextSlide in currentTimelineFlat track by $index" 
-					         	ng-show="isNextSlideIndex($index)" 
-					         	ng-src="{{nextSlide.url}}">
-					    </div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> <!-- end #admin-dashboard row -->
+                        <div class="preview-screen">
+                            <img ng-repeat="currentSlide in currentTimelineFlat track by $index"
+                                 ng-show="isCurrentSlideIndex($index)"
+                                 ng-src="{{currentSlide.url}}">
+                        </div>
+                    </div>
+
+                    <!-- Next slide -->
+                    <div class="col-xs-6">
+                        <h3 class="admin-panel-h3">Next</h3>
+
+                        <div class="preview-screen">
+                            <img ng-repeat="nextSlide in currentTimelineFlat track by $index"
+                                 ng-show="isNextSlideIndex($index)"
+                                 ng-src="{{nextSlide.url}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end #admin-dashboard row -->
 </div>

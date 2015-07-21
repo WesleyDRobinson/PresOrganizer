@@ -8,22 +8,21 @@ module.exports = function (server) {
 
     io = socketio(server);
 
-
     io.on('connection', function (socket) {
 
-    	console.log('connected',socket.id);
+        console.log('connected', socket.id);
 
-    	socket.on('join projection', function(room){
-    		console.log('joining', room.id);
-    		socket.join(room.id);
-    	});
-
-        socket.on('play',function(data){
-        	io.to(data.id).emit('play',data);
+        socket.on('join projection', function (room) {
+            console.log('joining', room.id);
+            socket.join(room.id);
         });
-        
+
+        socket.on('play', function (data) {
+            io.to(data.id).emit('play', data);
+        });
+
     });
-    
+
     return io;
 
 };

@@ -1,3 +1,4 @@
+// TODO -- for later version
 // app.controller('NewConferenceCtrl',function ($scope, $state, $rootScope, $stateParams, ConferenceFactory){
 //     $rootScope.$state = $state;
 //     $rootScope.$stateParams = $stateParams;

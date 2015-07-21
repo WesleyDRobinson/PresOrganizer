@@ -36,14 +36,14 @@ describe('Presentation GET, POST, PUT, DELETE routes', function () {
     beforeEach('Make a test User and Presentation', function (done) {
 
         User.create({
-            name : 'Ash',
+            name: 'Ash',
             email: 'ash@beats.com'
         })
             .then(function (user) {
                 testUser = user;
                 Presentation.create({
-                    media    : [{mediaType: 'image', url: "img.com"}, {mediaType: 'image2', url: "img2.com"}],
-                    title    : "Presentation 1",
+                    media: [{mediaType: 'image', url: "img.com"}, {mediaType: 'image2', url: "img2.com"}],
+                    title: "Presentation 1",
                     presenter: user._id
                 })
                     .then(function (presentation) {
@@ -57,14 +57,14 @@ describe('Presentation GET, POST, PUT, DELETE routes', function () {
     beforeEach('Make an alt User and Presentation', function (done) {
 
         User.create({
-            name : 'Sam',
+            name: 'Sam',
             email: 'sam@beats.com'
         })
             .then(function (user) {
                 altUser = user;
                 Presentation.create({
-                    media    : [{mediaType: 'image3', url: "img3.com"}, {mediaType: 'image4', url: "img4.com"}],
-                    title    : "Presentation 2",
+                    media: [{mediaType: 'image3', url: "img3.com"}, {mediaType: 'image4', url: "img4.com"}],
+                    title: "Presentation 2",
                     presenter: altUser._id
                 })
                     .then(function (presentation) {
@@ -108,8 +108,8 @@ describe('Presentation GET, POST, PUT, DELETE routes', function () {
         describe("POST", function () {
             it("should create a presentation", function (done) {
                 var newPresentation = {
-                    media    : [{mediaType: "image", url: "image5.com"}],
-                    title    : "Presentation 3",
+                    media: [{mediaType: "image", url: "image5.com"}],
+                    title: "Presentation 3",
                     presenter: altUser._id
                 };
                 request(app).post("/api/presentation")

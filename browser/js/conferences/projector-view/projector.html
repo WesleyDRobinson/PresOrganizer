@@ -1,14 +1,16 @@
-<div id="projector-view" 
-	ng-class="isFullscreen ? 'black-background projector-large' : 'projector-small'"  
-	ng-mousemove="isFullscreen && mouse()" ng-keydown="escKey($event)">
-	<div class="row button-row">
-		<div class="col-md-12 text-center">
-			<button id="fullScreenBtn" ng-class="{'fade-out': fade, fadedOut: fade}" class="btn fade-out" ng-click="goFullscreen(); toggleButton()">{{ fullscreenBtnText }}</button>
-		</div>
+<div id="projector-view"
+     ng-class="isFullscreen ? 'black-background projector-large' : 'projector-small'"
+     ng-mousemove="isFullscreen && mouse()" ng-keydown="escKey($event)">
+    <div class="row button-row">
+        <div class="col-md-12 text-center">
+            <button id="fullScreenBtn" ng-class="{'fade-out': fade, fadedOut: fade}" class="btn fade-out"
+                    ng-click="goFullscreen(); toggleButton()">{{ fullscreenBtnText }}
+            </button>
+        </div>
     </div>
     <div class="row projector-image">
-		<div class="col-md-12">
-		    <img ng-src="{{data.url}}">
-		</div>
-	</div>
+        <div class="col-md-12">
+            <img ng-src="{{data.url}}">
+        </div>
+    </div>
 </div>

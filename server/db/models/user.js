@@ -12,7 +12,7 @@ var schema = new mongoose.Schema({
     },
     salt: {
         type: String
-    },  
+    },
     twitter: {
         id: String,
         username: String,
@@ -47,7 +47,7 @@ var encryptPassword = function (plainText, salt) {
     hash.update(plainText);
     hash.update(salt);
     return hash.digest('hex');
-    };
+};
 
 schema.pre('save', function (next) {
 
