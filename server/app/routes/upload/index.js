@@ -5,13 +5,7 @@ var path = require('path');
 var crypto = require('crypto');
 var AWS = require('aws-sdk');
 var s3 = new AWS.S3();
-
-var keys;
-if (process.env.NODE_ENV === 'production') {
-    keys = require(path.join(__dirname, '../../../env'));
-} else {
-    keys = require('./keys.js');
-}
+var keys = require(path.join(__dirname, '../../../env'));
 var secret_s3_key = keys.S3.SECRET_KEY;
 var access_s3_key = keys.S3.ACCESS_KEY;
 var bucket_s3 = keys.S3.BUCKET;
